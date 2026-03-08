@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Dream_Journal_Project.Models"
+             x:Class="Dream_Journal_Project.MainPage"
+             x:DataType="model:Dream"
+             Title="Dream Journal">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+        
+        <CollectionView ItemsSource="{Binding Dreams}">
+        
+        <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Dream">
+                    
+                    <VerticalStackLayout>
+                    <Label>
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0}. {1}">
+                                <Binding Path="Id"/>
+                                <Binding Path="Title"/>
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Label Text="{Binding Description}"/>
+
+                </VerticalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+        <Button Text="Add Dream" Clicked="OnAddDreamClicked" VerticalOptions="Center"/>
+        <Button Text="wypierdol te sny jebane" Clicked="CleanList" VerticalOptions="Center"/>
+    </VerticalStackLayout>
+
+</ContentPage>
