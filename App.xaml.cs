@@ -7,11 +7,16 @@ namespace Dream_Journal_Project
         public App()
         {
             InitializeComponent();
+
+            
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
             return new Window(new AppShell());
         }
+
+        
+        
     }
 }

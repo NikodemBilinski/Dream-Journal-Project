@@ -12,25 +12,25 @@
         
         <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Dream">
-                    
-                    <VerticalStackLayout>
-                    <Label>
-                        <Label.Text>
-                            <MultiBinding StringFormat="{}{0}. {1}">
-                                <Binding Path="Id"/>
-                                <Binding Path="Title"/>
-                            </MultiBinding>
-                        </Label.Text>
-                    </Label>
-                    <Label Text="{Binding Description}"/>
-
-                </VerticalStackLayout>
-            </DataTemplate>
+                    <Border >
+                        <VerticalStackLayout>
+                            <Label>
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0}. {1}">
+                                            <Binding Path="Id"/>
+                                            <Binding Path="Title"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            <Label Text="{Binding Description}"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
 
-        <Button Text="Add Dream" Clicked="OnAddDreamClicked" VerticalOptions="Center"/>
-        <Button Text="wypierdol te sny jebane" Clicked="CleanList" VerticalOptions="Center"/>
+        <Button Text="Add Dream" Clicked="OnAddDreamClicked" VerticalOptions="Center" WidthRequest="175"/>
+        <Button Text="skidibi toilet" Clicked="CleanList" VerticalOptions="Center" WidthRequest="175"/>
     </VerticalStackLayout>
 
 </ContentPage>

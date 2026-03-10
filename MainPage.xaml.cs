@@ -6,34 +6,40 @@ namespace Dream_Journal_Project
     [QueryProperty(nameof(IncomingDream), "NewDream")]
     public partial class MainPage : ContentPage
     {
+
+
+        private readonly DreamService _dreamservice;
+
+        public ObservableCollection<Dream> Dreams { get; set; }
+
+
         public Dream IncomingDream
         {
             set
             {
                 if(value != null)
                 {
-                    value.Id = DreamCount_Id;
-
-                    Dreams.Add(value);
+                    value.Id = _dreamservice.Dreams.Count + 1;
+                    _dreamservice.Dreams.Add(value);
                 }
             }
         }
 
-        public ObservableCollection<Dream> Dreams { get; set; } = new();
+        
 
         public int DreamCount_Id => Dreams.Count + 1;
-        public MainPage()
+        public MainPage(DreamService dreamservice)
         {
-            
-        InitializeComponent();
 
-            if(Dreams.Count == 0)
-            {
-                Dreams.Add(new Dream(1, "nasralem w turbine samolotu", "naprawde nasralem przysiegam"));
-            }
+            _dreamservice = dreamservice;
+
+            Dreams = _dreamservice.Dreams;
+            
+            InitializeComponent();
 
             this.BindingContext = this;
 
+         
         }
 
         public async void OnAddDreamClicked(object sender, EventArgs e)
@@ -43,9 +49,10 @@ namespace Dream_Journal_Project
             
         }
 
-        public async void CleanList(object sender, EventArgs e)
+        public void CleanList(object sender, EventArgs e)
         {
-            Dreams.Clear();
+            _dreamservice.Dreams.Clear();
+            
         }
 
 

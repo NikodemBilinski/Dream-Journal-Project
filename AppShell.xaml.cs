@@ -9,6 +9,8 @@
             Routing.RegisterRoute(nameof(AddDreamPage), typeof(AddDreamPage));
 
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+
+            
         }
     }
 }
