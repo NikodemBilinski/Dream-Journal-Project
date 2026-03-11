@@ -12,9 +12,14 @@
         
         <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Dream">
-                    <Border >
+                    <Border BackgroundColor="Transparent"
+                            Stroke="Transparent"
+                            HeightRequest="50">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDreamTapped"/>
+                        </Border.GestureRecognizers>
                         <VerticalStackLayout>
-                            <Label>
+                                <Label>
                                     <Label.Text>
                                         <MultiBinding StringFormat="{}{0}. {1}">
                                             <Binding Path="Id"/>
@@ -24,6 +29,7 @@
                                 </Label>
                             <Label Text="{Binding Description}"/>
                         </VerticalStackLayout>
+                            
                     </Border>
                 </DataTemplate>
         </CollectionView.ItemTemplate>

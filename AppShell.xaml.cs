@@ -10,6 +10,8 @@
 
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
 
+            Routing.RegisterRoute(nameof(DreamDetailsPage), typeof(DreamDetailsPage));
+
             
         }
     }

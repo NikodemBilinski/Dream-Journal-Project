@@ -1,9 +1,11 @@
 ﻿using Dream_Journal_Project.Models;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Dream_Journal_Project
 {
     [QueryProperty(nameof(IncomingDream), "NewDream")]
+    [QueryProperty(nameof(DreamId), "DreamId")]
     public partial class MainPage : ContentPage
     {
 
@@ -12,6 +14,7 @@ namespace Dream_Journal_Project
 
         public ObservableCollection<Dream> Dreams { get; set; }
 
+        public int DreamId { get; set; }
 
         public Dream IncomingDream
         {
@@ -39,6 +42,7 @@ namespace Dream_Journal_Project
 
             this.BindingContext = this;
 
+
          
         }
 
@@ -55,6 +59,16 @@ namespace Dream_Journal_Project
             
         }
 
+
+        public async void OnDreamTapped(object sender, EventArgs e)
+        {
+            var border = (Border)sender;
+            var tappedDream = (Dream)border.BindingContext;
+            if( tappedDream != null )
+            {
+                await Shell.Current.GoToAsync($"{nameof(DreamDetailsPage)}?DreamId={tappedDream.Id}");
+            }
+        }
 
         
     }
