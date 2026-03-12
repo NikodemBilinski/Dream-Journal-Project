@@ -10,41 +10,49 @@ namespace Dream_Journal_Project
     {
 
 
-        private readonly DreamService _dreamservice;
+        private readonly DataBaseService _databaseService;
 
-        public ObservableCollection<Dream> Dreams { get; set; }
+        public ObservableCollection<Dream> Dreams { get; set; } = new();
 
         public int DreamId { get; set; }
 
-        public Dream IncomingDream
-        {
-            set
-            {
-                if(value != null)
-                {
-                    value.Id = _dreamservice.Dreams.Count + 1;
-                    _dreamservice.Dreams.Add(value);
-                }
-            }
-        }
-
-        
-
-        public int DreamCount_Id => Dreams.Count + 1;
-        public MainPage(DreamService dreamservice)
+        public MainPage(DataBaseService databaseservice)
         {
 
-            _dreamservice = dreamservice;
-
-            Dreams = _dreamservice.Dreams;
-            
             InitializeComponent();
+
+            _databaseService = databaseservice;
 
             this.BindingContext = this;
 
 
          
         }
+
+        public Dream IncomingDream
+        {
+            set
+            {
+                if (value != null)
+                {
+                    _databaseService.AddDream(value);
+                }
+            }
+        }
+
+        private async void SaveIncomingDream(Dream newdream)
+        {
+            await _databaseService.AddDream(newdream);
+
+            Dreams.Add(newdream);
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            RefreshDreams();
+        }
+
 
         public async void OnAddDreamClicked(object sender, EventArgs e)
         {
@@ -55,8 +63,8 @@ namespace Dream_Journal_Project
 
         public void CleanList(object sender, EventArgs e)
         {
-            _dreamservice.Dreams.Clear();
-            
+            _databaseService.DeleteAllDreams();
+            RefreshDreams();
         }
 
 
@@ -70,6 +78,16 @@ namespace Dream_Journal_Project
             }
         }
 
+
+        private async Task RefreshDreams()
+        {
+            var dreamsFromDb = await _databaseService.GetDreams();
+            Dreams.Clear();
+            foreach (var dream in dreamsFromDb)
+            {
+                Dreams.Add(dream);
+            }
+        }
         
     }
 }

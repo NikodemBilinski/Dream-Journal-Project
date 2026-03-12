@@ -4,7 +4,7 @@ namespace Dream_Journal_Project;
 
 public partial class AddDreamPage : ContentPage
 {
-	public AddDreamPage()
+	public AddDreamPage(DataBaseService databaseservice)
 	{
 		InitializeComponent();
 	}
@@ -27,9 +27,14 @@ public partial class AddDreamPage : ContentPage
         }
 
 
-		var newdream = new Dream(0, Dream_Title.Text, Dream_Description.Text);
+        var newdream = new Dream
+		{
+			Title = Dream_Title.Text,
+			Description = Dream_Description.Text,
+			DateCreated = DateTime.Now
+		};
 
-		var parameters = new Dictionary<string, object>
+        var parameters = new Dictionary<string, object>
 		{
 			{"NewDream", newdream }
 		};

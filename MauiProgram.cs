@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Dream_Journal_Project.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Dream_Journal_Project
 {
@@ -15,7 +16,7 @@ namespace Dream_Journal_Project
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.AddSingleton<DreamService>();
+            builder.Services.AddSingleton<DataBaseService>();
             builder.Services.AddTransient<MainPage>();
 
 #if DEBUG
