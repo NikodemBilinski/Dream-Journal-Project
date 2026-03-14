@@ -60,5 +60,16 @@ namespace Dream_Journal_Project.Models
 
             await _database.CreateTableAsync<Dream>();
         }
+
+        public async Task<Dream> GetSpecificDream(int Dreamid)
+        {
+
+            await Init();
+
+            return await _database.Table<Dream>()
+                                  .Where(d => d.Id == Dreamid)
+                                  .FirstOrDefaultAsync();
+                
+        }
     }
 }

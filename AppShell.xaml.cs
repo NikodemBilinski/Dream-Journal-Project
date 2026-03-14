@@ -1,4 +1,6 @@
-﻿namespace Dream_Journal_Project
+﻿using Dream_Journal_Project.Pages;
+
+namespace Dream_Journal_Project
 {
     public partial class AppShell : Shell
     {
@@ -11,6 +13,8 @@
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
 
             Routing.RegisterRoute(nameof(DreamDetailsPage), typeof(DreamDetailsPage));
+
+            Routing.RegisterRoute(nameof(LDTechniquesPage), typeof(LDTechniquesPage));
 
             
         }

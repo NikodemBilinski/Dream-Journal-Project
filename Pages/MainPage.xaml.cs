@@ -1,4 +1,5 @@
 ﻿using Dream_Journal_Project.Models;
+using Dream_Journal_Project.Pages;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -88,6 +89,11 @@ namespace Dream_Journal_Project
                 Dreams.Add(dream);
             }
         }
-        
+
+       
+        private async void LD_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(LDTechniquesPage));
+        }
     }
 }

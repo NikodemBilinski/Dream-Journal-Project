@@ -15,15 +15,25 @@ public partial class DreamDetailsPage : ContentPage
 		_databaseservice = databaseservice;
 	}
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-		////var selectedDream = _databaseservice.get;
+		var dream = await _databaseservice.GetSpecificDream(DreamId);
 
-		//if (selectedDream != null)
-		//{
-		//	BindingContext = selectedDream;
-  //      }
-    }
+		if (dream != null)
+		{
+
+			this.Title = dream.Title;
+			var DateCreated = dream.DateCreated;
+			var description = dream.Description;
+
+
+			DescriptionLabel.Text = description;
+			Date.Text = DateCreated.ToString();
+
+
+        }
+		
+	}
 }

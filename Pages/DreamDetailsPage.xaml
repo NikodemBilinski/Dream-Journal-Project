@@ -7,14 +7,16 @@
              x:DataType="model:Dream">
     <VerticalStackLayout Padding="20">
 
-        <Label Text="{Binding DateCreated, StringFormat='Date Created: {0}'}"
+        <Label x:Name="Date"
+               Text="StringFormat='Date Created: {0}'}"
                VerticalOptions="Center"
                HorizontalOptions="Center"
                FontSize="25"/>
 
         <Label Text="Descritpion of the dream:"
                FontSize="25"/>
-        <Label Text="{Binding Description}"
+
+        <Label x:Name="DescriptionLabel"
                Margin="10,20,0,0"/>
 
     </VerticalStackLayout>

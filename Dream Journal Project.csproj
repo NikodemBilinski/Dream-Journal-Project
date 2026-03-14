@@ -72,10 +72,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AddDreamPage.xaml">
+	  <MauiXaml Update="Pages\AddDreamPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="DreamDetailsPage.xaml">
+	  <MauiXaml Update="Pages\DreamDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LDTechniquesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -5,7 +5,12 @@
              x:Class="Dream_Journal_Project.MainPage"
              x:DataType="model:Dream"
              Title="Dream Journal">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="LD Techniques"
+                     Clicked="LD_Clicked"/>
 
+
+    </ContentPage.ToolbarItems>
     <VerticalStackLayout Padding="20" Spacing="15">
         
         <CollectionView ItemsSource="{Binding Dreams}">
