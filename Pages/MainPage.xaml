@@ -32,7 +32,7 @@
                                         </MultiBinding>
                                     </Label.Text>
                                 </Label>
-                            <Label Text="{Binding Description}"/>
+                            <!--to be removed later, leave it for now--><Label Text="{Binding Description}"/>
                         </VerticalStackLayout>
                             
                     </Border>
