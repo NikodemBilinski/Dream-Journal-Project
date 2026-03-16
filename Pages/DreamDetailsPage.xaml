@@ -5,6 +5,7 @@
              x:Class="Dream_Journal_Project.DreamDetailsPage"
              Title="{Binding Title}"
              x:DataType="model:Dream">
+    <ScrollView>
     <VerticalStackLayout Padding="20">
 
         <Label x:Name="Date"
@@ -20,4 +21,5 @@
                Margin="10,20,0,0"/>
 
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

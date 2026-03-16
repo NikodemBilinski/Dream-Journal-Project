@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Dream_Journal_Project.Models"
              x:Class="Dream_Journal_Project.MainPage"
-             x:DataType="model:Dream"
              Title="Dream Journal">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="LD Techniques"
                      Clicked="LD_Clicked"/>
+        <ToolbarItem Text="Refresh"
+                     Clicked="Refresh_Button_Clicked"/>
 
 
     </ContentPage.ToolbarItems>
@@ -23,25 +24,37 @@
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnDreamTapped"/>
                         </Border.GestureRecognizers>
-                        <VerticalStackLayout>
-                                <Label>
-                                    <Label.Text>
-                                        <MultiBinding StringFormat="{}{0}. {1}">
-                                            <Binding Path="Id"/>
-                                            <Binding Path="Title"/>
-                                        </MultiBinding>
-                                    </Label.Text>
-                                </Label>
-                            <!--to be removed later, leave it for now--><Label Text="{Binding Description}"/>
-                        </VerticalStackLayout>
+                        <Grid ColumnDefinitions="*,20">
+                            <Label Grid.Column="0"
+                                   VerticalOptions="Center">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} | {1}">
+                                        <Binding Path="DateCreated"/>
+                                        <Binding Path="Title"/>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                                <Image Source="trashbin3.png"  
+                                       HeightRequest="50" 
+                                       WidthRequest="50"
+                                       Grid.Row="1"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="End"
+                                       BackgroundColor="Transparent"
+                                       Background="Transparent">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Trash_Bin_Clicked"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                        </Grid>
                             
                     </Border>
                 </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
-
+        
         <Button Text="Add Dream" Clicked="OnAddDreamClicked" VerticalOptions="Center" WidthRequest="175"/>
-        <Button Text="skidibi toilet" Clicked="CleanList" VerticalOptions="Center" WidthRequest="175"/>
+        <!--<Button Text="skidibi toilet" Clicked="CleanList" VerticalOptions="Center" WidthRequest="175"/>-->
     </VerticalStackLayout>
 
 </ContentPage>

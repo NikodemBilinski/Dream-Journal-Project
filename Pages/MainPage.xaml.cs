@@ -1,6 +1,7 @@
 ﻿using Dream_Journal_Project.Models;
 using Dream_Journal_Project.Pages;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace Dream_Journal_Project
@@ -62,11 +63,19 @@ namespace Dream_Journal_Project
             
         }
 
-        public void CleanList(object sender, EventArgs e)
-        {
-            _databaseService.DeleteAllDreams();
-            RefreshDreams();
-        }
+        //public async void CleanList(object sender, EventArgs e)
+        //{
+        //    bool response = await DisplayAlertAsync("u sure?,", "are you sure?", "Yes", "No");
+
+            
+
+        //    if (response)
+        //    {
+        //        _databaseService.DeleteAllDreams();
+        //        RefreshDreams();
+        //    }
+            
+        //}
 
 
         public async void OnDreamTapped(object sender, EventArgs e)
@@ -83,6 +92,7 @@ namespace Dream_Journal_Project
         private async Task RefreshDreams()
         {
             var dreamsFromDb = await _databaseService.GetDreams();
+            Debug.WriteLine($"sny:  {dreamsFromDb.Count}");
             Dreams.Clear();
             foreach (var dream in dreamsFromDb)
             {
@@ -94,6 +104,29 @@ namespace Dream_Journal_Project
         private async void LD_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(LDTechniquesPage));
+        }
+
+        private async void Trash_Bin_Clicked(object sender, TappedEventArgs e)
+        {
+            var element = (VisualElement)sender;
+
+            var tappedDream = (Dream)element.BindingContext; 
+
+            Debug.Write(tappedDream.Title);
+
+            bool response = await DisplayAlertAsync("Delete Dream", $"You sure you want to delete that? '{tappedDream.Title}'?", "Yes", "No");
+
+            if(response)
+            {
+                await _databaseService.DeleteDream(tappedDream);
+                await RefreshDreams();
+            }
+
+        }
+
+        private async void Refresh_Button_Clicked(object sender, EventArgs e)
+        {
+            await RefreshDreams();
         }
     }
 }
