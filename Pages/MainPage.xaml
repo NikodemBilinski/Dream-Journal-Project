@@ -28,7 +28,7 @@
                             <Label Grid.Column="0"
                                    VerticalOptions="Center">
                                 <Label.Text>
-                                    <MultiBinding StringFormat="{}{0} | {1}">
+                                    <MultiBinding StringFormat="{}{0:d} | {1}">
                                         <Binding Path="DateCreated"/>
                                         <Binding Path="Title"/>
                                     </MultiBinding>

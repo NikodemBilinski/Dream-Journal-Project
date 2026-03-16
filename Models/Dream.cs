@@ -15,6 +15,9 @@ namespace Dream_Journal_Project.Models
 
         public DateTime DateCreated { get; set; }
 
+        public bool LucidDream { get; set; }
+
+
         
     }
 }

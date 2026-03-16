@@ -1,4 +1,5 @@
 using Dream_Journal_Project.Models;
+using System.Diagnostics;
 
 namespace Dream_Journal_Project;
 
@@ -27,12 +28,16 @@ public partial class AddDreamPage : ContentPage
         }
 
 
-        var newdream = new Dream
+		var newdream = new Dream
 		{
 			Title = Dream_Title.Text,
 			Description = Dream_Description.Text,
-			DateCreated = DateTime.Now
+			DateCreated = DateTime.Now,
+			LucidDream = LucidDreamBox.IsChecked
 		};
+
+		//debug hehe
+		Debug.WriteLine(newdream);
 
         var parameters = new Dictionary<string, object>
 		{

@@ -30,7 +30,7 @@ public partial class DreamDetailsPage : ContentPage
 
 
 			DescriptionLabel.Text = description;
-			Date.Text = DateCreated.ToString();
+			Date.Text = DateCreated.ToString("f");
 
 
         }
