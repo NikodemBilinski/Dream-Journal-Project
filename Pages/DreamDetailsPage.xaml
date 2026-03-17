@@ -13,9 +13,13 @@
                VerticalOptions="Center"
                HorizontalOptions="Center"
                FontSize="25"/>
-
+        <HorizontalStackLayout>
         <Label Text="Descritpion of the dream:"
                FontSize="25"/>
+        <Label x:Name="LucidDream"
+               FontSize="25"/>
+            
+            </HorizontalStackLayout>
 
         <Label x:Name="DescriptionLabel"
                Margin="10,20,0,0"/>

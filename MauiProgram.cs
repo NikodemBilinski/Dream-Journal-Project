@@ -1,5 +1,8 @@
 ﻿using Dream_Journal_Project.Models;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+
 
 namespace Dream_Journal_Project
 {
@@ -10,11 +13,13 @@ namespace Dream_Journal_Project
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+                
 
             builder.Services.AddSingleton<DataBaseService>();
             builder.Services.AddTransient<MainPage>();

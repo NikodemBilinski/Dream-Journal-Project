@@ -3,6 +3,9 @@ using Dream_Journal_Project.Pages;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
+using Microcharts;
+using SkiaSharp;
+
 
 namespace Dream_Journal_Project
 {
@@ -10,7 +13,7 @@ namespace Dream_Journal_Project
     [QueryProperty(nameof(DreamId), "DreamId")]
     public partial class MainPage : ContentPage
     {
-
+        public Chart MyChart { get; set; }
 
         private readonly DataBaseService _databaseService;
 
@@ -22,6 +25,30 @@ namespace Dream_Journal_Project
         {
 
             InitializeComponent();
+
+            var entries = new[]
+            {
+                new ChartEntry(10)
+                {
+                    Label = "Lucid",
+                    ValueLabelColor = SKColors.White,
+                    ValueLabel = "10",
+                    Color = SKColor.Parse("#FF0000")
+                },
+                new ChartEntry(20)
+                {
+                    Label = "Non-Lucid",
+                    ValueLabelColor = SKColors.White,
+                    ValueLabel = "20",
+                    Color = SKColor.Parse("#00FF00")
+                }
+            };
+
+            MyChart = new DonutChart
+            {
+                Entries = entries,
+                BackgroundColor = SKColors.Empty
+            };
 
             _databaseService = databaseservice;
 

@@ -28,6 +28,15 @@ public partial class DreamDetailsPage : ContentPage
 			var DateCreated = dream.DateCreated;
 			var description = dream.Description;
 
+			if(dream.LucidDream)
+			{
+				LucidDream.Text = "Lucid Dream: Yes";
+			}
+			else
+			{
+				LucidDream.Text = "Lucid Dream: No";
+            }
+
 
 			DescriptionLabel.Text = description;
 			Date.Text = DateCreated.ToString("f");
