@@ -13,6 +13,7 @@ public partial class DreamDetailsPage : ContentPage
 		
 		InitializeComponent();
 		_databaseservice = databaseservice;
+
 	}
 
     protected override async void OnAppearing()

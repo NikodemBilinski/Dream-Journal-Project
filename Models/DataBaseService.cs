@@ -71,5 +71,12 @@ namespace Dream_Journal_Project.Models
                                   .FirstOrDefaultAsync();
                 
         }
+
+        public async Task UpdateDream(Dream dream)
+        {
+            await Init();
+
+            await _database.UpdateAsync(dream);
+        }
     }
 }

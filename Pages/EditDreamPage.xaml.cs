@@ -3,25 +3,57 @@ using System.Diagnostics;
 
 namespace Dream_Journal_Project.Pages;
 
-[QueryProperty(nameof(DreamId), "dreamId")]
+[QueryProperty(nameof(DreamId), "DreamId")]
 
-[QueryProperty(nameof(Dream), "Dream")]
 
 public partial class EditDreamPage : ContentPage
 {
 	public int DreamId { get; set; }
 
-	public Dream Dream { get; set; }
-    public EditDreamPage()
+	private readonly DataBaseService _databaservice;
+
+    public EditDreamPage(DataBaseService databaseservice)
 	{
 		InitializeComponent();
 
-		
-		if(Dream != null)
+		_databaservice = databaseservice;
+
+
+        Debug.WriteLine(DreamId + ": dream id");
+
+
+
+
+    }
+
+	protected override async void OnAppearing()
+	{
+		base.OnAppearing();
+
+		Debug.WriteLine(DreamId + ": dream id in onappearing");
+        var DreamToEdit = await _databaservice.GetSpecificDream(DreamId);
+
+		if (DreamToEdit != null)
 		{
-            Debug.WriteLine(DreamId + ": dream id");
-            Debug.WriteLine(Dream.Title + ": dream title from dream");
-        }
-		
+			this.Title = DreamToEdit.Title;
+			Dream_Description.Text = DreamToEdit.Description;
+
+		}
 	}
+    public async Task OnSaveButtonClicked(object sender, EventArgs e)
+	{
+		var updatedDream = new Dream
+		{
+			Id = DreamId,
+			Description = Dream_Description.Text
+            /*Description = DescriptionEditor.Text,
+			DateCreated = DateTime.Now,
+			LucidDream = LucidSwitch.IsToggled*/
+        };
+		
+		await _databaservice.UpdateDream(updatedDream);
+
+
+		Shell.Current.GoToAsync("..");
+    }
 }
