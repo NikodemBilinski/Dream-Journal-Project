@@ -155,5 +155,15 @@ namespace Dream_Journal_Project
         {
             await RefreshDreams();
         }
+
+        private async void Edit_Clicked(object sender, EventArgs e)
+        {
+            var element = (VisualElement)sender;
+            var tappedDream = (Dream)element.BindingContext; 
+            Debug.Write(tappedDream.Title);
+
+            await Shell.Current.GoToAsync($"{nameof(EditDreamPage)}?DreamId={tappedDream.Id}");
+            //await Shell.Current.GoToAsync($"{nameof(EditDreamPage)}?Dream={tappedDream}");
+        }
     }
 }

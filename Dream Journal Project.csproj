@@ -79,6 +79,9 @@
 	  <MauiXaml Update="Pages\DreamDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\EditDreamPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\LDTechniquesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

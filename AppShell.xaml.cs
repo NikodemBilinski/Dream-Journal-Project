@@ -16,6 +16,8 @@ namespace Dream_Journal_Project
 
             Routing.RegisterRoute(nameof(LDTechniquesPage), typeof(LDTechniquesPage));
 
+            Routing.RegisterRoute(nameof(EditDreamPage), typeof(EditDreamPage));
+
             
         }
     }
