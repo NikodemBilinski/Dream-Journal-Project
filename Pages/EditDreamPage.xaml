@@ -4,14 +4,45 @@
              x:Class="Dream_Journal_Project.Pages.EditDreamPage"
              Title="EditDreamPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <ScrollView>
+            <VerticalStackLayout Padding="20"
+                                 Spacing="15">
 
-        <Editor  x:Name="Dream_Description" 
-            Placeholder="Description" 
-            Margin="10" 
-            HeightRequest="300" />
+
+                <Label x:Name="HeaderLabel"
+                       Text="StringFormat='Edit {0}'}"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+
+                <HorizontalStackLayout 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+
+                    <Entry x:Name="Dream_Title" 
+                           Placeholder="Title" 
+                           Margin="10" 
+                           WidthRequest="200"
+                           HorizontalOptions="Fill"/>
+                    <Label Text="Lucid Dream "
+                           VerticalOptions="Center"
+                           Margin="20,0,0,0"/>
+                    <CheckBox x:Name="LucidDreamBox"/>
+
+                </HorizontalStackLayout>
+                <Editor  x:Name="Dream_Description" 
+                         Placeholder="Description" 
+                         Margin="10" 
+                         HeightRequest="300" />
+
+                <Button Text="Save Dream" 
+                        Clicked="OnSaveButtonClicked" 
+                        VerticalOptions="End"
+                        WidthRequest="150"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>

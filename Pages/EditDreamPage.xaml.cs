@@ -36,20 +36,23 @@ public partial class EditDreamPage : ContentPage
 		if (DreamToEdit != null)
 		{
 			this.Title = DreamToEdit.Title;
+			HeaderLabel.Text = DreamToEdit.Title;
+			Dream_Title.Text = DreamToEdit.Title;
 			Dream_Description.Text = DreamToEdit.Description;
+			LucidDreamBox.IsChecked = DreamToEdit.LucidDream;
 
 		}
 	}
-    public async Task OnSaveButtonClicked(object sender, EventArgs e)
+    public async void OnSaveButtonClicked(object sender, EventArgs e)
 	{
 		var updatedDream = new Dream
 		{
 			Id = DreamId,
-			Description = Dream_Description.Text
-            /*Description = DescriptionEditor.Text,
+			Title = Dream_Title.Text,
+			Description = Dream_Description.Text,
 			DateCreated = DateTime.Now,
-			LucidDream = LucidSwitch.IsToggled*/
-        };
+			LucidDream = LucidDreamBox.IsChecked
+		};
 		
 		await _databaservice.UpdateDream(updatedDream);
 
