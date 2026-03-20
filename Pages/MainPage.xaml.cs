@@ -165,5 +165,10 @@ namespace Dream_Journal_Project
             await Shell.Current.GoToAsync($"{nameof(EditDreamPage)}?DreamId={tappedDream.Id}");
             //await Shell.Current.GoToAsync($"{nameof(EditDreamPage)}?Dream={tappedDream}");
         }
+
+        private async void Open_Chart_Page(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(ChartPage));
+        }
     }
 }

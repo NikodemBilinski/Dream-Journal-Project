@@ -1,5 +1,6 @@
 using Dream_Journal_Project.Models;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Dream_Journal_Project.Pages;
 
@@ -11,6 +12,7 @@ public partial class EditDreamPage : ContentPage
 	public int DreamId { get; set; }
 
 	private readonly DataBaseService _databaservice;
+	private DateTime EditDreamDate;
 
     public EditDreamPage(DataBaseService databaseservice)
 	{
@@ -33,7 +35,9 @@ public partial class EditDreamPage : ContentPage
 		Debug.WriteLine(DreamId + ": dream id in onappearing");
         var DreamToEdit = await _databaservice.GetSpecificDream(DreamId);
 
-		if (DreamToEdit != null)
+		EditDreamDate = DreamToEdit.DateCreated;
+
+        if (DreamToEdit != null)
 		{
 			this.Title = DreamToEdit.Title;
 			HeaderLabel.Text = DreamToEdit.Title;
@@ -45,12 +49,15 @@ public partial class EditDreamPage : ContentPage
 	}
     public async void OnSaveButtonClicked(object sender, EventArgs e)
 	{
+
+		
+
 		var updatedDream = new Dream
 		{
 			Id = DreamId,
+			DateCreated = EditDreamDate,
 			Title = Dream_Title.Text,
 			Description = Dream_Description.Text,
-			DateCreated = DateTime.Now,
 			LucidDream = LucidDreamBox.IsChecked
 		};
 		

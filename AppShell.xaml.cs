@@ -18,6 +18,8 @@ namespace Dream_Journal_Project
 
             Routing.RegisterRoute(nameof(EditDreamPage), typeof(EditDreamPage));
 
+            Routing.RegisterRoute(nameof(ChartPage), typeof(ChartPage));
+
             
         }
     }

@@ -8,18 +8,18 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="LD Techniques"
                      Clicked="LD_Clicked"/>
-        <ToolbarItem Text="Refresh"
-                     Clicked="Refresh_Button_Clicked"
-                     IconImageSource="refresh.png">
+        <ToolbarItem IconImageSource="chart.png"
+                     Clicked="Open_Chart_Page"/>
 
-        </ToolbarItem>
-
+        <ToolbarItem IconImageSource="refresh.png"
+             Clicked="Refresh_Button_Clicked"/>
 
     </ContentPage.ToolbarItems>
     <VerticalStackLayout Padding="20" Spacing="15">
         
         <Button Text="Add Dream" Clicked="OnAddDreamClicked" VerticalOptions="Center" WidthRequest="175"/>
 
+        <ScrollView>
         <CollectionView ItemsSource="{Binding Dreams}">
         
         <CollectionView.ItemTemplate>
@@ -72,8 +72,8 @@
                 </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
+    </ScrollView>
 
-        <charts:ChartView Chart="{Binding MyChart}" HeightRequest="200" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"/>
 
         <!--<Button Text="skidibi toilet" Clicked="CleanList" VerticalOptions="Center" WidthRequest="175"/>-->
     </VerticalStackLayout>

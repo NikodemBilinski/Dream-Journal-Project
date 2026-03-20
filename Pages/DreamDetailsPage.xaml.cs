@@ -31,11 +31,11 @@ public partial class DreamDetailsPage : ContentPage
 
 			if(dream.LucidDream)
 			{
-				LucidDream.Text = "Lucid Dream: Yes";
+				LucidDream.Text = "Lucid";
 			}
 			else
 			{
-				LucidDream.Text = "Lucid Dream: No";
+				LucidDream.Text = "Not Lucid";
             }
 
 
