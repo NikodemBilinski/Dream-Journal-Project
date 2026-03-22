@@ -5,8 +5,50 @@
              x:Class="Dream_Journal_Project.Pages.ChartPage"
              Title="ChartPage">
     <VerticalStackLayout>
-        <charts:ChartView x:Name="DreamChart"
+
+        <Label x:Name="ChartsHeader"
+               Text="Dream Statistics"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="White"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"/>
+
+        <charts:ChartView x:Name="DreamChart" 
                           HeightRequest="300"
-                          Margin="20"/>
+                          WidthRequest="300"
+                          Margin="20"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center"/>
+
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+            
+            <BoxView x:Name="NonLucidBox"
+                     Color="Red"
+                     WidthRequest="20"
+                     HeightRequest="20"
+                     VerticalOptions="Center"/>
+            
+            <Label x:Name="ChartNonLucidLabel"
+                   FontSize="20"/>
+            
+        </HorizontalStackLayout>
+        
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+            
+            <BoxView x:Name="LucidBox"
+                     Color="Green"
+                     WidthRequest="20"
+                     HeightRequest="20"
+                     VerticalOptions="Center"/>
+
+            <Label x:Name="ChartLucidLabel"
+                   FontSize="20"/>
+            
+        </HorizontalStackLayout>
+
+
+
+
     </VerticalStackLayout>
 </ContentPage>
