@@ -60,18 +60,13 @@ public partial class ChartPage : ContentPage
         {
             new ChartEntry(lucidCount)
             {
-                Label = "Lucid",
-                ValueLabelColor = SKColors.White,
-                ValueLabel = lucidCount.ToString(),
-                Color = SKColor.Parse("#FF0000")
+                Color = SKColors.Red
             },
 
             new ChartEntry(nonlucidCount)
             {
-                Label = "Non-Lucid",
-                ValueLabelColor = SKColors.White,
-                ValueLabel = nonlucidCount.ToString(),
-                Color = SKColor.Parse("#00FF00")
+                Color = SKColors.Green
+                
             }
 
         };
@@ -86,6 +81,9 @@ public partial class ChartPage : ContentPage
         };
 
         DreamChart.Chart = MyChart;
+
+        ChartLucidLabel.Text = "Lucid Count: " + lucidCount.ToString();
+        ChartNonLucidLabel.Text = "Non-Lucid Count:  " + nonlucidCount.ToString();
     }
 
 
