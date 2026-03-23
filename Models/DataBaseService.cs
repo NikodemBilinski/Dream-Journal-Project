@@ -72,6 +72,16 @@ namespace Dream_Journal_Project.Models
             _database.DeleteAsync(dream);
         }
 
+        public async Task DeleteTag(Tag tag)
+        {
+            await Init();
+            if (tag == null)
+            {
+                return;
+            }
+            _database.DeleteAsync(tag);
+        }
+
         public async Task GenerateDefaultTags()
         {
             await Init();

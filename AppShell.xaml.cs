@@ -20,6 +20,8 @@ namespace Dream_Journal_Project
 
             Routing.RegisterRoute(nameof(ChartPage), typeof(ChartPage));
 
+            Routing.RegisterRoute(nameof(TagPage), typeof(TagPage));
+
             
         }
     }

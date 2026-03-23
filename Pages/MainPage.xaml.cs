@@ -63,7 +63,7 @@ namespace Dream_Journal_Project
         }
 
 
-        public async void OnAddDreamClicked(object sender, EventArgs e)
+        public async void On_Add_Dream_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(AddDreamPage));
 
@@ -149,6 +149,11 @@ namespace Dream_Journal_Project
         private async void Open_Chart_Page(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(ChartPage));
+        }
+
+        private async void On_Tags_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(TagPage));
         }
     }
 }
