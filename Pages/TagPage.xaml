@@ -15,25 +15,33 @@
             </CollectionView.ItemTemplate>
         </CollectionView> -->
 
-
+        <Button Text="Add New Tag"
+                WidthRequest="150"
+                HorizontalOptions="Center"
+                Clicked="Add_Tag"/>
 
         <CollectionView x:Name="TagTemplate" Margin="20">
 
-            <CollectionView.ItemTemplate x:DataType="model:Tag">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border BackgroundColor="{Binding ColorHex}"
+                    <Border BackgroundColor="Transparent"
                         Stroke="Transparent"
                         HeightRequest="50">
-                        <Grid ColumnDefinitions="*,35,35">
+                        <Grid ColumnDefinitions="*,45">
                             <Label Grid.Column="0"
                                    VerticalOptions="Center"
                                    Text="{Binding Name}"
-                                   TextColor="Black"/>
+                                   Margin="20,0,0,0"/>
+                            <BoxView BackgroundColor="{Binding ColorHex}"
+                                     HeightRequest="15"
+                                     WidthRequest="15"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Start"/>
 
                             <Image Source="trashbin3.png"  
                                 HeightRequest="35" 
                                 WidthRequest="35"
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 VerticalOptions="Center"
                                 HorizontalOptions="End"
                                 BackgroundColor="Transparent"
