@@ -5,11 +5,22 @@ namespace Dream_Journal_Project;
 
 public partial class AddDreamPage : ContentPage
 {
-	public AddDreamPage(DataBaseService databaseservice)
+	private readonly DataBaseService _databaseService;
+    public AddDreamPage(DataBaseService databaseservice)
 	{
 		InitializeComponent();
+		_databaseService = databaseservice;
 	}
-	private async void Save_Dream_Clicked(object sender, EventArgs e)
+
+	protected override async void OnAppearing()
+	{
+		base.OnAppearing();
+
+		var tags = await _databaseService.GetTags();
+
+		TagsSelection.ItemsSource = tags;
+    }
+    private async void Save_Dream_Clicked(object sender, EventArgs e)
 	{
 		await Save_Dream();
 	}

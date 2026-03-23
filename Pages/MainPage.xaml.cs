@@ -56,6 +56,9 @@ namespace Dream_Journal_Project
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            _databaseService.GenerateDefaultTags();
+
             RefreshDreams();
         }
 
