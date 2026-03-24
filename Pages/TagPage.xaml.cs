@@ -36,6 +36,15 @@ public partial class TagPage : ContentPage
 			await DisplayAlertAsync("Error", "You cannot delete the default tags.", "OK");
 			return;
 		}
+
+		var allDreams = await _databaseservice.GetDreams();
+
+		if (allDreams.Any(x => !string.IsNullOrEmpty(x.TagIds) && x.TagIds.Split(",").Contains(tagToDelete.Id.ToString())))
+		{
+			await DisplayAlertAsync("Error", "You cannot delete a tag that is currently in use by a dream.", "OK");
+			return;
+        }
+
 		_databaseservice.DeleteTag(tagToDelete);
 
 		Refresh_Tags();

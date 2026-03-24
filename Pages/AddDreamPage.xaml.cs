@@ -40,7 +40,7 @@ public partial class AddDreamPage : ContentPage
 
 		var selectedItems = TagsSelection.SelectedItems.Cast<Tag>().ToList();
 
-		string TagsIdString = string.Join(", ", selectedItems.Select(x => x.Id));
+		string TagsIdString = string.Join(",", selectedItems.Select(x => x.Id));
 
 
 		var newdream = new Dream

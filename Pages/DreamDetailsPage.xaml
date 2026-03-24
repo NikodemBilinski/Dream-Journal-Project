@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Dream_Journal_Project.Models"
              x:Class="Dream_Journal_Project.DreamDetailsPage"
-             Title="{Binding Title}"
-             x:DataType="model:Dream">
+             Title="{Binding Title}">
     <ScrollView>
     <VerticalStackLayout Padding="20">
 
@@ -14,10 +13,26 @@
                HorizontalOptions="Center"
                FontSize="25"/>
 
-       
-
-        <Label x:Name="DescriptionLabel"
+            <CollectionView x:Name="TagsCollection"
+                            Margin="0,20,0,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{Binding ColorHex}"
+                            Padding="5"
+                            Margin="5">
+                            <Label Text="{Binding Name}"
+                               TextColor="Black"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+            <Label x:Name="DescriptionLabel"
                Margin="10,20,0,0"/>
+        
+        
 
     </VerticalStackLayout>
     </ScrollView>

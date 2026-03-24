@@ -1,4 +1,5 @@
 using Dream_Journal_Project.Models;
+using System.Diagnostics;
 
 namespace Dream_Journal_Project;
 
@@ -33,6 +34,15 @@ public partial class DreamDetailsPage : ContentPage
 
 			DescriptionLabel.Text = description;
 			Date.Text = DateCreated.ToString("f");
+
+
+			//await _databaseservice.GetTagsById(dream.TagIds);
+			
+            var TagList = await _databaseservice.GetTagsById(dream.TagIds);
+
+			TagsCollection.ItemsSource = TagList;
+
+
 
 
         }
