@@ -18,6 +18,7 @@ namespace Dream_Journal_Project.Models
 
             _database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
             await _database.CreateTableAsync<Dream>();
+            await _database.CreateTableAsync<Tag>();
 
         }
 
@@ -25,6 +26,12 @@ namespace Dream_Journal_Project.Models
         {
             await Init();
             return await _database.Table<Dream>().ToListAsync();
+        }
+
+        public async Task<List<Tag>> GetTags()
+        {
+            await Init();
+            return await _database.Table<Tag>().ToListAsync();
         }
 
         public async Task AddDream(Dream dream)
@@ -41,6 +48,19 @@ namespace Dream_Journal_Project.Models
             }
         }
 
+        public async Task AddTag(Tag tag)
+        {
+            await Init();
+            if (tag.Id != 0)
+            {
+                await _database.UpdateAsync(tag);
+            }
+            else
+            {
+                await _database.InsertAsync(tag);
+            }
+        }
+
         public async Task DeleteDream(Dream dream)
         {
             await Init();
@@ -50,6 +70,31 @@ namespace Dream_Journal_Project.Models
             }
 
             _database.DeleteAsync(dream);
+        }
+
+        public async Task DeleteTag(Tag tag)
+        {
+            await Init();
+            if (tag == null)
+            {
+                return;
+            }
+            _database.DeleteAsync(tag);
+        }
+
+        public async Task GenerateDefaultTags()
+        {
+            await Init();
+
+            var count = await _database.Table<Tag>().CountAsync();
+
+            if (count == 0)
+            {
+                await _database.InsertAsync(new Tag { Name = "Nightmare", ColorHex = "#FF0000", IsActive = false });
+                await _database.InsertAsync(new Tag { Name = "Vivid", ColorHex = "#FFFF00", IsActive = false });
+                await _database.InsertAsync(new Tag { Name = "False Awakening", ColorHex = "#FFFFFF", IsActive = false });
+
+            }
         }
 
         public async Task DeleteAllDreams()

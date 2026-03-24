@@ -16,9 +16,14 @@
 
     </ContentPage.ToolbarItems>
     <VerticalStackLayout Padding="20" Spacing="15">
-        
-        <Button Text="Add Dream" Clicked="OnAddDreamClicked" VerticalOptions="Center" WidthRequest="175"/>
 
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+            
+        <Button Text="Add Dream" Clicked="On_Add_Dream_Clicked" VerticalOptions="Center" WidthRequest="175"/>
+        <Button Text="View Tags" Clicked="On_Tags_Clicked" VerticalOptions="Center" WidthRequest="175"/>
+            
+            
+        </HorizontalStackLayout>
         <ScrollView>
         <CollectionView ItemsSource="{Binding Dreams}">
         

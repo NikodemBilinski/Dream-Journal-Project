@@ -26,6 +26,24 @@
                        VerticalOptions="Center"
                        Margin="20,0,0,0"/>
                 <CheckBox x:Name="LucidDreamBox"/>
+                <Label Text="Choose Tags:"/>
+                <CollectionView x:Name="TagsSelection"
+                                SelectionMode="Multiple"
+                                Margin="20,0,0,0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BackgroundColor="{Binding ColorHex}">
+                                <Label Text="{Binding Name}"
+                                       Margin="5"
+                                       TextColor="Black"/>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"/>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
 
             </HorizontalStackLayout>
             <Editor  x:Name="Dream_Description" 
