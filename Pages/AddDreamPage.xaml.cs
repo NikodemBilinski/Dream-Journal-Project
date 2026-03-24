@@ -38,13 +38,19 @@ public partial class AddDreamPage : ContentPage
 			return;
         }
 
+		var selectedItems = TagsSelection.SelectedItems.Cast<Tag>().ToList();
+
+		string tagsString = string.Join(", ", selectedItems.Select(x => x.Name));
+
 
 		var newdream = new Dream
 		{
 			Title = Dream_Title.Text,
 			Description = Dream_Description.Text,
 			DateCreated = DateTime.Now,
-			LucidDream = LucidDreamBox.IsChecked
+			LucidDream = LucidDreamBox.IsChecked,
+			TagIds = tagsString
+			
 		};
 
 		//debug hehe

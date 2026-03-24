@@ -27,7 +27,9 @@
                        Margin="20,0,0,0"/>
                 <CheckBox x:Name="LucidDreamBox"/>
                 <Label Text="Choose Tags:"/>
-                <CollectionView x:Name="TagsSelection">
+                <CollectionView x:Name="TagsSelection"
+                                SelectionMode="Multiple"
+                                Margin="20,0,0,0">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border BackgroundColor="{Binding ColorHex}">
