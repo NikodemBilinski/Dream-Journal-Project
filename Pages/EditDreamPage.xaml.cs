@@ -43,7 +43,6 @@ public partial class EditDreamPage : ContentPage
 			HeaderLabel.Text = DreamToEdit.Title;
 			Dream_Title.Text = DreamToEdit.Title;
 			Dream_Description.Text = DreamToEdit.Description;
-			LucidDreamBox.IsChecked = DreamToEdit.LucidDream;
 
 		}
 	}
@@ -57,8 +56,7 @@ public partial class EditDreamPage : ContentPage
 			Id = DreamId,
 			DateCreated = EditDreamDate,
 			Title = Dream_Title.Text,
-			Description = Dream_Description.Text,
-			LucidDream = LucidDreamBox.IsChecked
+			Description = Dream_Description.Text
 		};
 		
 		await _databaservice.UpdateDream(updatedDream);

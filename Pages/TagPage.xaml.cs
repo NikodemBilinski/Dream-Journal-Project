@@ -31,6 +31,11 @@ public partial class TagPage : ContentPage
 
 		var tagToDelete = (Tag)element.BindingContext;
 
+		if(tagToDelete.Name == "Lucid" || tagToDelete.Name == "Nightmare" || tagToDelete.Name == "Vivid" || tagToDelete.Name == "False Awakening")
+		{
+			await DisplayAlertAsync("Error", "You cannot delete the default tags.", "OK");
+			return;
+		}
 		_databaseservice.DeleteTag(tagToDelete);
 
 		Refresh_Tags();

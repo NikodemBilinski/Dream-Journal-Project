@@ -29,14 +29,6 @@ public partial class DreamDetailsPage : ContentPage
 			var DateCreated = dream.DateCreated;
 			var description = dream.Description;
 
-			if(dream.LucidDream)
-			{
-				LucidDream.Text = "Lucid";
-			}
-			else
-			{
-				LucidDream.Text = "Not Lucid";
-            }
 
 
 			DescriptionLabel.Text = description;

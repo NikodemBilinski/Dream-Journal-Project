@@ -14,10 +14,7 @@
                HorizontalOptions="Center"
                FontSize="25"/>
 
-        <Label x:Name="LucidDream"
-               FontSize="25"/>
-            
-
+       
 
         <Label x:Name="DescriptionLabel"
                Margin="10,20,0,0"/>

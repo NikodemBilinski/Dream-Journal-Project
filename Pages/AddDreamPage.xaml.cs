@@ -40,7 +40,7 @@ public partial class AddDreamPage : ContentPage
 
 		var selectedItems = TagsSelection.SelectedItems.Cast<Tag>().ToList();
 
-		string tagsString = string.Join(", ", selectedItems.Select(x => x.Name));
+		string TagsIdString = string.Join(", ", selectedItems.Select(x => x.Id));
 
 
 		var newdream = new Dream
@@ -48,8 +48,7 @@ public partial class AddDreamPage : ContentPage
 			Title = Dream_Title.Text,
 			Description = Dream_Description.Text,
 			DateCreated = DateTime.Now,
-			LucidDream = LucidDreamBox.IsChecked,
-			TagIds = tagsString
+			TagIds = TagsIdString
 			
 		};
 

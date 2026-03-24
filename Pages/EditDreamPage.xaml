@@ -26,10 +26,6 @@
                            Margin="10" 
                            WidthRequest="200"
                            HorizontalOptions="Fill"/>
-                    <Label Text="Lucid Dream "
-                           VerticalOptions="Center"
-                           Margin="20,0,0,0"/>
-                    <CheckBox x:Name="LucidDreamBox"/>
 
                 </HorizontalStackLayout>
                 <Editor  x:Name="Dream_Description" 
