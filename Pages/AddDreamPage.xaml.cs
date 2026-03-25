@@ -43,6 +43,7 @@ public partial class AddDreamPage : ContentPage
 		string TagsIdString = string.Join(",", selectedItems.Select(x => x.Id));
 
 
+
 		var newdream = new Dream
 		{
 			Title = Dream_Title.Text,

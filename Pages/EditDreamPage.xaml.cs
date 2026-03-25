@@ -23,7 +23,7 @@ public partial class EditDreamPage : ContentPage
 
         Debug.WriteLine(DreamId + ": dream id");
 
-
+		
 
 
     }
@@ -33,21 +33,41 @@ public partial class EditDreamPage : ContentPage
 		base.OnAppearing();
 
 		Debug.WriteLine(DreamId + ": dream id in onappearing");
-        var DreamToEdit = await _databaservice.GetSpecificDream(DreamId);
+		var DreamToEdit = await _databaservice.GetSpecificDream(DreamId);
 
 		EditDreamDate = DreamToEdit.DateCreated;
 
-        if (DreamToEdit != null)
+		if (DreamToEdit != null)
 		{
 			this.Title = DreamToEdit.Title;
 			HeaderLabel.Text = DreamToEdit.Title;
 			Dream_Title.Text = DreamToEdit.Title;
 			Dream_Description.Text = DreamToEdit.Description;
 
+			var tags = await _databaservice.GetTags();
+
+			TagsSelection.ItemsSource = tags;
+
+			if (!string.IsNullOrEmpty(DreamToEdit.TagIds))
+			{
+				var TagsArray = DreamToEdit.TagIds.Split(",", StringSplitOptions.TrimEntries);
+
+				var selectedTags = tags.Where(x => TagsArray.Contains(x.Id.ToString())).ToList();
+
+				foreach (var tag in selectedTags)
+				{
+					TagsSelection.SelectedItems.Add(tag);
+                }
+
+			}
 		}
 	}
     public async void OnSaveButtonClicked(object sender, EventArgs e)
 	{
+
+		var selectedTags = TagsSelection.SelectedItems.Cast<Tag>().ToList();
+
+		string TagsIdsJoin = string.Join(",", selectedTags.Select(x => x.Id));
 
 		
 
@@ -56,8 +76,10 @@ public partial class EditDreamPage : ContentPage
 			Id = DreamId,
 			DateCreated = EditDreamDate,
 			Title = Dream_Title.Text,
-			Description = Dream_Description.Text
-		};
+			Description = Dream_Description.Text,
+			TagIds = TagsIdsJoin
+
+        };
 		
 		await _databaservice.UpdateDream(updatedDream);
 
