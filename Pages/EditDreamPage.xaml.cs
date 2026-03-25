@@ -14,6 +14,8 @@ public partial class EditDreamPage : ContentPage
 	private readonly DataBaseService _databaservice;
 	private DateTime EditDreamDate;
 
+	private List<Tag> MySelectedTags = new List<Tag>(); 
+
     public EditDreamPage(DataBaseService databaseservice)
 	{
 		InitializeComponent();
@@ -46,26 +48,36 @@ public partial class EditDreamPage : ContentPage
 
 			var tags = await _databaservice.GetTags();
 
-			TagsSelection.ItemsSource = tags;
+
+
+			
 
 			if (!string.IsNullOrEmpty(DreamToEdit.TagIds))
 			{
 				var TagsArray = DreamToEdit.TagIds.Split(",", StringSplitOptions.TrimEntries);
 
-				var selectedTags = tags.Where(x => TagsArray.Contains(x.Id.ToString())).ToList();
+				
 
-				foreach (var tag in selectedTags)
+				foreach (var tag in tags)
 				{
-					TagsSelection.SelectedItems.Add(tag);
+					if(TagsArray.Contains(tag.Id.ToString()))
+					{
+						MySelectedTags.Add(tag);
+						tag.CurrentThickness = 5;
+
+                    }
+
                 }
 
 			}
-		}
+
+            TagsSelection.ItemsSource = tags;
+        }
 	}
     public async void OnSaveButtonClicked(object sender, EventArgs e)
 	{
 
-		var selectedTags = TagsSelection.SelectedItems.Cast<Tag>().ToList();
+		var selectedTags = MySelectedTags;
 
 		string TagsIdsJoin = string.Join(",", selectedTags.Select(x => x.Id));
 
@@ -85,5 +97,24 @@ public partial class EditDreamPage : ContentPage
 
 
 		Shell.Current.GoToAsync("..");
+    }
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+		var border = (Border)sender;
+
+		var tag = (Tag)border.BindingContext;
+
+        if (MySelectedTags.Contains(tag))
+        {
+            MySelectedTags.Remove(tag);
+            border.StrokeThickness = 0;
+
+        }
+        else
+        {
+            MySelectedTags.Add(tag);
+            border.StrokeThickness = 5;
+        }
     }
 }

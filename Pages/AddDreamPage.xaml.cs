@@ -6,6 +6,8 @@ namespace Dream_Journal_Project;
 public partial class AddDreamPage : ContentPage
 {
 	private readonly DataBaseService _databaseService;
+
+	private List<Tag> MySelectedTags = new List<Tag>();
     public AddDreamPage(DataBaseService databaseservice)
 	{
 		InitializeComponent();
@@ -19,6 +21,7 @@ public partial class AddDreamPage : ContentPage
 		var tags = await _databaseService.GetTags();
 
 		TagsSelection.ItemsSource = tags;
+
     }
     private async void Save_Dream_Clicked(object sender, EventArgs e)
 	{
@@ -38,7 +41,7 @@ public partial class AddDreamPage : ContentPage
 			return;
         }
 
-		var selectedItems = TagsSelection.SelectedItems.Cast<Tag>().ToList();
+		var selectedItems = MySelectedTags;
 
 		string TagsIdString = string.Join(",", selectedItems.Select(x => x.Id));
 
@@ -63,5 +66,25 @@ public partial class AddDreamPage : ContentPage
 
 		// go back to mainpage
 		await Shell.Current.GoToAsync("..", parameters);
+    }
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+		var border = (Border)sender;
+
+		var tag = (Tag)border.BindingContext;
+
+		if (MySelectedTags.Contains(tag))
+		{
+			MySelectedTags.Remove(tag);
+			border.StrokeThickness = 0;
+
+		}
+		else
+		{
+			MySelectedTags.Add(tag);
+			border.Stroke = Colors.Black;
+			border.StrokeThickness = 5;
+        }
     }
 }

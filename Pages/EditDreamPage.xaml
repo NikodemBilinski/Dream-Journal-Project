@@ -27,20 +27,24 @@
                            WidthRequest="200"
                            HorizontalOptions="Fill"/>
                     <CollectionView x:Name="TagsSelection"
-                                    SelectionMode="Multiple"
-                                    Margin="20,0,0,0"> 
+                                    SelectionMode="None"> 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Border BackgroundColor="{Binding ColorHex}">
+                                <Border BackgroundColor="{Binding ColorHex}"
+                                        StrokeThickness="{Binding CurrentThickness}"
+                                        Stroke="Black">
                                     <Label Text="{Binding Name}"
                                            Margin="5"
                                            TextColor="Black"/>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                    </Border.GestureRecognizers>
                                 </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
 
                         <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal"/>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>
                     </CollectionView>
 
