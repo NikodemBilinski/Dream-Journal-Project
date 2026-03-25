@@ -13,20 +13,23 @@
                HorizontalOptions="Center"
                FontSize="25"/>
 
-            <CollectionView x:Name="TagsCollection"
-                            Margin="0,20,0,0">
+            <CollectionView x:Name="TagsCollection">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border BackgroundColor="{Binding ColorHex}"
-                            Padding="5"
-                            Margin="5">
+                                HeightRequest="45"
+                                Stroke="Black"
+                                StrokeShape="RoundRectangle 40,40,0,40">
                             <Label Text="{Binding Name}"
-                               TextColor="Black"/>
+                                   TextColor="Black"
+                                   Margin="5"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"/>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"/>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
             </CollectionView>
             <Label x:Name="DescriptionLabel"

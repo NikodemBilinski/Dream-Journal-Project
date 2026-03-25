@@ -32,10 +32,14 @@
                             <DataTemplate>
                                 <Border BackgroundColor="{Binding ColorHex}"
                                         StrokeThickness="{Binding CurrentThickness}"
-                                        Stroke="Black">
+                                        Stroke="Black"
+                                        HeightRequest="45"
+                                        StrokeShape="RoundRectangle 40,40,0,40">
                                     <Label Text="{Binding Name}"
                                            Margin="5"
-                                           TextColor="Black"/>
+                                           TextColor="Black"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                                     </Border.GestureRecognizers>
@@ -44,7 +48,7 @@
                         </CollectionView.ItemTemplate>
 
                         <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                         </CollectionView.ItemsLayout>
                     </CollectionView>
 

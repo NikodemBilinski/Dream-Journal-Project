@@ -109,12 +109,13 @@ public partial class EditDreamPage : ContentPage
         {
             MySelectedTags.Remove(tag);
             border.StrokeThickness = 0;
-
+			border.Stroke = Colors.Transparent;
         }
         else
         {
             MySelectedTags.Add(tag);
             border.StrokeThickness = 5;
+			border.Stroke = Colors.Black;
         }
     }
 }
