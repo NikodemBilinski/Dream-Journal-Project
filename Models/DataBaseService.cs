@@ -34,6 +34,24 @@ namespace Dream_Journal_Project.Models
             return await _database.Table<Tag>().ToListAsync();
         }
 
+        public async Task<List<Tag>> GetTagsById(string tagIds)
+        {
+            await Init();
+
+            if(string.IsNullOrEmpty(tagIds))
+            {
+                return new List<Tag>();
+            }
+
+            var idArray = tagIds.Split(',', StringSplitOptions.TrimEntries);
+
+            var allTags = await _database.Table<Tag>().ToListAsync();
+
+            return allTags.Where(t => idArray.Contains(t.Id.ToString())).ToList();
+
+
+        }
+
         public async Task AddDream(Dream dream)
         {
             await Init();
@@ -90,9 +108,10 @@ namespace Dream_Journal_Project.Models
 
             if (count == 0)
             {
+                await _database.InsertAsync(new Tag { Name = "Lucid", ColorHex = "#FFFFFF", IsActive = false });
                 await _database.InsertAsync(new Tag { Name = "Nightmare", ColorHex = "#FF0000", IsActive = false });
                 await _database.InsertAsync(new Tag { Name = "Vivid", ColorHex = "#FFFF00", IsActive = false });
-                await _database.InsertAsync(new Tag { Name = "False Awakening", ColorHex = "#FFFFFF", IsActive = false });
+                await _database.InsertAsync(new Tag { Name = "False Awakening", ColorHex = "#FF00FF", IsActive = false });
 
             }
         }

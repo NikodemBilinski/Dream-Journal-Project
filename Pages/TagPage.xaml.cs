@@ -31,6 +31,20 @@ public partial class TagPage : ContentPage
 
 		var tagToDelete = (Tag)element.BindingContext;
 
+		if(tagToDelete.Name == "Lucid" || tagToDelete.Name == "Nightmare" || tagToDelete.Name == "Vivid" || tagToDelete.Name == "False Awakening")
+		{
+			await DisplayAlertAsync("Error", "You cannot delete the default tags.", "OK");
+			return;
+		}
+
+		var allDreams = await _databaseservice.GetDreams();
+
+		if (allDreams.Any(x => !string.IsNullOrEmpty(x.TagIds) && x.TagIds.Split(",").Contains(tagToDelete.Id.ToString())))
+		{
+			await DisplayAlertAsync("Error", "You cannot delete a tag that is currently in use by a dream.", "OK");
+			return;
+        }
+
 		_databaseservice.DeleteTag(tagToDelete);
 
 		Refresh_Tags();
