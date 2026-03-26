@@ -27,22 +27,29 @@
                            WidthRequest="200"
                            HorizontalOptions="Fill"/>
                     <CollectionView x:Name="TagsSelection"
-                                    SelectionMode="None"> 
+                                    SelectionMode="None"
+                                    HeightRequest="90"> 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Border BackgroundColor="{Binding ColorHex}"
+                                <Border Stroke="GhostWhite"
                                         StrokeThickness="{Binding CurrentThickness}"
-                                        Stroke="Black"
-                                        HeightRequest="45"
-                                        StrokeShape="RoundRectangle 40,40,0,40">
-                                    <Label Text="{Binding Name}"
-                                           Margin="5"
-                                           TextColor="Black"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Center"/>
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                                    </Border.GestureRecognizers>
+                                        StrokeShape="RoundRectangle 40,40,0,40"
+                                        HeightRequest="50">
+                                    
+                                    <Border BackgroundColor="{Binding ColorHex}"
+                                            StrokeThickness="1"
+                                            Stroke="Black"
+                                            HeightRequest="40"
+                                            StrokeShape="RoundRectangle 40,40,0,40">
+                                        <Label Text="{Binding Name}"
+                                               Margin="5"
+                                               TextColor="Black"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"/>
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                        </Border.GestureRecognizers>
+                                    </Border>
                                 </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

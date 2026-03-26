@@ -102,20 +102,21 @@ public partial class EditDreamPage : ContentPage
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
 		var border = (Border)sender;
+		var border2 = (Border)border.Parent;
 
 		var tag = (Tag)border.BindingContext;
 
         if (MySelectedTags.Contains(tag))
         {
             MySelectedTags.Remove(tag);
-            border.StrokeThickness = 0;
-			border.Stroke = Colors.Transparent;
+            border2.StrokeThickness = 0;
+			border2.Stroke = Colors.Transparent;
         }
         else
         {
             MySelectedTags.Add(tag);
-            border.StrokeThickness = 5;
-			border.Stroke = Colors.Black;
+            border2.StrokeThickness = 5;
+			border2.Stroke = Colors.GhostWhite;
         }
     }
 }
