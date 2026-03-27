@@ -39,51 +39,53 @@ public partial class ChartPage : ContentPage
         }
     }
 
+
+    // for now it will stay commented until i make it work with tags
     public async Task GenerateChart2()
     {
-        // get dreams from database to collection
-        var dreamsFromDb = await _dataBaseService.GetDreams();
-        Debug.WriteLine($"sny:  {dreamsFromDb.Count}");
-        Dreams.Clear();
-        foreach (var dream in dreamsFromDb)
-        {
-            Dreams.Add(dream);
-        }
+        //// get dreams from database to collection
+        //var dreamsFromDb = await _dataBaseService.GetDreams();
+        //Debug.WriteLine($"sny:  {dreamsFromDb.Count}");
+        //Dreams.Clear();
+        //foreach (var dream in dreamsFromDb)
+        //{
+        //    Dreams.Add(dream);
+        //}
 
-        // get number of specific dreams to ints
-        int lucidCount = Dreams.Count(x => x.LucidDream);
-        int nonlucidCount = Dreams.Count(x => !x.LucidDream);
-        int dreamsTotal = Dreams.Count();
+        //// get number of specific dreams to ints
+        ////int lucidCount = Dreams.Count(x => x.LucidDream);
+        ////int nonlucidCount = Dreams.Count(x => !x.LucidDream);
+        ////int dreamsTotal = Dreams.Count();
 
-        // create entries for chart (Lucid and non lucid dreams)
-        var entries = new[]
-        {
-            new ChartEntry(lucidCount)
-            {
-                Color = SKColors.Red
-            },
+        //// create entries for chart (Lucid and non lucid dreams)
+        //var entries = new[]
+        //{
+        //    new ChartEntry(lucidCount)
+        //    {
+        //        Color = SKColors.Red
+        //    },
 
-            new ChartEntry(nonlucidCount)
-            {
-                Color = SKColors.Green
+        //    new ChartEntry(nonlucidCount)
+        //    {
+        //        Color = SKColors.Green
                 
-            }
+        //    }
 
-        };
+        //};
 
-        MyChart = new DonutChart
-        {
-            Entries = entries,
-            BackgroundColor = SKColor.Empty,
-            LabelTextSize = 15,
-            Typeface = SKTypeface.FromFamilyName("Arial"),
-            LabelColor = SKColors.White
-        };
+        //MyChart = new DonutChart
+        //{
+        //    Entries = entries,
+        //    BackgroundColor = SKColor.Empty,
+        //    LabelTextSize = 15,
+        //    Typeface = SKTypeface.FromFamilyName("Arial"),
+        //    LabelColor = SKColors.White
+        //};
 
-        DreamChart.Chart = MyChart;
+        //DreamChart.Chart = MyChart;
 
-        ChartLucidLabel.Text = "Lucid Count: " + lucidCount.ToString();
-        ChartNonLucidLabel.Text = "Non-Lucid Count:  " + nonlucidCount.ToString();
+        //ChartLucidLabel.Text = "Lucid Count: " + lucidCount.ToString();
+        //ChartNonLucidLabel.Text = "Non-Lucid Count:  " + nonlucidCount.ToString();
     }
 
 

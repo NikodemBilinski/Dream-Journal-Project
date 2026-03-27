@@ -17,6 +17,9 @@ namespace Dream_Journal_Project.Models
             public string ColorHex { get; set; }
 
             public bool IsActive { get; set; }
-        }
+
+            [SQLite.Ignore]
+            public int CurrentThickness { get; set; } = 0;
+    }
     
 }

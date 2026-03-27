@@ -14,6 +14,8 @@ public partial class EditDreamPage : ContentPage
 	private readonly DataBaseService _databaservice;
 	private DateTime EditDreamDate;
 
+	private List<Tag> MySelectedTags = new List<Tag>(); 
+
     public EditDreamPage(DataBaseService databaseservice)
 	{
 		InitializeComponent();
@@ -23,7 +25,7 @@ public partial class EditDreamPage : ContentPage
 
         Debug.WriteLine(DreamId + ": dream id");
 
-
+		
 
 
     }
@@ -33,22 +35,51 @@ public partial class EditDreamPage : ContentPage
 		base.OnAppearing();
 
 		Debug.WriteLine(DreamId + ": dream id in onappearing");
-        var DreamToEdit = await _databaservice.GetSpecificDream(DreamId);
+		var DreamToEdit = await _databaservice.GetSpecificDream(DreamId);
 
 		EditDreamDate = DreamToEdit.DateCreated;
 
-        if (DreamToEdit != null)
+		if (DreamToEdit != null)
 		{
 			this.Title = DreamToEdit.Title;
 			HeaderLabel.Text = DreamToEdit.Title;
 			Dream_Title.Text = DreamToEdit.Title;
 			Dream_Description.Text = DreamToEdit.Description;
-			LucidDreamBox.IsChecked = DreamToEdit.LucidDream;
 
-		}
+			var tags = await _databaservice.GetTags();
+
+
+
+			
+
+			if (!string.IsNullOrEmpty(DreamToEdit.TagIds))
+			{
+				var TagsArray = DreamToEdit.TagIds.Split(",", StringSplitOptions.TrimEntries);
+
+				
+
+				foreach (var tag in tags)
+				{
+					if(TagsArray.Contains(tag.Id.ToString()))
+					{
+						MySelectedTags.Add(tag);
+						tag.CurrentThickness = 5;
+
+                    }
+
+                }
+
+			}
+
+            TagsSelection.ItemsSource = tags;
+        }
 	}
     public async void OnSaveButtonClicked(object sender, EventArgs e)
 	{
+
+		var selectedTags = MySelectedTags;
+
+		string TagsIdsJoin = string.Join(",", selectedTags.Select(x => x.Id));
 
 		
 
@@ -58,12 +89,34 @@ public partial class EditDreamPage : ContentPage
 			DateCreated = EditDreamDate,
 			Title = Dream_Title.Text,
 			Description = Dream_Description.Text,
-			LucidDream = LucidDreamBox.IsChecked
-		};
+			TagIds = TagsIdsJoin
+
+        };
 		
 		await _databaservice.UpdateDream(updatedDream);
 
 
 		Shell.Current.GoToAsync("..");
+    }
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+		var border = (Border)sender;
+		var border2 = (Border)border.Parent;
+
+		var tag = (Tag)border.BindingContext;
+
+        if (MySelectedTags.Contains(tag))
+        {
+            MySelectedTags.Remove(tag);
+            border2.StrokeThickness = 0;
+			border2.Stroke = Colors.Transparent;
+        }
+        else
+        {
+            MySelectedTags.Add(tag);
+            border2.StrokeThickness = 5;
+			border2.Stroke = Colors.GhostWhite;
+        }
     }
 }

@@ -26,10 +26,38 @@
                            Margin="10" 
                            WidthRequest="200"
                            HorizontalOptions="Fill"/>
-                    <Label Text="Lucid Dream "
-                           VerticalOptions="Center"
-                           Margin="20,0,0,0"/>
-                    <CheckBox x:Name="LucidDreamBox"/>
+                    <CollectionView x:Name="TagsSelection"
+                                    SelectionMode="None"
+                                    HeightRequest="90"> 
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="GhostWhite"
+                                        StrokeThickness="{Binding CurrentThickness}"
+                                        StrokeShape="RoundRectangle 40,40,0,40"
+                                        HeightRequest="50">
+                                    
+                                    <Border BackgroundColor="{Binding ColorHex}"
+                                            StrokeThickness="1"
+                                            Stroke="Black"
+                                            HeightRequest="40"
+                                            StrokeShape="RoundRectangle 40,40,0,40">
+                                        <Label Text="{Binding Name}"
+                                               Margin="5"
+                                               TextColor="Black"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"/>
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                        </Border.GestureRecognizers>
+                                    </Border>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
 
                 </HorizontalStackLayout>
                 <Editor  x:Name="Dream_Description" 

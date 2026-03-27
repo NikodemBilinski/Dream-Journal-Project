@@ -14,38 +14,48 @@
                    VerticalOptions="Center"
                    HorizontalOptions="Center"/>
 
-            <HorizontalStackLayout HorizontalOptions="Center"
-                                   VerticalOptions="Center">
-                
                 <Entry x:Name="Dream_Title" 
                        Placeholder="Title" 
                        Margin="10" 
                        WidthRequest="200"
                        HorizontalOptions="Fill"/>
-                <Label Text="Lucid Dream "
-                       VerticalOptions="Center"
-                       Margin="20,0,0,0"/>
-                <CheckBox x:Name="LucidDreamBox"/>
-                <Label Text="Choose Tags:"/>
-                <CollectionView x:Name="TagsSelection"
-                                SelectionMode="Multiple"
-                                Margin="20,0,0,0">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BackgroundColor="{Binding ColorHex}">
-                                <Label Text="{Binding Name}"
+
+
+
+            <CollectionView x:Name="TagsSelection"
+                            SelectionMode="None"
+                            HorizontalOptions="Center">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{Binding ColorHex}"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="Start"
+                                Stroke="Transparent"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 40,40,0,40">
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped">
+                                    
+                                </TapGestureRecognizer>
+                            </Border.GestureRecognizers>
+                            
+                            <Label Text="{Binding Name}"
                                        Margin="5"
                                        TextColor="Black"/>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
+                            
+                            
+                        </Border>
+                        
+                        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal"/>
-                    </CollectionView.ItemsLayout>
-                </CollectionView>
-
-            </HorizontalStackLayout>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                       ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
             <Editor  x:Name="Dream_Description" 
                      Placeholder="Description" 
                      Margin="10" 
