@@ -4,6 +4,16 @@
 
 will be adding more features soon for sure, got some in mind
 
+features that are working now:
+
+- Adding, viewing, deleting and viewing your dreams
+- Adding your own tags
+- Tagging diffrent dreams
+- Storing all data on local database using SQLite
+
+features that im working on now:
+
+- Charts that show statistics according to chosen tag
 
 
 sources of the images in the project:
