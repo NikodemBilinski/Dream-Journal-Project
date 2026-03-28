@@ -47,7 +47,7 @@ namespace Dream_Journal_Project.Models
 
             var allTags = await _database.Table<Tag>().ToListAsync();
 
-            return allTags.Where(t => idArray.Contains(t.Id.ToString())).ToList();
+            return allTags.Where(chuj => idArray.Contains(chuj.Id.ToString())).ToList();
 
 
         }

@@ -21,6 +21,7 @@ public partial class ChartPage : ContentPage
 
         _dataBaseService = databaseservice;
 
+
         
     }
 
@@ -37,6 +38,12 @@ public partial class ChartPage : ContentPage
         {
             Debug.WriteLine($"Error generating chart: "+ ex.Message);
         }
+
+        var taglist = await _dataBaseService.GetTags();
+
+        ExpanderList.ItemsSource = taglist;
+
+
     }
 
 
@@ -87,6 +94,20 @@ public partial class ChartPage : ContentPage
         //ChartLucidLabel.Text = "Lucid Count: " + lucidCount.ToString();
         //ChartNonLucidLabel.Text = "Non-Lucid Count:  " + nonlucidCount.ToString();
     }
+
+    
+    private void ExpanderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var tag = e.CurrentSelection.FirstOrDefault() as Tag;
+
+        if (tag != null)
+        {
+            DisplayAlertAsync("dewfaew", tag.Name, "ok");
+        }
+        
+    }
+
+
 
 
 
