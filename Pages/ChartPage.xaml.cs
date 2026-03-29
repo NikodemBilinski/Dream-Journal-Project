@@ -103,28 +103,37 @@ public partial class ChartPage : ContentPage
 
         if (tag != null)
         {
+            await RemoveChart();
             await GenerateChart(tag);
             
-            TagExpander.IsExpanded = false;
         }
         
     }
 
 
-
+    private async Task RemoveChart()
+    {
+        DreamChart.Chart = null;
+    }
     private async Task GenerateChart(Tag tag)
     {
         List<Dream> AllDreams = await _dataBaseService.GetDreams();
 
         var dreamswithTag = AllDreams.Where(d => d.TagIds != null && d.TagIds.Split(',').Contains(tag.Id.ToString())).ToList();
 
-        var AllDreamsCount = AllDreams.Count;
+        float AllDreamsCount = AllDreams.Count;
 
+        float TagDreamsCount = dreamswithTag.Count;
+
+        float OtherDreamsCount = AllDreamsCount - TagDreamsCount;
+
+
+        // create entries for chart
         var entries = new[]
         {
-            new ChartEntry(AllDreamsCount)
+            new ChartEntry(OtherDreamsCount)
             {
-                Color = SKColors.Green
+                Color = SKColors.LimeGreen
             },
             new ChartEntry(dreamswithTag.Count)
             {
@@ -132,14 +141,26 @@ public partial class ChartPage : ContentPage
             }
         };
 
+
+        // create chart with entries
         DonutChart Mychart = new DonutChart();
         {
             Mychart.Entries = entries;
             Mychart.HoleRadius = 0.5f;
+            Mychart.BackgroundColor = SKColors.Transparent;
 
         }
 
+        
         DreamChart.Chart = Mychart;
+
+        Box_1.Color = Colors.LimeGreen;
+
+        Box_1_Label.Text = "Other Dreams: " + OtherDreamsCount;
+
+        Box_2.Color = Color.Parse(tag.ColorHex);
+
+        Box_2_Label.Text = tag.Name + ": " + dreamswithTag.Count + "  | " + Math.Round((TagDreamsCount / AllDreamsCount) * 100) + "%";
 
     }
 
