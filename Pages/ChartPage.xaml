@@ -15,7 +15,9 @@
             
             
 
-                <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander x:Name="TagExpander"
+                                  Margin="10" 
+                                  IsExpanded="True">
                     <toolkit:Expander.Header>
                         <Label Text="Choose tag to view it in chart"
                            Margin="15"/>

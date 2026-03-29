@@ -97,21 +97,49 @@ public partial class ChartPage : ContentPage
     }
 
     
-    private void ExpanderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void ExpanderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var tag = e.CurrentSelection.FirstOrDefault() as Tag;
 
         if (tag != null)
         {
-            GenerateChart(tag);
+            await GenerateChart(tag);
+            
+            TagExpander.IsExpanded = false;
         }
         
     }
 
 
 
-    private void GenerateChart(Tag tag)
+    private async Task GenerateChart(Tag tag)
     {
+        List<Dream> AllDreams = await _dataBaseService.GetDreams();
+
+        var dreamswithTag = AllDreams.Where(d => d.TagIds != null && d.TagIds.Split(',').Contains(tag.Id.ToString())).ToList();
+
+        var AllDreamsCount = AllDreams.Count;
+
+        var entries = new[]
+        {
+            new ChartEntry(AllDreamsCount)
+            {
+                Color = SKColors.Green
+            },
+            new ChartEntry(dreamswithTag.Count)
+            {
+                Color = SKColor.Parse(tag.ColorHex)
+            }
+        };
+
+        DonutChart Mychart = new DonutChart();
+        {
+            Mychart.Entries = entries;
+            Mychart.HoleRadius = 0.5f;
+
+        }
+
+        DreamChart.Chart = Mychart;
 
     }
 
