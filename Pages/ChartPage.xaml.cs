@@ -12,18 +12,22 @@ public partial class ChartPage : ContentPage
 
     private List<Dream> Dreams { get; set; } = new();
 
+    private int ChartId = 0;
+
+    private Tag SelectedTag;
+
     DataBaseService _dataBaseService;
 
     public Chart MyChart { get; set; }
-	public ChartPage(DataBaseService databaseservice)
-	{
-		
-		InitializeComponent();
+    public ChartPage(DataBaseService databaseservice)
+    {
+
+        InitializeComponent();
 
         _dataBaseService = databaseservice;
 
 
-        
+
     }
 
     protected override async void OnAppearing()
@@ -41,29 +45,31 @@ public partial class ChartPage : ContentPage
 
     }
 
-    
+
     private async void ExpanderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var tag = e.CurrentSelection.FirstOrDefault() as Tag;
+        SelectedTag = e.CurrentSelection.FirstOrDefault() as Tag;
 
-        if (tag != null)
+
+
+        if (SelectedTag != null)
         {
 
             await RemoveChart();
             try
             {
-                await GenerateChart(tag);
+                await GenerateChart(SelectedTag);
 
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error generating chart: " + ex.Message);
             }
-           
-            
-            
+
+
+
         }
-        
+
     }
 
 
@@ -100,17 +106,41 @@ public partial class ChartPage : ContentPage
         };
 
 
-        // create chart with entries
-        DonutChart Mychart = new DonutChart();
-        {
-            Mychart.Entries = entries;
-            Mychart.HoleRadius = 0.5f;
-            Mychart.BackgroundColor = SKColors.Transparent;
+        // create default chart with entries
 
+        switch (ChartId)
+        {
+            case 0:
+                {
+                    DonutChart Mychart = new DonutChart();
+                    {
+                        Mychart.Entries = entries;
+                        Mychart.HoleRadius = 0.5f;
+                        Mychart.BackgroundColor = SKColors.Transparent;
+
+                    }
+
+                    DreamChart.Chart = Mychart;
+
+                    break;
+                }
+
+            case 1:
+                {
+                    PointChart Mychart = new PointChart();
+                    {
+                        Mychart.Entries = entries;
+                        Mychart.BackgroundColor = SKColors.Transparent;
+
+                    }
+
+                    DreamChart.Chart = Mychart;
+
+                    break;
+                }
         }
 
-        
-        DreamChart.Chart = Mychart;
+
 
         Box_1.Color = Colors.LimeGreen;
 
@@ -121,5 +151,25 @@ public partial class ChartPage : ContentPage
         Box_2_Label.Text = tag.Name + ": " + dreamswithTag.Count + "  | " + Math.Round((TagDreamsCount / AllDreamsCount) * 100) + "%";
 
     }
+
+    private async void ImageButton_Clicked_1(object sender, EventArgs e)
+    {
+        ChartId = 0;
+        if (SelectedTag != null)
+        {
+            await RemoveChart();
+            await GenerateChart(SelectedTag);
+        }
+    }
+    private async void ImageButton_Clicked_2(object sender, EventArgs e)
+    {
+        ChartId = 1;
+        if (SelectedTag != null)
+        {
+            await RemoveChart();
+            await GenerateChart(SelectedTag);
+        }
+    }
+
 
 }
