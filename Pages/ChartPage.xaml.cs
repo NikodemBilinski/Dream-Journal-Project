@@ -40,7 +40,7 @@ public partial class ChartPage : ContentPage
 
         Dreams = await _dataBaseService.GetDreams();
 
-        Box_1_Label.Text = "All Dreams: " + Dreams.Count;
+        Box_1_Label.Text = "Total Dreams: " + Dreams.Count;
 
 
     }

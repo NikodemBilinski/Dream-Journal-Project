@@ -26,4 +26,8 @@ https://www.freepik.com/icon/trash-can_6438902 - trashbin icon
 
 https://www.freeiconspng.com/img/10846 - refresh icon
 
+"https://www.flaticon.com/free-icons/graph" - bar chart icon
+
+https://www.flaticon.com/free-icons/pie-chart - pie chart icon
+
 

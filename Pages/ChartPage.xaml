@@ -12,10 +12,10 @@
             
                 <VerticalStackLayout Grid.Row="0">
                     <Grid ColumnDefinitions="300,*" Grid.Row="0">
-                    <ImageButton Source="edit.png" HeightRequest="50" WidthRequest="50" Clicked="ImageButton_Clicked_1" Grid.Column="1"
-                                 VerticalOptions="Center"/>
-                    <ImageButton Source="edit.png" HeightRequest="50" WidthRequest="50" Clicked="ImageButton_Clicked_2" Grid.Column="1"
-                                 VerticalOptions="Center" Margin="150,0,0,0"/>
+                    <ImageButton Source="piechart.png" HeightRequest="50" WidthRequest="50" Clicked="ImageButton_Clicked_1" Grid.Column="1"
+                                 VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,50,0"/>
+                    <ImageButton Source="barchart.png" HeightRequest="50" WidthRequest="50" Clicked="ImageButton_Clicked_2" Grid.Column="1"
+                                 VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,150,0"/>
 
                     <toolkit:Expander x:Name="TagExpander"
                                           Margin="10" 
