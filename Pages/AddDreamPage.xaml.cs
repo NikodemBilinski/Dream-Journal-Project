@@ -76,7 +76,7 @@ public partial class AddDreamPage : ContentPage
         var tag = (Tag)border.BindingContext;
 
         if (MySelectedTags.Contains(tag))
-        {
+		{
             MySelectedTags.Remove(tag);
             border2.StrokeThickness = 0;
             border2.Stroke = Colors.Transparent;

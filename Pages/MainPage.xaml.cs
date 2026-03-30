@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using Microcharts;
 using SkiaSharp;
+using Google.Android.Material.Tooltip;
 
 
 namespace Dream_Journal_Project
@@ -31,8 +32,35 @@ namespace Dream_Journal_Project
 
             this.BindingContext = this;
 
+            //ideas dumpster
 
-         
+            // jak na razie tyle mialem jakis pomysl jeden jeszcze ale mi uciekl, ewentualnie tutaj sobie bede dodawal jakies pomysly co by tu jeszcze mozna bylo zrobic
+
+            //todo check on layout on android and fix it if needed to
+
+            //todo obsluga powiadomien o update (version.txt)
+
+            //todo sprawdzic to other dreams i all dreams sie zastanowic co jest lepsze kurde
+
+            //todo wallpaper or some shit
+
+            //todo ld techniques dokonczyc w koncu
+
+            //todo obczaic light theme czy ma sens i czy dziala na telefonie aby syfu nie bylo
+
+            //todo ustawienia? (ewentualne pomysly?)
+
+            //todo zrobic cos z tym scrollview w charts bo mnie to wkruwia jak to wyglada
+
+            //todo dodac wiecej snow dla testow (bardziej aby sie pobawic jak to by wygladalo przy np 200 snach - uzyc sobie chata aby uzupelnil tabele dreams czy cos
+
+            //Todo na pewno jakis filter snow od razu jak ma byc tyle snow - wyszukiwarka i filtrowanie po np dacie jakby sie udalo
+
+
+
+
+
+
         }
 
         public Dream IncomingDream
@@ -70,19 +98,6 @@ namespace Dream_Journal_Project
             
         }
 
-        //public async void CleanList(object sender, EventArgs e)
-        //{
-        //    bool response = await DisplayAlertAsync("u sure?,", "are you sure?", "Yes", "No");
-
-            
-
-        //    if (response)
-        //    {
-        //        _databaseService.DeleteAllDreams();
-        //        RefreshDreams();
-        //    }
-            
-        //}
 
 
         public async void OnDreamTapped(object sender, EventArgs e)
