@@ -10,7 +10,7 @@ namespace Dream_Journal_Project.Pages;
 public partial class ChartPage : ContentPage
 {
 
-    private ObservableCollection<Dream> Dreams { get; set; } = new();
+    private List<Dream> Dreams { get; set; } = new();
 
     DataBaseService _dataBaseService;
 
@@ -33,6 +33,10 @@ public partial class ChartPage : ContentPage
         var taglist = await _dataBaseService.GetTags();
 
         ExpanderList.ItemsSource = taglist;
+
+        Dreams = await _dataBaseService.GetDreams();
+
+        Box_1_Label.Text = "All Dreams: " + Dreams.Count;
 
 
     }

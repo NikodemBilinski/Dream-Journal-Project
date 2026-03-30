@@ -25,7 +25,7 @@ namespace Dream_Journal_Project.Models
         public async Task<List<Dream>> GetDreams()
         {
             await Init();
-            return await _database.Table<Dream>().ToListAsync();
+            return await _database.Table<Dream>().OrderByDescending(x => x.DateCreated).ToListAsync();
         }
 
         public async Task<List<Tag>> GetTags()
