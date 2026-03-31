@@ -55,7 +55,7 @@ namespace Dream_Journal_Project
 
             //Todo na pewno jakis filter snow od razu jak ma byc tyle snow - wyszukiwarka i filtrowanie po np dacie jakby sie udalo
 
-
+            
 
 
 

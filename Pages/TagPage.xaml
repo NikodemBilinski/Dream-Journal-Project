@@ -46,6 +46,8 @@
                                 HorizontalOptions="End"
                                 BackgroundColor="Transparent"
                                 Background="Transparent">
+                                
+                                
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Trash_Bin_Clicked"/>
                                 </Image.GestureRecognizers>
