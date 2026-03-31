@@ -27,24 +27,27 @@
                             HorizontalOptions="Center">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border BackgroundColor="{Binding ColorHex}"
-                                Margin="0,0,10,0"
-                                HorizontalOptions="Start"
-                                Stroke="Transparent"
-                                StrokeThickness="0"
-                                StrokeShape="RoundRectangle 40,40,0,40">
+                        <Border Stroke="GhostWhite"
+                                StrokeThickness="{Binding CurrentThickness}"
+                                StrokeShape="RoundRectangle 40,40,0,40"
+                                HeightRequest="50">
 
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped">
-                                    
-                                </TapGestureRecognizer>
-                            </Border.GestureRecognizers>
-                            
-                            <Label Text="{Binding Name}"
+                            <Border BackgroundColor="{Binding ColorHex}"
+                                    StrokeThickness="1"
+                                    Stroke="Black"
+                                    HeightRequest="40"
+                                    StrokeShape="RoundRectangle 40,40,0,40">
+                                <Label Text="{Binding Name}"
                                        Margin="5"
-                                       TextColor="Black"/>
-                            
-                            
+                                       TextColor="Black"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"/>
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </Border.GestureRecognizers>
+
+                            </Border>
                         </Border>
                         
                         

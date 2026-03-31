@@ -60,7 +60,6 @@ namespace Dream_Journal_Project
 
 
 
-         
         }
 
         public Dream IncomingDream
@@ -98,19 +97,6 @@ namespace Dream_Journal_Project
             
         }
 
-        //public async void CleanList(object sender, EventArgs e)
-        //{
-        //    bool response = await DisplayAlertAsync("u sure?,", "are you sure?", "Yes", "No");
-
-            
-
-        //    if (response)
-        //    {
-        //        _databaseService.DeleteAllDreams();
-        //        RefreshDreams();
-        //    }
-            
-        //}
 
 
         public async void OnDreamTapped(object sender, EventArgs e)

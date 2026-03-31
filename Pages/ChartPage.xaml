@@ -2,53 +2,88 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Dream_Journal_Project.Pages.ChartPage"
-             Title="ChartPage">
+             Title="Dream Statistics">
     <VerticalStackLayout>
 
-        <Label x:Name="ChartsHeader"
-               Text="Dream Statistics"
-               FontSize="20"
-               FontAttributes="Bold"
-               TextColor="White"
-               VerticalOptions="Center"
-               HorizontalOptions="Center"/>
+        <Grid RowDefinitions="200,*">
+       
+            
+                <VerticalStackLayout Grid.Row="0">
+                    <Grid ColumnDefinitions="200,*" Grid.Row="0">
+                    <ImageButton Source="piechart.png" HeightRequest="50" WidthRequest="50" Clicked="ImageButton_Clicked_1" Grid.Column="1"
+                                 VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,50,0"/>
+                    <ImageButton Source="barchart.png" HeightRequest="50" WidthRequest="50" Clicked="ImageButton_Clicked_2" Grid.Column="1"
+                                 VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,115,0"/>
 
-        <charts:ChartView x:Name="DreamChart" 
-                          HeightRequest="300"
-                          WidthRequest="300"
-                          Margin="20"
-                          VerticalOptions="Center"
-                          HorizontalOptions="Center"/>
+                    <toolkit:Expander x:Name="TagExpander"
+                                          Margin="10" 
+                                          IsExpanded="True"
+                                          Grid.Column="0">
+                        <toolkit:Expander.Header>
+                            <Label Text="Choose a tag to view it in chart"
+                                   Margin="15"
+                                   LineBreakMode="WordWrap"/>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <CollectionView x:Name="ExpanderList"
+                                            SelectionMode="Single"
+                                            SelectionChanged="ExpanderList_SelectionChanged"
+                                            HeightRequest="125">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Text="{Binding Name}" Padding="10"/>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
 
-        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+                            </CollectionView>
+
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+                </Grid>
+                </VerticalStackLayout>
+           
+
+
+            <VerticalStackLayout Grid.Row="1">
+                
             
-            <BoxView x:Name="NonLucidBox"
-                     Color="Red"
-                     WidthRequest="20"
-                     HeightRequest="20"
-                     VerticalOptions="Center"/>
+            <charts:ChartView x:Name="DreamChart" 
+                              HeightRequest="200"
+                              WidthRequest="200"
+                              Margin="20"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Center"/>
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
             
-            <Label x:Name="ChartNonLucidLabel"
-                   FontSize="20"/>
+                <BoxView x:Name="Box_1"
+                         Color="Transparent"
+                         WidthRequest="20"
+                         HeightRequest="20"
+                         VerticalOptions="Center"/>
             
-        </HorizontalStackLayout>
+                <Label x:Name="Box_1_Label"
+                       FontSize="20"/>
+            
+            </HorizontalStackLayout>
         
-        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
             
-            <BoxView x:Name="LucidBox"
-                     Color="Green"
-                     WidthRequest="20"
-                     HeightRequest="20"
-                     VerticalOptions="Center"/>
+                <BoxView x:Name="Box_2"
+                         Color="Transparent"
+                         WidthRequest="20"
+                         HeightRequest="20"
+                         VerticalOptions="Center"/>
 
-            <Label x:Name="ChartLucidLabel"
-                   FontSize="20"/>
+                <Label x:Name="Box_2_Label"
+                       FontSize="20"/>
             
-        </HorizontalStackLayout>
+            </HorizontalStackLayout>
 
+            </VerticalStackLayout>
 
-
-
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

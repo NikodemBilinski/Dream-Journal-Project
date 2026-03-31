@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Core;
 using Dream_Journal_Project.Models;
 using Microcharts;
 using SkiaSharp;
@@ -9,113 +10,166 @@ namespace Dream_Journal_Project.Pages;
 public partial class ChartPage : ContentPage
 {
 
-    private ObservableCollection<Dream> Dreams { get; set; } = new();
+    private List<Dream> Dreams { get; set; } = new();
+
+    private int ChartId = 0;
+
+    private Tag SelectedTag;
 
     DataBaseService _dataBaseService;
 
     public Chart MyChart { get; set; }
-	public ChartPage(DataBaseService databaseservice)
-	{
-		
-		InitializeComponent();
+    public ChartPage(DataBaseService databaseservice)
+    {
+
+        InitializeComponent();
 
         _dataBaseService = databaseservice;
 
-        
+
+
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-        try
-        {
-            await GenerateChart2();
+        var taglist = await _dataBaseService.GetTags();
 
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"Error generating chart: "+ ex.Message);
-        }
+        ExpanderList.ItemsSource = taglist;
+
+        Dreams = await _dataBaseService.GetDreams();
+
+        Box_1_Label.Text = "Total Dreams: " + Dreams.Count;
+
+
     }
 
 
-    // for now it will stay commented until i make it work with tags
-    public async Task GenerateChart2()
+    private async void ExpanderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        //// get dreams from database to collection
-        //var dreamsFromDb = await _dataBaseService.GetDreams();
-        //Debug.WriteLine($"sny:  {dreamsFromDb.Count}");
-        //Dreams.Clear();
-        //foreach (var dream in dreamsFromDb)
-        //{
-        //    Dreams.Add(dream);
-        //}
+        SelectedTag = e.CurrentSelection.FirstOrDefault() as Tag;
 
-        //// get number of specific dreams to ints
-        ////int lucidCount = Dreams.Count(x => x.LucidDream);
-        ////int nonlucidCount = Dreams.Count(x => !x.LucidDream);
-        ////int dreamsTotal = Dreams.Count();
 
-        //// create entries for chart (Lucid and non lucid dreams)
-        //var entries = new[]
-        //{
-        //    new ChartEntry(lucidCount)
-        //    {
-        //        Color = SKColors.Red
-        //    },
 
-        //    new ChartEntry(nonlucidCount)
-        //    {
-        //        Color = SKColors.Green
-                
-        //    }
+        if (SelectedTag != null)
+        {
 
-        //};
+            await RemoveChart();
+            try
+            {
+                await GenerateChart(SelectedTag);
 
-        //MyChart = new DonutChart
-        //{
-        //    Entries = entries,
-        //    BackgroundColor = SKColor.Empty,
-        //    LabelTextSize = 15,
-        //    Typeface = SKTypeface.FromFamilyName("Arial"),
-        //    LabelColor = SKColors.White
-        //};
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error generating chart: " + ex.Message);
+            }
 
-        //DreamChart.Chart = MyChart;
 
-        //ChartLucidLabel.Text = "Lucid Count: " + lucidCount.ToString();
-        //ChartNonLucidLabel.Text = "Non-Lucid Count:  " + nonlucidCount.ToString();
+
+        }
+
     }
 
 
+    private async Task RemoveChart()
+    {
+        DreamChart.Chart = null;
+    }
 
-    //public async Task GenerateChart()
-    //{
-    //    var entries = new[]
-    //       {
-    //            new ChartEntry(10)
-    //            {
-    //                Label = "Lucid",
-    //                ValueLabelColor = SKColors.White,
-    //                ValueLabel = "10",
-    //                Color = SKColor.Parse("#FF0000")
-    //            },
-    //            new ChartEntry(20)
-    //            {
-    //                Label = "Non-Lucid",
-    //                ValueLabelColor = SKColors.White,
-    //                ValueLabel = "20",
-    //                Color = SKColor.Parse("#00FF00")
-    //            }
-    //        };
 
-    //    MyChart = new DonutChart
-    //    {
-    //        Entries = entries,
-    //        BackgroundColor = SKColors.Empty
-    //    };
+    private async Task GenerateChart(Tag tag)
+    {
+        List<Dream> AllDreams = await _dataBaseService.GetDreams();
 
-    //    DreamChart.Chart = MyChart;
-    //}
+        var dreamswithTag = AllDreams.Where(d => d.TagIds != null && d.TagIds.Split(',').Contains(tag.Id.ToString())).ToList();
+
+        float AllDreamsCount = AllDreams.Count;
+
+        float TagDreamsCount = dreamswithTag.Count;
+
+        float OtherDreamsCount = AllDreamsCount - TagDreamsCount;
+
+
+        // create entries for chart
+        var entries = new[]
+        {
+            new ChartEntry(OtherDreamsCount)
+            {
+                Color = SKColors.LimeGreen
+            },
+            new ChartEntry(dreamswithTag.Count)
+            {
+                Color = SKColor.Parse(tag.ColorHex)
+            }
+        };
+
+
+        // create default chart with entries
+
+        switch (ChartId)
+        {
+            case 0:
+                {
+                    DonutChart Mychart = new DonutChart();
+                    {
+                        Mychart.Entries = entries;
+                        Mychart.HoleRadius = 0.5f;
+                        Mychart.BackgroundColor = SKColors.Transparent;
+
+                    }
+
+                    DreamChart.Chart = Mychart;
+
+                    break;
+                }
+
+            case 1:
+                {
+                    PointChart Mychart = new PointChart();
+                    {
+                        Mychart.Entries = entries;
+                        Mychart.BackgroundColor = SKColors.Transparent;
+
+                    }
+
+                    DreamChart.Chart = Mychart;
+
+                    break;
+                }
+        }
+
+
+
+        Box_1.Color = Colors.LimeGreen;
+
+        Box_1_Label.Text = "Other Dreams: " + OtherDreamsCount + "  | "+ Math.Round((OtherDreamsCount / AllDreamsCount) * 100) + "%";
+
+        Box_2.Color = Color.Parse(tag.ColorHex);
+
+        Box_2_Label.Text = tag.Name + ": " + dreamswithTag.Count + "  | " + Math.Round((TagDreamsCount / AllDreamsCount) * 100) + "%";
+
+    }
+
+    private async void ImageButton_Clicked_1(object sender, EventArgs e)
+    {
+        ChartId = 0;
+        if (SelectedTag != null)
+        {
+            await RemoveChart();
+            await GenerateChart(SelectedTag);
+        }
+    }
+    private async void ImageButton_Clicked_2(object sender, EventArgs e)
+    {
+        ChartId = 1;
+        if (SelectedTag != null)
+        {
+            await RemoveChart();
+            await GenerateChart(SelectedTag);
+        }
+    }
+
+
 }
