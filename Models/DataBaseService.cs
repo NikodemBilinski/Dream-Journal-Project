@@ -25,7 +25,7 @@ namespace Dream_Journal_Project.Models
         public async Task<List<Dream>> GetDreams()
         {
             await Init();
-            return await _database.Table<Dream>().ToListAsync();
+            return await _database.Table<Dream>().OrderByDescending(x => x.DateCreated).ToListAsync();
         }
 
         public async Task<List<Tag>> GetTags()
@@ -47,7 +47,7 @@ namespace Dream_Journal_Project.Models
 
             var allTags = await _database.Table<Tag>().ToListAsync();
 
-            return allTags.Where(t => idArray.Contains(t.Id.ToString())).ToList();
+            return allTags.Where(chuj => idArray.Contains(chuj.Id.ToString())).ToList();
 
 
         }
