@@ -39,15 +39,21 @@ public partial class TagPage : ContentPage
 
 		var allDreams = await _databaseservice.GetDreams();
 
-		if (allDreams.Any(x => !string.IsNullOrEmpty(x.TagIds) && x.TagIds.Split(",").Contains(tagToDelete.Id.ToString())))
+		var dreamsWithTag = allDreams.Where(x => !string.IsNullOrEmpty(x.TagIds) && x.TagIds.Split(",").Contains(tagToDelete.Id.ToString())).ToList();
+
+		var dreamsWithTagTitles = string.Join(", ", dreamsWithTag.Select(x => x.Title));
+
+
+
+        if (allDreams.Any(x => !string.IsNullOrEmpty(x.TagIds) && x.TagIds.Split(",").Contains(tagToDelete.Id.ToString())))
 		{
-			await DisplayAlertAsync("Error", "You cannot delete a tag that is currently in use by a dream.", "OK");
+			await DisplayAlertAsync("Error", "You cannot delete a tag that is currently in use by a dream. \n \n" + dreamsWithTagTitles, "OK");
 			return;
         }
 
-		_databaseservice.DeleteTag(tagToDelete);
+		await _databaseservice.DeleteTag(tagToDelete);
 
-		Refresh_Tags();
+		await Refresh_Tags();
     }
 
 	public async Task Refresh_Tags()
