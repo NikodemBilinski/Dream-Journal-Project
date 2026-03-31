@@ -11,18 +11,18 @@
        
             
                 <VerticalStackLayout Grid.Row="0">
-                    <Grid ColumnDefinitions="300,*" Grid.Row="0">
+                    <Grid ColumnDefinitions="200,*" Grid.Row="0">
                     <ImageButton Source="piechart.png" HeightRequest="50" WidthRequest="50" Clicked="ImageButton_Clicked_1" Grid.Column="1"
                                  VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,50,0"/>
                     <ImageButton Source="barchart.png" HeightRequest="50" WidthRequest="50" Clicked="ImageButton_Clicked_2" Grid.Column="1"
-                                 VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,150,0"/>
+                                 VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,115,0"/>
 
                     <toolkit:Expander x:Name="TagExpander"
                                           Margin="10" 
                                           IsExpanded="True"
                                           Grid.Column="0">
                         <toolkit:Expander.Header>
-                            <Label Text="Choose tag to view it in chart"
+                            <Label Text="Choose a tag to view it in chart"
                                    Margin="15"
                                    LineBreakMode="WordWrap"/>
                         </toolkit:Expander.Header>
@@ -30,7 +30,7 @@
                             <CollectionView x:Name="ExpanderList"
                                             SelectionMode="Single"
                                             SelectionChanged="ExpanderList_SelectionChanged"
-                                            HeightRequest="100">
+                                            HeightRequest="125">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Label Text="{Binding Name}" Padding="10"/>

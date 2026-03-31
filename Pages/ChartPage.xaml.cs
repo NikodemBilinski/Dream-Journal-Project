@@ -144,7 +144,7 @@ public partial class ChartPage : ContentPage
 
         Box_1.Color = Colors.LimeGreen;
 
-        Box_1_Label.Text = "Other Dreams: " + OtherDreamsCount;
+        Box_1_Label.Text = "Other Dreams: " + OtherDreamsCount + "  | "+ Math.Round((OtherDreamsCount / AllDreamsCount) * 100) + "%";
 
         Box_2.Color = Color.Parse(tag.ColorHex);
 

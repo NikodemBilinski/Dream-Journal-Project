@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Windows.Input;
 using Microcharts;
 using SkiaSharp;
-using Google.Android.Material.Tooltip;
 
 
 namespace Dream_Journal_Project
