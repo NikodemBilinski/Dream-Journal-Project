@@ -53,9 +53,6 @@ namespace Dream_Journal_Project
 
             
 
-
-
-
         }
 
         public Dream IncomingDream
@@ -80,9 +77,25 @@ namespace Dream_Journal_Project
         {
             base.OnAppearing();
 
+            await Task.Delay(200);
+
+            bool AnyUpdates = await _databaseService.CheckForUpdates();
+
+            if (AnyUpdates)
+            {
+                bool response = await DisplayAlertAsync("Update Available", "A new version of the app is available! Do you want to download a new version of Dream Journal?", "Yes", "No");
+                if (response)
+                {
+                    // Open the app's page GITHUBBBBBBBB
+                    await Launcher.OpenAsync("https://github.com/NikodemBilinski/Dream-Journal-Project/releases/latest");
+                }
+            }
+
             await _databaseService.GenerateDefaultTags();
 
             await RefreshDreams();
+
+
         }
 
 

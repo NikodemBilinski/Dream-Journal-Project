@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using SQLite;
 
@@ -20,6 +21,33 @@ namespace Dream_Journal_Project.Models
             await _database.CreateTableAsync<Dream>();
             await _database.CreateTableAsync<Tag>();
 
+        }
+
+        public async Task<bool> CheckForUpdates()
+        {
+            var http = "https://raw.githubusercontent.com/NikodemBilinski/Dream-Journal-Project/refs/heads/master/version.txt";
+
+            string currentVersion = "5.2";
+
+            try
+            {
+
+                var latestVersion = await new HttpClient().GetStringAsync(http);
+                if (latestVersion.Trim() != currentVersion)
+                {
+                    // Notify user about the update
+                    Debug.WriteLine("A new version of the app is available!");
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to check for updates: {ex.Message}");
+                return false;
+            }
+            Debug.WriteLine("No updates available");
+            return false;
         }
 
         public async Task<List<Dream>> GetDreams()
