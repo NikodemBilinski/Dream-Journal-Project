@@ -39,8 +39,6 @@ namespace Dream_Journal_Project
 
             //todo obsluga powiadomien o update (version.txt)
 
-            //todo sprawdzic to other dreams i all dreams sie zastanowic co jest lepsze kurde
-
             //todo wallpaper or some shit
 
             //todo ld techniques dokonczyc w koncu
@@ -48,8 +46,6 @@ namespace Dream_Journal_Project
             //todo obczaic light theme czy ma sens i czy dziala na telefonie aby syfu nie bylo
 
             //todo ustawienia? (ewentualne pomysly?)
-
-            //todo zrobic cos z tym scrollview w charts bo mnie to wkruwia jak to wyglada
 
             //todo dodac wiecej snow dla testow (bardziej aby sie pobawic jak to by wygladalo przy np 200 snach - uzyc sobie chata aby uzupelnil tabele dreams czy cos
 
@@ -84,9 +80,9 @@ namespace Dream_Journal_Project
         {
             base.OnAppearing();
 
-            _databaseService.GenerateDefaultTags();
+            await _databaseService.GenerateDefaultTags();
 
-            RefreshDreams();
+            await RefreshDreams();
         }
 
 

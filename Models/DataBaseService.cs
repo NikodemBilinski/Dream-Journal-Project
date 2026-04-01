@@ -87,7 +87,7 @@ namespace Dream_Journal_Project.Models
                 return;
             }
 
-            _database.DeleteAsync(dream);
+            await _database.DeleteAsync(dream);
         }
 
         public async Task DeleteTag(Tag tag)
@@ -97,7 +97,7 @@ namespace Dream_Journal_Project.Models
             {
                 return;
             }
-            _database.DeleteAsync(tag);
+            await _database.DeleteAsync(tag);
         }
 
         public async Task GenerateDefaultTags()
