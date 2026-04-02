@@ -37,8 +37,6 @@ namespace Dream_Journal_Project
 
             //todo check on layout on android and fix it if needed to
 
-            //todo obsluga powiadomien o update (version.txt)
-
             //todo wallpaper or some shit
 
             //todo ld techniques dokonczyc w koncu

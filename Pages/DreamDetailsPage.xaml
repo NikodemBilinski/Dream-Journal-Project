@@ -11,7 +11,8 @@
                Text="StringFormat='Date Created: {0}'}"
                VerticalOptions="Center"
                HorizontalOptions="Center"
-               FontSize="25"/>
+               FontSize="20"
+               Margin="0,0,0,20"/>
 
             <CollectionView x:Name="TagsCollection">
                 <CollectionView.ItemTemplate>

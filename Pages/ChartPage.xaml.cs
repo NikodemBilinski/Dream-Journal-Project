@@ -42,7 +42,7 @@ public partial class ChartPage : ContentPage
 
         Box_1_Label.Text = "Total Dreams: " + Dreams.Count;
 
-
+        Box_1.Color = Colors.LimeGreen;
     }
 
 
@@ -142,11 +142,15 @@ public partial class ChartPage : ContentPage
 
 
 
-        Box_1.Color = Colors.LimeGreen;
+        
 
         Box_1_Label.Text = "Other Dreams: " + OtherDreamsCount + "  | "+ Math.Round((OtherDreamsCount / AllDreamsCount) * 100) + "%";
 
         Box_2.Color = Color.Parse(tag.ColorHex);
+
+        Box_2.HeightRequest = 20;
+
+        Box_2.WidthRequest = 20;
 
         Box_2_Label.Text = tag.Name + ": " + dreamswithTag.Count + "  | " + Math.Round((TagDreamsCount / AllDreamsCount) * 100) + "%";
 

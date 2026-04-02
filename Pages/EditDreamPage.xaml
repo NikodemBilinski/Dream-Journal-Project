@@ -4,8 +4,7 @@
              x:Class="Dream_Journal_Project.Pages.EditDreamPage"
              Title="EditDreamPage">
     <VerticalStackLayout>
-        <ScrollView>
-            <VerticalStackLayout Padding="20"
+        <VerticalStackLayout Padding="20"
                                  Spacing="15">
 
 
@@ -17,7 +16,7 @@
                        VerticalOptions="Center"
                        HorizontalOptions="Center"/>
 
-                <HorizontalStackLayout 
+                <VerticalStackLayout 
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
 
@@ -28,19 +27,19 @@
                            HorizontalOptions="Fill"/>
                     <CollectionView x:Name="TagsSelection"
                                     SelectionMode="None"
-                                    HeightRequest="90"> 
+                                    HeightRequest="90">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Border Stroke="GhostWhite"
+                            <Border Stroke="GhostWhite"
                                         StrokeThickness="{Binding CurrentThickness}"
                                         StrokeShape="RoundRectangle 40,40,0,40"
                                         HeightRequest="50">
-                                    
-                                    <Border BackgroundColor="{Binding ColorHex}"
+                                <Border BackgroundColor="{Binding ColorHex}"
                                             StrokeThickness="1"
                                             Stroke="Black"
                                             HeightRequest="40"
                                             StrokeShape="RoundRectangle 40,40,0,40">
+                                    
                                         <Label Text="{Binding Name}"
                                                Margin="5"
                                                TextColor="Black"
@@ -59,18 +58,17 @@
                         </CollectionView.ItemsLayout>
                     </CollectionView>
 
-                </HorizontalStackLayout>
+                </VerticalStackLayout>
                 <Editor  x:Name="Dream_Description" 
                          Placeholder="Description" 
                          Margin="10" 
-                         HeightRequest="300" />
-
+                         HeightRequest="300"
+                         />
                 <Button Text="Save Dream" 
                         Clicked="OnSaveButtonClicked" 
                         VerticalOptions="End"
-                        WidthRequest="150"/>
+                        />
 
             </VerticalStackLayout>
-        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>
