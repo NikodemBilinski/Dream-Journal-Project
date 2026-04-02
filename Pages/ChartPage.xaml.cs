@@ -1,9 +1,11 @@
 using CommunityToolkit.Maui.Core;
 using Dream_Journal_Project.Models;
+using Java.Lang;
 using Microcharts;
 using SkiaSharp;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace Dream_Journal_Project.Pages;
 
@@ -43,6 +45,8 @@ public partial class ChartPage : ContentPage
         Box_1_Label.Text = "Total Dreams: " + Dreams.Count;
 
         Box_1.Color = Colors.LimeGreen;
+
+       
     }
 
 

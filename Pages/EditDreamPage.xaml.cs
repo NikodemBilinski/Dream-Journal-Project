@@ -34,7 +34,16 @@ public partial class EditDreamPage : ContentPage
 	{
 		base.OnAppearing();
 
-		Debug.WriteLine(DreamId + ": dream id in onappearing");
+		#if ANDROID
+			if (Platform.CurrentActivity != null)
+			{
+				Platform.CurrentActivity.RequestedOrientation = Android.Content.PM.ScreenOrientation.Unspecified;
+			}
+		#endif
+
+
+
+        Debug.WriteLine(DreamId + ": dream id in onappearing");
 		var DreamToEdit = await _databaservice.GetSpecificDream(DreamId);
 
 		EditDreamDate = DreamToEdit.DateCreated;
@@ -74,6 +83,18 @@ public partial class EditDreamPage : ContentPage
             TagsSelection.ItemsSource = tags;
         }
 	}
+
+	protected override void OnDisappearing()
+	{
+		base.OnDisappearing();
+
+		#if ANDROID
+		if(Platform.CurrentActivity != null)
+		{
+            Platform.CurrentActivity.RequestedOrientation = Android.Content.PM.ScreenOrientation.Unspecified;
+        }	
+		#endif
+    }
     public async void OnSaveButtonClicked(object sender, EventArgs e)
 	{
 
