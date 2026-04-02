@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using CommunityToolkit.Maui;
+using Dream_Journal_Project.Pages;
 
 
 namespace Dream_Journal_Project
@@ -25,6 +26,7 @@ namespace Dream_Journal_Project
 
             builder.Services.AddSingleton<DataBaseService>();
             builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<ChartPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

@@ -1,6 +1,5 @@
 using CommunityToolkit.Maui.Core;
 using Dream_Journal_Project.Models;
-using Java.Lang;
 using Microcharts;
 using SkiaSharp;
 using System.Collections.ObjectModel;
@@ -36,15 +35,25 @@ public partial class ChartPage : ContentPage
     {
         base.OnAppearing();
 
-        var taglist = await _dataBaseService.GetTags();
+        try
+        {
+            var taglist = await _dataBaseService.GetTags();
 
-        ExpanderList.ItemsSource = taglist;
+            ExpanderList.ItemsSource = taglist;
 
-        Dreams = await _dataBaseService.GetDreams();
+            Dreams = await _dataBaseService.GetDreams();
 
-        Box_1_Label.Text = "Total Dreams: " + Dreams.Count;
+            Box_1_Label.Text = "Total Dreams: " + Dreams.Count;
 
-        Box_1.Color = Colors.LimeGreen;
+            Box_1.Color = Colors.LimeGreen;
+        }
+        catch (Exception ex)
+        {
+            // To pokaże Ci dokładny komunikat błędu na ekranie telefonu!
+            DisplayAlertAsync("Crash Debug", ex.ToString(), "OK");
+        }
+
+        
 
        
     }

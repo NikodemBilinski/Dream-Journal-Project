@@ -31,12 +31,11 @@
                             <CollectionView x:Name="ExpanderList"
                                             SelectionMode="Single"
                                             SelectionChanged="ExpanderList_SelectionChanged"
-                                            HeightRequest="125">
+                                            HeightRequest="140">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Border BackgroundColor="Transparent" Padding="10"
-                                                StrokeShape="40,40,40,40"
-                                                HeightRequest="60">
+                                                StrokeShape="RoundRectangle 40,40,40,40">
 
                                             <VisualStateManager.VisualStateGroups>
                                                 <VisualStateGroupList>

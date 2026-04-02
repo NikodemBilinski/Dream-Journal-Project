@@ -19,8 +19,8 @@
 
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
             
-        <Button Text="Add Dream" Clicked="On_Add_Dream_Clicked" VerticalOptions="Center" WidthRequest="175"/>
-        <Button Text="View Tags" Clicked="On_Tags_Clicked" VerticalOptions="Center" WidthRequest="175"/>
+        <Button Text="Add Dream" Clicked="On_Add_Dream_Clicked" VerticalOptions="Center" WidthRequest="125"/>
+        <Button Text="View Tags" Clicked="On_Tags_Clicked" VerticalOptions="Center" WidthRequest="125"/>
             
             
         </HorizontalStackLayout>
@@ -35,7 +35,7 @@
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnDreamTapped"/>
                         </Border.GestureRecognizers>
-                        <Grid ColumnDefinitions="*,50,50">
+                        <Grid ColumnDefinitions="*,35,35">
                             <Label Grid.Column="0"
                                    VerticalOptions="Center">
                                 <Label.Text>
@@ -46,8 +46,8 @@
                                 </Label.Text>
                             </Label>
                             <Image Source="edit.png"  
-                                   HeightRequest="45" 
-                                   WidthRequest="45"
+                                   HeightRequest="35" 
+                                   WidthRequest="35"
                                    Grid.Column="1"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End"
@@ -58,14 +58,14 @@
                                 </Image.GestureRecognizers>
                             </Image>
                             <Image Source="trashbin3.png"  
-                                    HeightRequest="50" 
-                                    WidthRequest="50"
+                                    HeightRequest="35" 
+                                    WidthRequest="35"
                                     Grid.Column="2"
                                     VerticalOptions="Center"
                                     HorizontalOptions="End"
                                     BackgroundColor="Transparent"
                                     Background="Transparent">
-                                <Image.GestureRecognizers>
+                                    <Image.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Trash_Bin_Clicked"/>
                                     </Image.GestureRecognizers>
                                 </Image>
