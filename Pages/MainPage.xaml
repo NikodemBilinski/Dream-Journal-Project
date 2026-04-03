@@ -14,22 +14,33 @@
     </ContentPage.ToolbarItems>
 
     
-
+    
     <VerticalStackLayout Padding="20" Spacing="15">
-       
+    
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+
+            <Button Text="Add Dream" Clicked="On_Add_Dream_Clicked" VerticalOptions="Center" WidthRequest="125"/>
+            <Button Text="View Tags" Clicked="On_Tags_Clicked" VerticalOptions="Center" WidthRequest="125"/>
+
+        
+
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Spacing="20" 
+                               HorizontalOptions="Center" 
+                               Margin="20" 
+                               VerticalOptions="Center">
+
+
+            <Label Text="Filter by Date"/>
             
-        <Button Text="Add Dream" Clicked="On_Add_Dream_Clicked" VerticalOptions="Center" WidthRequest="125"/>
-        <Button Text="View Tags" Clicked="On_Tags_Clicked" VerticalOptions="Center" WidthRequest="125"/>
-            
-            
+            <DatePicker Format="dd.MM.yyyy"
+                FontSize="Small"/>
             
         </HorizontalStackLayout>
-        
-        <ScrollView>
-        <CollectionView ItemsSource="{Binding Dreams}">
-        
-        <CollectionView.ItemTemplate>
+
+        <CollectionView ItemsSource="{Binding Dreams}" HeightRequest="350">
+
+            <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Dream">
                     <Border BackgroundColor="Transparent"
                             Stroke="Transparent"
@@ -67,20 +78,18 @@
                                     HorizontalOptions="End"
                                     BackgroundColor="Transparent"
                                     Background="Transparent">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="Trash_Bin_Clicked"/>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Trash_Bin_Clicked"/>
+                                </Image.GestureRecognizers>
+                            </Image>
                             <BoxView HeightRequest="1"
                                      VerticalOptions="End"/>
                         </Grid>
-                            
+
                     </Border>
                 </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
-    </ScrollView>
-
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <!--<Button Text="skidibi toilet" Clicked="CleanList" VerticalOptions="Center" WidthRequest="175"/>-->
     </VerticalStackLayout>
