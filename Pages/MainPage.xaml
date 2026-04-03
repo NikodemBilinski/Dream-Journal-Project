@@ -3,27 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Dream_Journal_Project.Models"
              xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Dream_Journal_Project.MainPage"
              Title="Dream Journal">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="LD Techniques"
-                     Clicked="LD_Clicked"/>
-        <ToolbarItem IconImageSource="chart.png"
-                     Clicked="Open_Chart_Page"/>
-
+        
         <ToolbarItem IconImageSource="refresh.png"
              Clicked="Refresh_Button_Clicked"/>
 
     </ContentPage.ToolbarItems>
-    <VerticalStackLayout Padding="20" Spacing="15">
 
+    
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+       
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
             
         <Button Text="Add Dream" Clicked="On_Add_Dream_Clicked" VerticalOptions="Center" WidthRequest="125"/>
         <Button Text="View Tags" Clicked="On_Tags_Clicked" VerticalOptions="Center" WidthRequest="125"/>
             
             
+            
         </HorizontalStackLayout>
+        
         <ScrollView>
         <CollectionView ItemsSource="{Binding Dreams}">
         

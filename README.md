@@ -18,6 +18,14 @@ features that im working on now:
 
 sources of the images in the project:
 
+"https://www.flaticon.com/free-icons/reading" - book icon
+
+"https://www.flaticon.com/free-icons/question-mark" - about icon
+
+"https://www.flaticon.com/free-icons/setting" - settings icon
+
+https://www.flaticon.com/free-icons/homepage - home icon
+
 https://www.flaticon.com/free-icons/edit - edit icon 
 
 https://www.flaticon.com/free-icons/bar-chart - chart icon

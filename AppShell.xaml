@@ -4,11 +4,44 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Dream_Journal_Project"
-    Title="Dream_Journal_Project">
+    xmlns:pages="clr-namespace:Dream_Journal_Project.Pages"
+    Title="Dream_Journal_Project"
+    FlyoutBehavior="Flyout">
 
-    <ShellContent
-        Title="Home"
+    
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="75">
+            <Label Text="Menu"
+                   Margin="20"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontSize="30"/>
+        </Grid>
+    </Shell.FlyoutHeader>
+    <FlyoutItem Title="Dream Journal" Icon="home.png">
+        <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Charts" Icon="chart.png">
+        <ShellContent ContentTemplate="{DataTemplate pages:ChartPage}"
+                      Shell.PresentationMode="ModalAnimated"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="LD Techniques" Icon="book.png">
+        <ShellContent ContentTemplate="{DataTemplate pages:LDTechniquesPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Settings" Icon="setting.png">
+    <ShellContent ContentTemplate="{DataTemplate pages:LDTechniquesPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="About App" Icon="question_mark.png">
+        <ShellContent ContentTemplate="{DataTemplate pages:LDTechniquesPage}"/>
+    </FlyoutItem>
+
+
+
 
 </Shell>

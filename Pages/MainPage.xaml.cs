@@ -78,7 +78,7 @@ namespace Dream_Journal_Project
         {
             base.OnAppearing();
 
-            await Task.Delay(200);
+            await Task.Delay(50);
 
             bool AnyUpdates = await _databaseService.CheckForUpdates();
 
@@ -131,12 +131,6 @@ namespace Dream_Journal_Project
             }
         }
 
-       
-        private async void LD_Clicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync(nameof(LDTechniquesPage));
-        }
-
         private async void Trash_Bin_Clicked(object sender, TappedEventArgs e)
         {
             var element = (VisualElement)sender;
@@ -167,17 +161,16 @@ namespace Dream_Journal_Project
             Debug.Write(tappedDream.Title);
 
             await Shell.Current.GoToAsync($"{nameof(EditDreamPage)}?DreamId={tappedDream.Id}");
-            //await Shell.Current.GoToAsync($"{nameof(EditDreamPage)}?Dream={tappedDream}");
-        }
-
-        private async void Open_Chart_Page(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync(nameof(ChartPage));
         }
 
         private async void On_Tags_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(TagPage));
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+        {
+
         }
     }
 }
