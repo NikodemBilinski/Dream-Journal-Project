@@ -104,7 +104,7 @@ namespace Dream_Journal_Project
         {
             await Shell.Current.GoToAsync(nameof(AddDreamPage));
 
-            
+
         }
 
 
@@ -113,7 +113,7 @@ namespace Dream_Journal_Project
         {
             var border = (Border)sender;
             var tappedDream = (Dream)border.BindingContext;
-            if( tappedDream != null )
+            if (tappedDream != null)
             {
                 await Shell.Current.GoToAsync($"{nameof(DreamDetailsPage)}?DreamId={tappedDream.Id}");
             }
@@ -135,13 +135,13 @@ namespace Dream_Journal_Project
         {
             var element = (VisualElement)sender;
 
-            var tappedDream = (Dream)element.BindingContext; 
+            var tappedDream = (Dream)element.BindingContext;
 
             Debug.Write(tappedDream.Title);
 
             bool response = await DisplayAlertAsync("Delete Dream", $"You sure you want to delete that? '{tappedDream.Title}'?", "Yes", "No");
 
-            if(response)
+            if (response)
             {
                 await _databaseService.DeleteDream(tappedDream);
                 await RefreshDreams();
@@ -157,7 +157,7 @@ namespace Dream_Journal_Project
         private async void Edit_Clicked(object sender, EventArgs e)
         {
             var element = (VisualElement)sender;
-            var tappedDream = (Dream)element.BindingContext; 
+            var tappedDream = (Dream)element.BindingContext;
             Debug.Write(tappedDream.Title);
 
             await Shell.Current.GoToAsync($"{nameof(EditDreamPage)}?DreamId={tappedDream.Id}");
@@ -168,9 +168,20 @@ namespace Dream_Journal_Project
             await Shell.Current.GoToAsync(nameof(TagPage));
         }
 
-        private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+        private async void Filter_By_Date(object sender, EventArgs e)
         {
+            var dreamsfromdb = await _databaseService.GetDreams();
+            var date = DateFilterPicker.Date;
+            
+            if(date != null)
+            {
+                Dreams.Clear();
 
+                foreach (var item in dreamsfromdb.Select(x => x).Where(x => x.DateCreated.Date == date))
+                {
+                    Dreams.Add(item);
+                }
+            }
         }
     }
 }

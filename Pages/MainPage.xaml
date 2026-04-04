@@ -30,11 +30,14 @@
                                Margin="20" 
                                VerticalOptions="Center">
 
-
-            <Label Text="Filter by Date"/>
-            
-            <DatePicker Format="dd.MM.yyyy"
-                FontSize="Small"/>
+            <VerticalStackLayout>
+            <Label Text="Filter by Date: " VerticalOptions="Center"/>
+            <Label Text="(Refresh to clear filter)" VerticalOptions="Center"/>
+            </VerticalStackLayout>
+            <DatePicker Format="d"
+                        x:Name="DateFilterPicker"
+                        FontSize="Small"
+                        DateSelected="Filter_By_Date"/>
             
         </HorizontalStackLayout>
 
