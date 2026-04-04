@@ -179,18 +179,7 @@ namespace Dream_Journal_Project
 
         private async void Filter_By_Date(object sender, EventArgs e)
         {
-            var dreamsfromdb = await _databaseService.GetDreams();
-            var date = DateFilterPicker.Date; 
-            
-            if(date != null)
-            {
-                Dreams.Clear();
-
-                foreach (var item in dreamsfromdb.Select(x => x).Where(x => x.DateCreated.Date == date))
-                {
-                    Dreams.Add(item);
-                }
-            }
+            DidDateChange.IsChecked = true;
         }
 
         // FILTERING BELOW
@@ -200,7 +189,7 @@ namespace Dream_Journal_Project
 
             var dreamsfromdb = await _databaseService.GetDreams();
 
-            var selectedtags = TagsSelection.SelectedItems.Cast<Tag>().ToList();
+            var selectedtags = MySelectedTags;
 
             var selectedtitle = TitleFilter.Text;
 
@@ -210,14 +199,25 @@ namespace Dream_Journal_Project
             {
                 bool matchesTitle = string.IsNullOrWhiteSpace(selectedtitle) || dream.Title.Contains(selectedtitle);
 
-                bool matchesDate = dream.DateCreated.Date == selecteddate;
+                bool matchesDate = !DidDateChange.IsChecked || dream.DateCreated.Date == selecteddate;
 
-                bool matchesTags = selectedtags.Count == 0 || selectedtags.All(tag => dream.TagIds.Split(",").Contains(tag.Id.ToString()));
+                bool matchesTags = selectedtags.Count == 0 || (dream.TagIds != null && selectedtags.All(tag => dream.TagIds.Split(",").Contains(tag.Id.ToString())));
 
                 return matchesTitle && matchesDate && matchesTags;
             }).ToList();
 
+            filteredDreams = dreamsfromdb.Where(dream => {
+                return IsFilterApplied(); 
+            }).ToList();
+
             Dreams.Clear();
+
+            foreach(var dream in filteredDreams)
+            {
+                Dreams.Add(dream);
+            }
+
+            DidDateChange.IsChecked = false;
         }
 
         private async void Toggle_Filter(object sender, EventArgs e)
@@ -244,6 +244,11 @@ namespace Dream_Journal_Project
                 border2.StrokeThickness = 5;
                 border2.Stroke = Colors.GhostWhite;
             }
+        }
+
+        private bool IsFilterApplied()
+        {
+            return !string.IsNullOrWhiteSpace(TitleFilter.Text) || DidDateChange.IsChecked || MySelectedTags.Count > 0;
         }
     }
 }
