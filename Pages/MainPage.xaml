@@ -6,6 +6,10 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Dream_Journal_Project.MainPage"
              Title="Dream Journal">
+    
+    
+    <!--Toolbar Items-->
+    
     <ContentPage.ToolbarItems>
         
         <ToolbarItem IconImageSource="refresh.png"
@@ -15,6 +19,8 @@
 
     </ContentPage.ToolbarItems>
     
+    
+    <!--Add dream and view tags buttons-->
     
     <VerticalStackLayout Padding="20" Spacing="15">
     
@@ -28,6 +34,8 @@
         </HorizontalStackLayout>
        
 
+        <!--Filter Panel (Title, Date, Tags)-->
+        
             <VerticalStackLayout>
             <Border x:Name="FilterPanel"
                     IsVisible="False"
@@ -35,14 +43,14 @@
                     Padding="15">
                 <VerticalStackLayout Spacing="20">
                         <Entry Placeholder="Enter Title" WidthRequest="200"/>
-                    
-                        <DatePicker Format="d"
+
+                    <DatePicker Format="d"
                                     x:Name="DateFilterPicker"
                                     FontSize="Small"
                                     DateSelected="Filter_By_Date"
                                     HorizontalOptions="Center"/>
-                        
-                        <Button Text="Apply" Clicked="Apply_Filters" WidthRequest="125"/>
+                    
+                    <!--copied from AddDreamPage.xaml-->
 
                     <CollectionView x:Name="TagsSelection"
                                     x:DataType="model:Tag"
@@ -83,11 +91,15 @@
                         </CollectionView.ItemsLayout>
                     </CollectionView>
 
+                    <Button Text="Apply" Clicked="Apply_Filters" WidthRequest="125"/>
+
                     <Label Text="(Refresh to clear filters)" VerticalOptions="Center" HorizontalOptions="Center"/>
 
                 </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>
+        
+        <!--Collection View of dreams (Date, title, edit button, delete button)-->
 
             <CollectionView ItemsSource="{Binding Dreams}" HeightRequest="350">
 
