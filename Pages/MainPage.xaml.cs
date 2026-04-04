@@ -171,7 +171,7 @@ namespace Dream_Journal_Project
         private async void Filter_By_Date(object sender, EventArgs e)
         {
             var dreamsfromdb = await _databaseService.GetDreams();
-            var date = DateFilterPicker.Date;
+            var date = DateFilterPicker.Date; 
             
             if(date != null)
             {
@@ -182,6 +182,16 @@ namespace Dream_Journal_Project
                     Dreams.Add(item);
                 }
             }
+        }
+
+        private async void Apply_Filters(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void Toggle_Filter(object sender, EventArgs e)
+        {
+            FilterPanel.IsVisible = !FilterPanel.IsVisible;
         }
     }
 }

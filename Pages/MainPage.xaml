@@ -10,9 +10,10 @@
         
         <ToolbarItem IconImageSource="refresh.png"
              Clicked="Refresh_Button_Clicked"/>
+        <ToolbarItem IconImageSource="book.png"
+                     Clicked="Toggle_Filter"/>
 
     </ContentPage.ToolbarItems>
-
     
     
     <VerticalStackLayout Padding="20" Spacing="15">
@@ -25,23 +26,41 @@
         
 
         </HorizontalStackLayout>
-        <HorizontalStackLayout Spacing="20" 
-                               HorizontalOptions="Center" 
-                               Margin="20" 
-                               VerticalOptions="Center">
+       
 
             <VerticalStackLayout>
-            <Label Text="Filter by Date: " VerticalOptions="Center"/>
-            <Label Text="(Refresh to clear filter)" VerticalOptions="Center"/>
-            </VerticalStackLayout>
-            <DatePicker Format="d"
-                        x:Name="DateFilterPicker"
-                        FontSize="Small"
-                        DateSelected="Filter_By_Date"/>
-            
-        </HorizontalStackLayout>
+            <Border x:Name="FilterPanel"
+                    IsVisible="False"
+                    VerticalOptions="Start"
+                    BackgroundColor="Gray"
+                    Padding="15">
+                <VerticalStackLayout>
+                        <Entry Placeholder="Szukaj"/>
+                    <HorizontalStackLayout Spacing="20" 
+                                           HorizontalOptions="Center" 
+                                           Margin="20" 
+                                           VerticalOptions="Center">   
 
-        <CollectionView ItemsSource="{Binding Dreams}" HeightRequest="350">
+                        <VerticalStackLayout>
+                                <Label Text="Filter by Date" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Text="(Refresh to clear filter)" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        
+                        
+                            <DatePicker Format="d"
+                                        x:Name="DateFilterPicker"
+                                        FontSize="Small"
+                                        DateSelected="Filter_By_Date"/>
+                        
+                        
+                            <Button Text="Zastosuj" Clicked="Apply_Filters"/>
+
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <CollectionView ItemsSource="{Binding Dreams}" HeightRequest="350">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Dream">
