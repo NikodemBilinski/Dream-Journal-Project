@@ -19,6 +19,11 @@ namespace Dream_Journal_Project
 
         public ObservableCollection<Dream> Dreams { get; set; } = new();
 
+        private List<Tag> MySelectedTags = new List<Tag>();
+
+        // przysiegam ze kiedys naprawde nasram do turbiny samolotu
+        //ktokolwiek to czyta to wiedz ze jschlatt nie mial absolutnie nic wspolnego z wydarzeniami z 11 wrzesnia 2001 roku
+
         public int DreamId { get; set; }
 
         public MainPage(DataBaseService databaseservice)
@@ -93,6 +98,10 @@ namespace Dream_Journal_Project
             }
 
             await _databaseService.GenerateDefaultTags();
+
+            var tags = await _databaseService.GetTags();
+
+            TagsSelection.ItemsSource = tags;
 
             await RefreshDreams();
 
@@ -184,6 +193,8 @@ namespace Dream_Journal_Project
             }
         }
 
+        // FILTERING BELOW
+
         private async void Apply_Filters(object sender, EventArgs e)
         {
 
@@ -192,6 +203,27 @@ namespace Dream_Journal_Project
         private async void Toggle_Filter(object sender, EventArgs e)
         {
             FilterPanel.IsVisible = !FilterPanel.IsVisible;
+        }
+
+        private async void Filter_TagSelected(object sender, EventArgs e)
+        {
+            var border = (Border)sender;
+            var border2 = (Border)border.Parent;
+
+            var tag = (Tag)border.BindingContext;
+
+            if (MySelectedTags.Contains(tag))
+            {
+                MySelectedTags.Remove(tag);
+                border2.StrokeThickness = 0;
+                border2.Stroke = Colors.Transparent;
+            }
+            else
+            {
+                MySelectedTags.Add(tag);
+                border2.StrokeThickness = 5;
+                border2.Stroke = Colors.GhostWhite;
+            }
         }
     }
 }

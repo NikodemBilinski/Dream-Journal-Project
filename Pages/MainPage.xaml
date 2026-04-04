@@ -32,31 +32,60 @@
             <Border x:Name="FilterPanel"
                     IsVisible="False"
                     VerticalOptions="Start"
-                    BackgroundColor="Gray"
                     Padding="15">
-                <VerticalStackLayout>
-                        <Entry Placeholder="Szukaj"/>
-                    <HorizontalStackLayout Spacing="20" 
-                                           HorizontalOptions="Center" 
-                                           Margin="20" 
-                                           VerticalOptions="Center">   
+                <VerticalStackLayout Spacing="20">
+                        <Entry Placeholder="Enter Title" WidthRequest="200"/>
+                    
+                        <DatePicker Format="d"
+                                    x:Name="DateFilterPicker"
+                                    FontSize="Small"
+                                    DateSelected="Filter_By_Date"
+                                    HorizontalOptions="Center"/>
+                        
+                        <Button Text="Apply" Clicked="Apply_Filters" WidthRequest="125"/>
 
-                        <VerticalStackLayout>
-                                <Label Text="Filter by Date" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                <Label Text="(Refresh to clear filter)" VerticalOptions="Center" HorizontalOptions="Center"/>
-                            </VerticalStackLayout>
-                        
-                        
-                            <DatePicker Format="d"
-                                        x:Name="DateFilterPicker"
-                                        FontSize="Small"
-                                        DateSelected="Filter_By_Date"/>
-                        
-                        
-                            <Button Text="Zastosuj" Clicked="Apply_Filters"/>
+                    <CollectionView x:Name="TagsSelection"
+                                    x:DataType="model:Tag"
+                                    SelectionMode="None"
+                                    HorizontalOptions="Center">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="GhostWhite"
+                                        StrokeThickness="{Binding CurrentThickness}"
+                                        StrokeShape="RoundRectangle 40,40,0,40"
+                                        HeightRequest="50">
 
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
+                                    <Border BackgroundColor="{Binding ColorHex}"
+                                            StrokeThickness="1"
+                                            Stroke="Black"
+                                            HeightRequest="40"
+                                            StrokeShape="RoundRectangle 40,40,0,40">
+                                        <Label Text="{Binding Name}"
+                                               Margin="5"
+                                               TextColor="Black"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"/>
+
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Filter_TagSelected"/>
+                                        </Border.GestureRecognizers>
+
+                                    </Border>
+                                </Border>
+
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"
+                                               ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
+
+                    <Label Text="(Refresh to clear filters)" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>
 
