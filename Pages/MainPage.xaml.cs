@@ -198,6 +198,26 @@ namespace Dream_Journal_Project
         private async void Apply_Filters(object sender, EventArgs e)
         {
 
+            var dreamsfromdb = await _databaseService.GetDreams();
+
+            var selectedtags = TagsSelection.SelectedItems.Cast<Tag>().ToList();
+
+            var selectedtitle = TitleFilter.Text;
+
+            var selecteddate = DateFilterPicker.Date;
+
+            var filteredDreams = dreamsfromdb.Where(dream =>
+            {
+                bool matchesTitle = string.IsNullOrWhiteSpace(selectedtitle) || dream.Title.Contains(selectedtitle);
+
+                bool matchesDate = dream.DateCreated.Date == selecteddate;
+
+                bool matchesTags = selectedtags.Count == 0 || selectedtags.All(tag => dream.TagIds.Split(",").Contains(tag.Id.ToString()));
+
+                return matchesTitle && matchesDate && matchesTags;
+            }).ToList();
+
+            Dreams.Clear();
         }
 
         private async void Toggle_Filter(object sender, EventArgs e)

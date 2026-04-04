@@ -42,14 +42,19 @@
                     VerticalOptions="Start"
                     Padding="15">
                 <VerticalStackLayout Spacing="20">
-                        <Entry Placeholder="Enter Title" WidthRequest="200"/>
+                        <Entry Placeholder="Enter Title" 
+                               WidthRequest="200"
+                               x:Name="TitleFilter"/>
 
                     <DatePicker Format="d"
                                     x:Name="DateFilterPicker"
                                     FontSize="Small"
                                     DateSelected="Filter_By_Date"
                                     HorizontalOptions="Center"/>
-                    
+
+                    <CheckBox IsVisible="False"
+                              x:Name="DidDateChange"/>
+
                     <!--copied from AddDreamPage.xaml-->
 
                     <CollectionView x:Name="TagsSelection"
