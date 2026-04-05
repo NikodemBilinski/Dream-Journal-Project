@@ -67,7 +67,7 @@ namespace Dream_Journal_Project
             {
                 if (value != null)
                 {
-                    _databaseService.AddDream(value);
+                    SaveIncomingDream(value);
                 }
             }
         }
@@ -77,6 +77,8 @@ namespace Dream_Journal_Project
             await _databaseService.AddDream(newdream);
 
             Dreams.Add(newdream);
+
+            await RefreshDreams();
         }
 
         protected override async void OnAppearing()
@@ -113,7 +115,6 @@ namespace Dream_Journal_Project
         {
             await Shell.Current.GoToAsync(nameof(AddDreamPage));
 
-
         }
 
 
@@ -132,7 +133,7 @@ namespace Dream_Journal_Project
         private async Task RefreshDreams()
         {
             var dreamsFromDb = await _databaseService.GetDreams();
-            Debug.WriteLine($"sny:  {dreamsFromDb.Count}");
+            Debug.WriteLine("sny: "+dreamsFromDb.Count);
             Dreams.Clear();
             foreach (var dream in dreamsFromDb)
             {
@@ -177,12 +178,14 @@ namespace Dream_Journal_Project
             await Shell.Current.GoToAsync(nameof(TagPage));
         }
 
+
+        // FILTERING BELOW
         private async void Filter_By_Date(object sender, EventArgs e)
         {
             DidDateChange.IsChecked = true;
         }
 
-        // FILTERING BELOW
+        
 
         private async void Apply_Filters(object sender, EventArgs e)
         {
@@ -204,10 +207,6 @@ namespace Dream_Journal_Project
                 bool matchesTags = selectedtags.Count == 0 || (dream.TagIds != null && selectedtags.All(tag => dream.TagIds.Split(",").Contains(tag.Id.ToString())));
 
                 return matchesTitle && matchesDate && matchesTags;
-            }).ToList();
-
-            filteredDreams = dreamsfromdb.Where(dream => {
-                return IsFilterApplied(); 
             }).ToList();
 
             Dreams.Clear();
@@ -246,9 +245,5 @@ namespace Dream_Journal_Project
             }
         }
 
-        private bool IsFilterApplied()
-        {
-            return !string.IsNullOrWhiteSpace(TitleFilter.Text) || DidDateChange.IsChecked || MySelectedTags.Count > 0;
-        }
     }
 }
