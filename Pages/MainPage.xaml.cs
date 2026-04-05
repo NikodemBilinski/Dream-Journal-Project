@@ -38,7 +38,7 @@ namespace Dream_Journal_Project
 
             //ideas dumpster
 
-            // jak na razie tyle mialem jakis pomysl jeden jeszcze ale mi uciekl, ewentualnie tutaj sobie bede dodawal jakies pomysly co by tu jeszcze mozna bylo zrobic
+            //ewentualnie tutaj sobie bede dodawal jakies pomysly co by tu jeszcze mozna bylo zrobic
 
             //todo check on layout on android and fix it if needed to
 
@@ -52,9 +52,14 @@ namespace Dream_Journal_Project
 
             //todo dodac wiecej snow dla testow (bardziej aby sie pobawic jak to by wygladalo przy np 200 snach - uzyc sobie chata aby uzupelnil tabele dreams czy cos
 
-            //Todo na pewno jakis filter snow od razu jak ma byc tyle snow - wyszukiwarka i filtrowanie po np dacie jakby sie udalo
+            //todo settings page z opcjami typu zmiana motywu, zarzadzanie tagami, zarzadzanie snami (np masowe usuwanie) itp, (wyclearowanie calej bazy snow)
+            //todo moze eksport danych do pliku json czy cos, aby mozna bylo sobie zbackupowac sny przed reinstalem systemu czy cos, a potem wczytac je z powrotem do aplikacji
 
-            //todo boczne rozsuwane menu z opcjami typu tagi, wykresy, ustawienia itp i inne, aby nei zaslaniac tytulu 
+            //todo about app page (kontakt, github, skrocone readme)
+
+            //todo zastanowic sie czy nie zachowac wybranego filtru po przegladzie konkretnych snow, bo teraz po kliknieciu w filtr i przegladzie snu, filtr sie resetuje
+
+
 
 
 
