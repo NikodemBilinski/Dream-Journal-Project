@@ -34,11 +34,11 @@
     </FlyoutItem>
 
     <FlyoutItem Title="Settings" Icon="setting.png">
-    <ShellContent ContentTemplate="{DataTemplate pages:LDTechniquesPage}"/>
+    <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"/>
     </FlyoutItem>
 
     <FlyoutItem Title="About App" Icon="question_mark.png">
-        <ShellContent ContentTemplate="{DataTemplate pages:LDTechniquesPage}"/>
+        <ShellContent ContentTemplate="{DataTemplate pages:AboutAppPage}"/>
     </FlyoutItem>
 
 

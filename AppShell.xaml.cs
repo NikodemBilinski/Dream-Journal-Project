@@ -22,7 +22,11 @@ namespace Dream_Journal_Project
 
             Routing.RegisterRoute(nameof(TagPage), typeof(TagPage));
 
-            
+            Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
+
+            Routing.RegisterRoute(nameof(AboutAppPage), typeof(AboutAppPage));
+
+
         }
     }
 }

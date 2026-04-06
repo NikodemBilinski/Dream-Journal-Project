@@ -61,8 +61,6 @@ namespace Dream_Journal_Project
 
             //todo about app page (kontakt, github, skrocone readme)
 
-            //todo zastanowic sie czy nie zachowac wybranego filtru po przegladzie konkretnych snow, bo teraz po kliknieciu w filtr i przegladzie snu, filtr sie resetuje
-
         }
 
         public Dream IncomingDream
