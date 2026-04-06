@@ -41,7 +41,8 @@
             <Border x:Name="FilterPanel"
                     IsVisible="False"
                     VerticalOptions="Start"
-                    Padding="15">
+                    Padding="15"
+                    StrokeShape="RoundRectangle 40,40,40,40">
                 <VerticalStackLayout Spacing="20">
                         <Entry Placeholder="Enter Title" 
                                WidthRequest="200"

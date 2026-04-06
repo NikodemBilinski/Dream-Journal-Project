@@ -42,9 +42,6 @@ public partial class DreamDetailsPage : ContentPage
 
 			TagsCollection.ItemsSource = TagList;
 
-
-
-
         }
 		
 	}

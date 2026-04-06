@@ -17,6 +17,10 @@ namespace Dream_Journal_Project
 
         private readonly DataBaseService _databaseService;
 
+        private bool DidFilterApplied = false;
+        
+        private bool IsFirstLoad = true;
+
         public ObservableCollection<Dream> Dreams { get; set; } = new();
 
         private List<Tag> MySelectedTags = new List<Tag>();
@@ -59,11 +63,6 @@ namespace Dream_Journal_Project
 
             //todo zastanowic sie czy nie zachowac wybranego filtru po przegladzie konkretnych snow, bo teraz po kliknieciu w filtr i przegladzie snu, filtr sie resetuje
 
-
-
-
-
-
         }
 
         public Dream IncomingDream
@@ -92,25 +91,41 @@ namespace Dream_Journal_Project
 
             await Task.Delay(50);
 
-            bool AnyUpdates = await _databaseService.CheckForUpdates();
-
-            if (AnyUpdates)
+            // Check for updates and load dreams only on the first load of the page
+            if (IsFirstLoad)
             {
-                bool response = await DisplayAlertAsync("Update Available", "A new version of the app is available! Do you want to download a new version of Dream Journal?", "Yes", "No");
-                if (response)
+                IsFirstLoad = false;
+                bool AnyUpdates = await _databaseService.CheckForUpdates();
+
+                if (AnyUpdates)
                 {
-                    // Open the app's page GITHUBBBBBBBB
-                    await Launcher.OpenAsync("https://github.com/NikodemBilinski/Dream-Journal-Project/releases/latest");
+                    bool response = await DisplayAlertAsync("Update Available", "A new version of the app is available! Do you want to download a new version of Dream Journal?", "Yes", "No");
+                    if (response)
+                    {
+                        // Open the app's page GITHUBBBBBBBB
+                        await Launcher.OpenAsync("https://github.com/NikodemBilinski/Dream-Journal-Project/releases/latest");
+                    }
                 }
+
+                await _databaseService.GenerateDefaultTags();
+
+                await RefreshDreams();
             }
 
-            await _databaseService.GenerateDefaultTags();
+            
 
-            var tags = await _databaseService.GetTags();
+            
+            // if filter is selected, dont change the filtered dreams list and selected tag list
+            if (!DidFilterApplied)
+            {
+                var tags = await _databaseService.GetTags();
 
-            TagsSelection.ItemsSource = tags;
+                TagsSelection.ItemsSource = tags;
 
-            await RefreshDreams();
+                await RefreshDreams();
+            }
+
+            
 
 
         }
@@ -137,6 +152,13 @@ namespace Dream_Journal_Project
 
         private async Task RefreshDreams()
         {
+            //refresh tags too for search
+
+            var tags = await _databaseService.GetTags();
+            TagsSelection.ItemsSource = tags;
+
+
+            //refresh dreams
             var dreamsFromDb = await _databaseService.GetDreams();
             Debug.WriteLine("sny: "+dreamsFromDb.Count);
             Dreams.Clear();
@@ -166,6 +188,14 @@ namespace Dream_Journal_Project
 
         private async void Refresh_Button_Clicked(object sender, EventArgs e)
         {
+            DidFilterApplied = false;
+
+            MySelectedTags.Clear();
+
+            TitleFilter.Text = string.Empty;
+
+            DateFilterPicker.Date = DateTime.Now;
+
             await RefreshDreams();
         }
 
@@ -205,7 +235,7 @@ namespace Dream_Journal_Project
 
             var filteredDreams = dreamsfromdb.Where(dream =>
             {
-                bool matchesTitle = string.IsNullOrWhiteSpace(selectedtitle) || dream.Title.Contains(selectedtitle);
+                bool matchesTitle = string.IsNullOrWhiteSpace(selectedtitle) || dream.Title.Contains(selectedtitle, StringComparison.OrdinalIgnoreCase);
 
                 bool matchesDate = !DidDateChange.IsChecked || dream.DateCreated.Date == selecteddate;
 
@@ -220,6 +250,8 @@ namespace Dream_Journal_Project
             {
                 Dreams.Add(dream);
             }
+
+            DidFilterApplied = true;
 
             DidDateChange.IsChecked = false;
         }

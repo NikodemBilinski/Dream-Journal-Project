@@ -1,12 +1,16 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Dream_Journal_Project.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dream_Journal_Project
 {
     public partial class App : Application
     {
-        public App()
+        private readonly DataBaseService _databaseService;
+        public App(DataBaseService databaseservice)
         {
             InitializeComponent();
+
+            _databaseService = databaseservice;
 
             
         }
@@ -15,8 +19,6 @@ namespace Dream_Journal_Project
         {
             return new Window(new AppShell());
         }
-
-        
-        
+   
     }
 }
