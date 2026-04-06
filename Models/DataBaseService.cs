@@ -27,7 +27,7 @@ namespace Dream_Journal_Project.Models
         {
             var http = "https://raw.githubusercontent.com/NikodemBilinski/Dream-Journal-Project/refs/heads/master/version.txt";
 
-            string currentVersion = "0.5.5";
+            string currentVersion = "0.6";
 
             try
             {
