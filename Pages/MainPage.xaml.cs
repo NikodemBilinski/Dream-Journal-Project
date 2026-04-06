@@ -19,7 +19,7 @@ namespace Dream_Journal_Project
 
         private bool DidFilterApplied = false;
         
-        private bool IsFirstLoad = true;
+        private static bool IsFirstLoad = true;
 
         public ObservableCollection<Dream> Dreams { get; set; } = new();
 
