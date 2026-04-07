@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using Microcharts;
 using SkiaSharp;
+using Microsoft.Maui.Layouts;
 
 
 namespace Dream_Journal_Project
@@ -254,9 +255,47 @@ namespace Dream_Journal_Project
             DidDateChange.IsChecked = false;
         }
 
+        private bool isanimating = false;
         private async void Toggle_Filter(object sender, EventArgs e)
         {
-            FilterPanel.IsVisible = !FilterPanel.IsVisible;
+
+            // look i know how it looks but i know what i am doing
+
+            if(isanimating)
+            {
+                return;
+            }
+
+            isanimating = true;
+
+            if (!FilterPanel.IsVisible)
+            {
+                FilterPanel.Opacity = 0;
+                FilterPanel.ScaleY = 0.5;
+                FilterPanel.IsVisible = true;
+                FilterPanel.Rotation = -1080;
+
+                
+                await Task.WhenAll(
+                    FilterPanel.FadeToAsync(1, 1500, Easing.CubicOut),
+                    FilterPanel.ScaleYToAsync(1, 1500, Easing.CubicOut),
+                    FilterPanel.RotateToAsync(0, 1500, Easing.CubicOut)
+
+                    );
+                
+            }
+            else
+            {
+                await Task.WhenAll(
+                    FilterPanel.FadeToAsync(0, 1500, Easing.CubicIn),
+                    FilterPanel.ScaleYToAsync(0, 1500, Easing.CubicIn),
+                    FilterPanel.RotateToAsync(-1080, 1500, Easing.CubicIn)
+                    );
+
+                FilterPanel.IsVisible = false;
+            }
+
+            isanimating = false;
         }
 
         private async void Filter_TagSelected(object sender, EventArgs e)
