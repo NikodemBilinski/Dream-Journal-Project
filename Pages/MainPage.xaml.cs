@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using Microcharts;
 using SkiaSharp;
+using Microsoft.Maui.Layouts;
 
 
 namespace Dream_Journal_Project
@@ -17,7 +18,16 @@ namespace Dream_Journal_Project
 
         private readonly DataBaseService _databaseService;
 
+        private bool DidFilterApplied = false;
+        
+        private static bool IsFirstLoad = true;
+
         public ObservableCollection<Dream> Dreams { get; set; } = new();
+
+        private List<Tag> MySelectedTags = new List<Tag>();
+
+        // przysiegam ze kiedys naprawde nasram do turbiny samolotu
+        //ktokolwiek to czyta to wiedz ze jschlatt nie mial absolutnie nic wspolnego z wydarzeniami z 11 wrzesnia 2001 roku
 
         public int DreamId { get; set; }
 
@@ -33,7 +43,7 @@ namespace Dream_Journal_Project
 
             //ideas dumpster
 
-            // jak na razie tyle mialem jakis pomysl jeden jeszcze ale mi uciekl, ewentualnie tutaj sobie bede dodawal jakies pomysly co by tu jeszcze mozna bylo zrobic
+            //ewentualnie tutaj sobie bede dodawal jakies pomysly co by tu jeszcze mozna bylo zrobic
 
             //todo check on layout on android and fix it if needed to
 
@@ -47,12 +57,10 @@ namespace Dream_Journal_Project
 
             //todo dodac wiecej snow dla testow (bardziej aby sie pobawic jak to by wygladalo przy np 200 snach - uzyc sobie chata aby uzupelnil tabele dreams czy cos
 
-            //Todo na pewno jakis filter snow od razu jak ma byc tyle snow - wyszukiwarka i filtrowanie po np dacie jakby sie udalo
+            //todo settings page z opcjami typu zmiana motywu, zarzadzanie tagami, zarzadzanie snami (np masowe usuwanie) itp, (wyclearowanie calej bazy snow)
+            //todo moze eksport danych do pliku json czy cos, aby mozna bylo sobie zbackupowac sny przed reinstalem systemu czy cos, a potem wczytac je z powrotem do aplikacji
 
-            //todo boczne rozsuwane menu z opcjami typu tagi, wykresy, ustawienia itp i inne, aby nei zaslaniac tytulu 
-
-
-
+            //todo about app page (kontakt, github, skrocone readme)
 
         }
 
@@ -62,7 +70,7 @@ namespace Dream_Journal_Project
             {
                 if (value != null)
                 {
-                    _databaseService.AddDream(value);
+                    SaveIncomingDream(value);
                 }
             }
         }
@@ -72,29 +80,51 @@ namespace Dream_Journal_Project
             await _databaseService.AddDream(newdream);
 
             Dreams.Add(newdream);
+
+            await RefreshDreams();
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            await Task.Delay(200);
+            await Task.Delay(50);
 
-            bool AnyUpdates = await _databaseService.CheckForUpdates();
-
-            if (AnyUpdates)
+            // Check for updates and load dreams only on the first load of the page
+            if (IsFirstLoad)
             {
-                bool response = await DisplayAlertAsync("Update Available", "A new version of the app is available! Do you want to download a new version of Dream Journal?", "Yes", "No");
-                if (response)
+                IsFirstLoad = false;
+                bool AnyUpdates = await _databaseService.CheckForUpdates();
+
+                if (AnyUpdates)
                 {
-                    // Open the app's page GITHUBBBBBBBB
-                    await Launcher.OpenAsync("https://github.com/NikodemBilinski/Dream-Journal-Project/releases/latest");
+                    bool response = await DisplayAlertAsync("Update Available", "A new version of the app is available! Do you want to download a new version of Dream Journal?", "Yes", "No");
+                    if (response)
+                    {
+                        // Open the app's page GITHUBBBBBBBB
+                        await Launcher.OpenAsync("https://github.com/NikodemBilinski/Dream-Journal-Project/releases/latest");
+                    }
                 }
+
+                await _databaseService.GenerateDefaultTags();
+
+                await RefreshDreams();
             }
 
-            await _databaseService.GenerateDefaultTags();
+            
 
-            await RefreshDreams();
+            
+            // if filter is selected, dont change the filtered dreams list and selected tag list
+            if (!DidFilterApplied)
+            {
+                var tags = await _databaseService.GetTags();
+
+                TagsSelection.ItemsSource = tags;
+
+                await RefreshDreams();
+            }
+
+            
 
 
         }
@@ -104,7 +134,6 @@ namespace Dream_Journal_Project
         {
             await Shell.Current.GoToAsync(nameof(AddDreamPage));
 
-            
         }
 
 
@@ -113,7 +142,7 @@ namespace Dream_Journal_Project
         {
             var border = (Border)sender;
             var tappedDream = (Dream)border.BindingContext;
-            if( tappedDream != null )
+            if (tappedDream != null)
             {
                 await Shell.Current.GoToAsync($"{nameof(DreamDetailsPage)}?DreamId={tappedDream.Id}");
             }
@@ -122,8 +151,15 @@ namespace Dream_Journal_Project
 
         private async Task RefreshDreams()
         {
+            //refresh tags too for search
+
+            var tags = await _databaseService.GetTags();
+            TagsSelection.ItemsSource = tags;
+
+
+            //refresh dreams
             var dreamsFromDb = await _databaseService.GetDreams();
-            Debug.WriteLine($"sny:  {dreamsFromDb.Count}");
+            Debug.WriteLine("sny: "+dreamsFromDb.Count);
             Dreams.Clear();
             foreach (var dream in dreamsFromDb)
             {
@@ -131,23 +167,17 @@ namespace Dream_Journal_Project
             }
         }
 
-       
-        private async void LD_Clicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync(nameof(LDTechniquesPage));
-        }
-
         private async void Trash_Bin_Clicked(object sender, TappedEventArgs e)
         {
             var element = (VisualElement)sender;
 
-            var tappedDream = (Dream)element.BindingContext; 
+            var tappedDream = (Dream)element.BindingContext;
 
             Debug.Write(tappedDream.Title);
 
             bool response = await DisplayAlertAsync("Delete Dream", $"You sure you want to delete that? '{tappedDream.Title}'?", "Yes", "No");
 
-            if(response)
+            if (response)
             {
                 await _databaseService.DeleteDream(tappedDream);
                 await RefreshDreams();
@@ -157,27 +187,137 @@ namespace Dream_Journal_Project
 
         private async void Refresh_Button_Clicked(object sender, EventArgs e)
         {
+            DidFilterApplied = false;
+
+            MySelectedTags.Clear();
+
+            TitleFilter.Text = string.Empty;
+
+            DateFilterPicker.Date = DateTime.Now;
+
             await RefreshDreams();
         }
 
         private async void Edit_Clicked(object sender, EventArgs e)
         {
             var element = (VisualElement)sender;
-            var tappedDream = (Dream)element.BindingContext; 
+            var tappedDream = (Dream)element.BindingContext;
             Debug.Write(tappedDream.Title);
 
             await Shell.Current.GoToAsync($"{nameof(EditDreamPage)}?DreamId={tappedDream.Id}");
-            //await Shell.Current.GoToAsync($"{nameof(EditDreamPage)}?Dream={tappedDream}");
-        }
-
-        private async void Open_Chart_Page(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync(nameof(ChartPage));
         }
 
         private async void On_Tags_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(TagPage));
         }
+
+
+        // FILTERING BELOW
+        private async void Filter_By_Date(object sender, EventArgs e)
+        {
+            DidDateChange.IsChecked = true;
+        }
+
+        
+
+        private async void Apply_Filters(object sender, EventArgs e)
+        {
+
+            var dreamsfromdb = await _databaseService.GetDreams();
+
+            var selectedtags = MySelectedTags;
+
+            var selectedtitle = TitleFilter.Text;
+
+            var selecteddate = DateFilterPicker.Date;
+
+            var filteredDreams = dreamsfromdb.Where(dream =>
+            {
+                bool matchesTitle = string.IsNullOrWhiteSpace(selectedtitle) || dream.Title.Contains(selectedtitle, StringComparison.OrdinalIgnoreCase);
+
+                bool matchesDate = !DidDateChange.IsChecked || dream.DateCreated.Date == selecteddate;
+
+                bool matchesTags = selectedtags.Count == 0 || (dream.TagIds != null && selectedtags.All(tag => dream.TagIds.Split(",").Contains(tag.Id.ToString())));
+
+                return matchesTitle && matchesDate && matchesTags;
+            }).ToList();
+
+            Dreams.Clear();
+
+            foreach(var dream in filteredDreams)
+            {
+                Dreams.Add(dream);
+            }
+
+            DidFilterApplied = true;
+
+            DidDateChange.IsChecked = false;
+        }
+
+        private bool isanimating = false;
+        private async void Toggle_Filter(object sender, EventArgs e)
+        {
+
+            // look i know how it looks but i know what i am doing
+
+            if(isanimating)
+            {
+                return;
+            }
+
+            isanimating = true;
+
+            if (!FilterPanel.IsVisible)
+            {
+                FilterPanel.Opacity = 0;
+                FilterPanel.ScaleY = 0.5;
+                FilterPanel.IsVisible = true;
+                FilterPanel.Rotation = -1080;
+
+                
+                await Task.WhenAll(
+                    FilterPanel.FadeToAsync(1, 1500, Easing.CubicOut),
+                    FilterPanel.ScaleYToAsync(1, 1500, Easing.CubicOut),
+                    FilterPanel.RotateToAsync(0, 1500, Easing.CubicOut)
+
+                    );
+                
+            }
+            else
+            {
+                await Task.WhenAll(
+                    FilterPanel.FadeToAsync(0, 1500, Easing.CubicIn),
+                    FilterPanel.ScaleYToAsync(0, 1500, Easing.CubicIn),
+                    FilterPanel.RotateToAsync(-1080, 1500, Easing.CubicIn)
+                    );
+
+                FilterPanel.IsVisible = false;
+            }
+
+            isanimating = false;
+        }
+
+        private async void Filter_TagSelected(object sender, EventArgs e)
+        {
+            var border = (Border)sender;
+            var border2 = (Border)border.Parent;
+
+            var tag = (Tag)border.BindingContext;
+
+            if (MySelectedTags.Contains(tag))
+            {
+                MySelectedTags.Remove(tag);
+                border2.StrokeThickness = 0;
+                border2.Stroke = Colors.Transparent;
+            }
+            else
+            {
+                MySelectedTags.Add(tag);
+                border2.StrokeThickness = 5;
+                border2.Stroke = Colors.GhostWhite;
+            }
+        }
+
     }
 }

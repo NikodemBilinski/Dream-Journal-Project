@@ -3,31 +3,114 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Dream_Journal_Project.Models"
              xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Dream_Journal_Project.MainPage"
              Title="Dream Journal">
+    
+    
+    <!--Toolbar Items-->
+    
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="LD Techniques"
-                     Clicked="LD_Clicked"/>
-        <ToolbarItem IconImageSource="chart.png"
-                     Clicked="Open_Chart_Page"/>
-
+        
+        <ToolbarItem IconImageSource="search.png"
+             Clicked="Toggle_Filter"/>
         <ToolbarItem IconImageSource="refresh.png"
              Clicked="Refresh_Button_Clicked"/>
+        
 
     </ContentPage.ToolbarItems>
+    
+    
+    <!--Add dream and view tags buttons-->
+    
     <VerticalStackLayout Padding="20" Spacing="15">
-
+    
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
-            
-        <Button Text="Add Dream" Clicked="On_Add_Dream_Clicked" VerticalOptions="Center" WidthRequest="125"/>
-        <Button Text="View Tags" Clicked="On_Tags_Clicked" VerticalOptions="Center" WidthRequest="125"/>
-            
-            
-        </HorizontalStackLayout>
-        <ScrollView>
-        <CollectionView ItemsSource="{Binding Dreams}">
+
+            <Button Text="Add Dream" Clicked="On_Add_Dream_Clicked" VerticalOptions="Center" WidthRequest="125"/>
+            <Button Text="View Tags" Clicked="On_Tags_Clicked" VerticalOptions="Center" WidthRequest="125"/>
+
         
-        <CollectionView.ItemTemplate>
+
+        </HorizontalStackLayout>
+       
+
+        <!--Filter Panel (Title, Date, Tags)-->
+        
+            <VerticalStackLayout>
+            <Border x:Name="FilterPanel"
+                    IsVisible="False"
+                    VerticalOptions="Start"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 40,40,40,40">
+                <VerticalStackLayout Spacing="20">
+                        <Entry Placeholder="Enter Title" 
+                               WidthRequest="200"
+                               x:Name="TitleFilter"/>
+
+                    <DatePicker Format="d"
+                                    x:Name="DateFilterPicker"
+                                    FontSize="Small"
+                                    DateSelected="Filter_By_Date"
+                                    HorizontalOptions="Center"/>
+
+                    <CheckBox IsVisible="False"
+                              x:Name="DidDateChange"/>
+
+                    <!--copied from AddDreamPage.xaml-->
+
+                    <CollectionView x:Name="TagsSelection"
+                                    x:DataType="model:Tag"
+                                    SelectionMode="None"
+                                    HorizontalOptions="Center">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="GhostWhite"
+                                        StrokeThickness="{Binding CurrentThickness}"
+                                        StrokeShape="RoundRectangle 40,40,0,40"
+                                        HeightRequest="50">
+
+                                    <Border BackgroundColor="{Binding ColorHex}"
+                                            StrokeThickness="1"
+                                            Stroke="Black"
+                                            HeightRequest="40"
+                                            StrokeShape="RoundRectangle 40,40,0,40">
+                                        <Label Text="{Binding Name}"
+                                               Margin="5"
+                                               TextColor="Black"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"/>
+
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Filter_TagSelected"/>
+                                        </Border.GestureRecognizers>
+
+                                    </Border>
+                                </Border>
+
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"
+                                               ItemSpacing="10"/>
+
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
+                    <Button Text="Apply" Clicked="Apply_Filters" WidthRequest="125"/>
+
+                    <Label Text="(Refresh to clear filters)" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        
+        <!--Collection View of dreams (Date, title, edit button, delete button)-->
+
+            <CollectionView ItemsSource="{Binding Dreams}" HeightRequest="350">
+
+            <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Dream">
                     <Border BackgroundColor="Transparent"
                             Stroke="Transparent"
@@ -65,20 +148,18 @@
                                     HorizontalOptions="End"
                                     BackgroundColor="Transparent"
                                     Background="Transparent">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="Trash_Bin_Clicked"/>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Trash_Bin_Clicked"/>
+                                </Image.GestureRecognizers>
+                            </Image>
                             <BoxView HeightRequest="1"
                                      VerticalOptions="End"/>
                         </Grid>
-                            
+
                     </Border>
                 </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
-    </ScrollView>
-
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <!--<Button Text="skidibi toilet" Clicked="CleanList" VerticalOptions="Center" WidthRequest="175"/>-->
     </VerticalStackLayout>

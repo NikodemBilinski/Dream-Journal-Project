@@ -27,7 +27,7 @@ namespace Dream_Journal_Project.Models
         {
             var http = "https://raw.githubusercontent.com/NikodemBilinski/Dream-Journal-Project/refs/heads/master/version.txt";
 
-            string currentVersion = "0.5.5";
+            string currentVersion = "0.6";
 
             try
             {
@@ -37,6 +37,7 @@ namespace Dream_Journal_Project.Models
                 {
                     // Notify user about the update
                     Debug.WriteLine("A new version of the app is available!");
+                    
                     return true;
                 }
 
@@ -134,14 +135,15 @@ namespace Dream_Journal_Project.Models
 
             var count = await _database.Table<Tag>().CountAsync();
 
-            if (count == 0)
+            if(count != 0)
             {
-                await _database.InsertAsync(new Tag { Name = "Lucid", ColorHex = "#FFFFFF", IsActive = false });
-                await _database.InsertAsync(new Tag { Name = "Nightmare", ColorHex = "#FF0000", IsActive = false });
-                await _database.InsertAsync(new Tag { Name = "Vivid", ColorHex = "#FFFF00", IsActive = false });
-                await _database.InsertAsync(new Tag { Name = "False Awakening", ColorHex = "#FF00FF", IsActive = false });
-
+                return;
             }
+
+            await _database.InsertAsync(new Tag { Name = "Lucid", ColorHex = "#FFFFFF", IsActive = false });
+            await _database.InsertAsync(new Tag { Name = "Nightmare", ColorHex = "#FF0000", IsActive = false });
+            await _database.InsertAsync(new Tag { Name = "Vivid", ColorHex = "#FFFF00", IsActive = false });
+            await _database.InsertAsync(new Tag { Name = "False Awakening", ColorHex = "#FF00FF", IsActive = false });
         }
 
         public async Task DeleteAllDreams()
