@@ -10,7 +10,7 @@ namespace Dream_Journal_Project.Models
     {
         SQLiteAsyncConnection _database;
 
-        async Task Init()
+        public async Task Init()
         {
             if (_database is not null)
             {
@@ -21,6 +21,15 @@ namespace Dream_Journal_Project.Models
             await _database.CreateTableAsync<Dream>();
             await _database.CreateTableAsync<Tag>();
 
+        }
+
+        public async Task CloseConnection()
+        {
+            if(_database is not null)
+            {
+                await _database.CloseAsync();
+                //_database = null;
+            }
         }
 
         public async Task<bool> CheckForUpdates()
@@ -181,6 +190,9 @@ namespace Dream_Journal_Project.Models
             await Init();
             await _database.DropTableAsync<Dream>();
             await _database.CreateTableAsync<Dream>();
+
         }
+
+
     }
 }

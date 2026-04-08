@@ -1,4 +1,6 @@
+using CommunityToolkit.Maui.Storage;
 using Dream_Journal_Project.Models;
+using System.Diagnostics;
 
 namespace Dream_Journal_Project.Pages;
 
@@ -33,19 +35,46 @@ public partial class SettingsPage : ContentPage
         }
     }
 
-    private void Change_Theme(object sender, EventArgs e)
+    private async void Change_Theme(object sender, EventArgs e)
     {
 
     }
 
-    private void Import_Database(object sender, EventArgs e)
+    private async void Import_Database(object sender, EventArgs e)
     {
 
     }
 
-    private void Export_Database(object sender, EventArgs e)
+    private async void Export_Database(object sender, EventArgs e)
     {
 
+        try
+        {
+            await _databaseService.CloseConnection();
+
+            string dbpath = Path.Combine(FileSystem.AppDataDirectory, "DreamJournal.db3");
+
+            using var stream = File.OpenRead(dbpath);
+
+            var fileSaveResult = await FileSaver.Default.SaveAsync("DreamJournal_Backup.db3", stream);
+
+            if (fileSaveResult.IsSuccessful)
+            {
+                await DisplayAlertAsync("Success", "Database exported successfully.", "OK");
+
+            }
+            else
+            {
+                await DisplayAlertAsync("Error", "Failed to export database: " + fileSaveResult.Exception.Message, "OK");
+            }
+
+            await _databaseService.Init();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+        
     }   
 
 }
