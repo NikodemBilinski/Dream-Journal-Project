@@ -32,4 +32,20 @@ public partial class SettingsPage : ContentPage
             await DisplayAlertAsync("Success", "All dreams have been deleted.", "OK");
         }
     }
+
+    private void Change_Theme(object sender, EventArgs e)
+    {
+
+    }
+
+    private void Import_Database(object sender, EventArgs e)
+    {
+
+    }
+
+    private void Export_Database(object sender, EventArgs e)
+    {
+
+    }   
+
 }

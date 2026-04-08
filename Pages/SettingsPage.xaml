@@ -6,6 +6,21 @@
 
     <ScrollView>
         <VerticalStackLayout Spacing="40" Margin="0,50,0,0">
+            <Button Text="Import database from a file"
+                    BackgroundColor="DarkSlateGray"
+                    WidthRequest="200"
+                    Clicked="Import_Database"/>
+            
+            <Button Text="Export database to a file"
+                    BackgroundColor="DarkSlateGray"
+                    WidthRequest="200"
+                    Clicked="Export_Database"/>
+            
+            <Button Text="Change Light/Dark Theme"
+                    BackgroundColor="DarkSlateGray"
+                    WidthRequest="200"
+                    Clicked="Change_Theme"/>
+            
             <Button Text="Delete All Dreams"
                     BackgroundColor="DarkSlateGray"
                     TextColor="Red"
