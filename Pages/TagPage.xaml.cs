@@ -45,11 +45,11 @@ public partial class TagPage : ContentPage
 
 
 
-        if (allDreams.Any(x => !string.IsNullOrEmpty(x.TagIds) && x.TagIds.Split(",").Contains(tagToDelete.Id.ToString())))
+		if (allDreams.Any(x => !string.IsNullOrEmpty(x.TagIds) && x.TagIds.Split(",").Contains(tagToDelete.Id.ToString())))
 		{
 			await DisplayAlertAsync("Error", "You cannot delete a tag that is currently in use by a dream. \n \n" + dreamsWithTagTitles, "OK");
 			return;
-        }
+		}
 
 		await _databaseservice.DeleteTag(tagToDelete);
 

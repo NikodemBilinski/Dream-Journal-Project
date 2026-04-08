@@ -2,11 +2,25 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Dream_Journal_Project.Pages.SettingsPage"
-             Title="SettingsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Settings Page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Dream Journal Settings">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="40" Margin="0,50,0,0">
+            <Button Text="Delete All Dreams"
+                    BackgroundColor="DarkSlateGray"
+                    TextColor="Red"
+                    WidthRequest="200"
+                    Clicked="Delete_All_Dreams_Clicked"
+                    Margin="50,0,0,0"
+                    HorizontalOptions="Start"/>
+
+            <Button Text="Delete All Tags"
+                    BackgroundColor="DarkSlateGray"
+                    TextColor="Red"
+                    WidthRequest="200"
+                    Clicked="Delete_All_Tags_Clicked"
+                    Margin="50,0,0,0"
+                    HorizontalOptions="Start"/>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -146,15 +146,6 @@ namespace Dream_Journal_Project.Models
             await _database.InsertAsync(new Tag { Name = "False Awakening", ColorHex = "#FF00FF", IsActive = false });
         }
 
-        public async Task DeleteAllDreams()
-        {
-            await Init();
-
-            await _database.DropTableAsync<Dream>();
-
-            await _database.CreateTableAsync<Dream>();
-        }
-
         public async Task<Dream> GetSpecificDream(int Dreamid)
         {
 
@@ -171,6 +162,25 @@ namespace Dream_Journal_Project.Models
             await Init();
 
             await _database.UpdateAsync(dream);
+        }
+
+
+        // for settings
+
+        public async Task DeleteAllTags()
+        {
+            await Init();
+            await _database.DropTableAsync<Tag>();
+            await _database.CreateTableAsync<Tag>();
+
+            await GenerateDefaultTags();
+        }
+
+        public async Task DeleteAllDreams()
+        {
+            await Init();
+            await _database.DropTableAsync<Dream>();
+            await _database.CreateTableAsync<Dream>();
         }
     }
 }

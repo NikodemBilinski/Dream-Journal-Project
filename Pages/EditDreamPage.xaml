@@ -66,8 +66,8 @@
                          />
                 <Button Text="Save Dream" 
                         Clicked="OnSaveButtonClicked" 
-                        VerticalOptions="End"
-                        />
+                        VerticalOptions="Center"
+                        WidthRequest="125"/>
 
             </VerticalStackLayout>
     </VerticalStackLayout>
