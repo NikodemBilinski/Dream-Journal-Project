@@ -13,6 +13,15 @@ public partial class SettingsPage : ContentPage
 		InitializeComponent();
 
         _databaseService = databaseservice;
+
+        if(Preferences.Default.Get("FilterAnimation", true) == true)
+        {
+            FilterAnimationSwitch.IsToggled = true;
+        }
+        else
+        {
+            FilterAnimationSwitch.IsToggled = false;
+        }
     }
 
 	private async void Delete_All_Tags_Clicked(object sender, EventArgs e)
@@ -75,6 +84,13 @@ public partial class SettingsPage : ContentPage
             Debug.WriteLine(ex.Message);
         }
         
-    }   
+    }
+    
+    private async void Filter_Animations(object sender, EventArgs e)
+    {
+        Debug.WriteLine("Filter Animations Toggled: " + FilterAnimationSwitch.IsToggled);
+        Preferences.Default.Set("FilterAnimation", FilterAnimationSwitch.IsToggled);
+    }
 
+    
 }

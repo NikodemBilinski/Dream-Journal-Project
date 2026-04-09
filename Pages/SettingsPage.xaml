@@ -10,7 +10,14 @@
                     BackgroundColor="DarkSlateGray"
                     WidthRequest="200"
                     Clicked="Import_Database"/>
-            
+            <HorizontalStackLayout>
+                <Label Text="Filter Animations On"
+                       VerticalOptions="Center"/>
+                <Switch x:Name="FilterAnimationSwitch"
+                        Toggled="Filter_Animations"
+                        ThumbColor="Aqua"/>
+            </HorizontalStackLayout>
+
             <Button Text="Export database to a file"
                     BackgroundColor="DarkSlateGray"
                     WidthRequest="200"

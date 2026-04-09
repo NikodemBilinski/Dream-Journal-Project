@@ -259,20 +259,30 @@ namespace Dream_Journal_Project
         private async void Toggle_Filter(object sender, EventArgs e)
         {
 
+            bool AnimationOn = Preferences.Default.Get("FilterAnimation",true);
+
             // look i know how it looks but i know what i am doing
 
-            if(isanimating)
+            if (isanimating)
             {
                 return;
             }
 
+            
             isanimating = true;
 
             if (!FilterPanel.IsVisible)
             {
+                FilterPanel.IsVisible = true;
+
+                if(!AnimationOn)
+                {
+                    isanimating = false;
+                    return;
+                }
+
                 FilterPanel.Opacity = 0;
                 FilterPanel.ScaleY = 0.5;
-                FilterPanel.IsVisible = true;
                 FilterPanel.Rotation = -1080;
 
                 
@@ -286,13 +296,23 @@ namespace Dream_Journal_Project
             }
             else
             {
+
+                
+
+                if(!AnimationOn)
+                {
+                    FilterPanel.IsVisible = false;
+                    isanimating = false;
+                    return;
+                }
                 await Task.WhenAll(
                     FilterPanel.FadeToAsync(0, 1500, Easing.CubicIn),
                     FilterPanel.ScaleYToAsync(0, 1500, Easing.CubicIn),
                     FilterPanel.RotateToAsync(-1080, 1500, Easing.CubicIn)
                     );
-
                 FilterPanel.IsVisible = false;
+
+
             }
 
             isanimating = false;
