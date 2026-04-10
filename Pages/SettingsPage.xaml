@@ -6,6 +6,30 @@
 
     <ScrollView>
         <VerticalStackLayout Spacing="40" Margin="0,50,0,0">
+
+
+            <HorizontalStackLayout Margin="50,0,0,0"
+                                   HorizontalOptions="Start"
+                                   Spacing="15">
+
+                <Border Padding="10"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        BackgroundColor="DarkSlateGray">
+
+                    <Label Text="Filter Animation On"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="Center"
+                           WidthRequest="150"
+                           TextColor="White"/>
+                </Border>
+
+                <Switch x:Name="FilterAnimationSwitch"
+                        Toggled="Filter_Animations"
+                        OnColor="DarkGray"/>
+
+            </HorizontalStackLayout>
+
             <Button Text="Import database from a file"
                     TextColor="White"
                     BackgroundColor="DarkSlateGray"
@@ -15,26 +39,6 @@
                     HorizontalOptions="Start"/>
             
             
-            <HorizontalStackLayout Margin="50,0,0,0"
-                                   HorizontalOptions="Start"
-                                   Spacing="15">
-                
-                <Border Padding="10"
-                        Stroke="Transparent"
-                        StrokeShape="RoundRectangle 10,10,10,10"
-                        BackgroundColor="DarkSlateGray">
-                    <Label Text="Filter Animations On"
-                           HorizontalTextAlignment="Center"
-                           VerticalOptions="Center"
-                           WidthRequest="150"
-                           TextColor="White"/>
-                </Border>
-                
-                <Switch x:Name="FilterAnimationSwitch"
-                        Toggled="Filter_Animations"/>
-                
-            </HorizontalStackLayout>
-
             <Button Text="Export database to a file"
                     BackgroundColor="DarkSlateGray"
                     WidthRequest="230"
@@ -53,7 +57,7 @@
             
             <Button Text="Delete All Dreams"
                     BackgroundColor="DarkSlateGray"
-                    TextColor="#600000"
+                    TextColor="#BF0000"
                     FontAttributes="Bold"
                     WidthRequest="230"
                     Clicked="Delete_All_Dreams_Clicked"
@@ -62,7 +66,7 @@
 
             <Button Text="Delete All Tags"
                     BackgroundColor="DarkSlateGray"
-                    TextColor="#600000"
+                    TextColor="#BF0000"
                     FontAttributes="Bold"
                     WidthRequest="230"
                     Clicked="Delete_All_Tags_Clicked"

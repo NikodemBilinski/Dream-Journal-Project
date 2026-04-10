@@ -82,11 +82,15 @@ public partial class SettingsPage : ContentPage
 
             await DisplayAlertAsync("Success", "Database imported successfully.", "OK");
 
+            //dispose stream and dbpath to release file locks before reinitializing database service
+
             stream.Dispose();
 
             dbpath.Dispose();
 
             await _databaseService.Init();
+
+            //create new main page to refresh data
 
             Application.Current.MainPage = new AppShell();
         }
