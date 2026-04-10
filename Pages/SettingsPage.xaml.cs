@@ -82,6 +82,10 @@ public partial class SettingsPage : ContentPage
 
             await DisplayAlertAsync("Success", "Database imported successfully.", "OK");
 
+            stream.Dispose();
+
+            dbpath.Dispose();
+
             await _databaseService.Init();
 
             Application.Current.MainPage = new AppShell();
