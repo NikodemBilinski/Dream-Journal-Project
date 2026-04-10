@@ -20,7 +20,7 @@ namespace Dream_Journal_Project
 
         private bool DidFilterApplied = false;
         
-        private static bool IsFirstLoad = true;
+        public static bool IsFirstLoad = true;
 
         public ObservableCollection<Dream> Dreams { get; set; } = new();
 
@@ -123,8 +123,6 @@ namespace Dream_Journal_Project
 
                 await RefreshDreams();
             }
-
-            
 
 
         }

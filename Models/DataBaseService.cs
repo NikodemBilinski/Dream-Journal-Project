@@ -28,9 +28,11 @@ namespace Dream_Journal_Project.Models
             if(_database is not null)
             {
                 await _database.CloseAsync();
-                //_database = null;
+                _database = null;
             }
         }
+
+        
 
         public async Task<bool> CheckForUpdates()
         {

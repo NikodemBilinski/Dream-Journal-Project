@@ -7,6 +7,7 @@ namespace Dream_Journal_Project.Pages;
 public partial class SettingsPage : ContentPage
 {
 	private readonly DataBaseService _databaseService;
+
     public SettingsPage(DataBaseService databaseservice)
 	{
 		
@@ -51,7 +52,44 @@ public partial class SettingsPage : ContentPage
 
     private async void Import_Database(object sender, EventArgs e)
     {
+        try
+        {
+            var result = await FilePicker.Default.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select Database File to import"
+            });
 
+            if (result == null)
+            {
+                return;
+            }
+
+            if (!result.FileName.EndsWith(".db3"))
+            {
+                await DisplayAlertAsync("Error", "Please select a valid .db3 file.", "OK");
+                return;
+            }
+
+            await _databaseService.CloseConnection();
+
+            MainPage.IsFirstLoad = true;
+
+            var stream = await result.OpenReadAsync();
+
+            var dbpath = File.Create(Constants.DatabasePath);
+
+            await stream.CopyToAsync(dbpath);
+
+            await DisplayAlertAsync("Success", "Database imported successfully.", "OK");
+
+            await _databaseService.Init();
+
+            Application.Current.MainPage = new AppShell();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Error", "Failed to import database: " + ex.Message, "OK");
+        }
     }
 
     private async void Export_Database(object sender, EventArgs e)
