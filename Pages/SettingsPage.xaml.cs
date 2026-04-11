@@ -47,19 +47,18 @@ public partial class SettingsPage : ContentPage
 
     private async void Change_Theme(object sender, EventArgs e)
     {
-        if(Application.Current.UserAppTheme == AppTheme.Unspecified)
-        {
-            Application.Current.UserAppTheme = AppTheme.Dark;
-        }
+        var currentTheme = Application.Current.RequestedTheme;
 
 
-        if(Application.Current.UserAppTheme == AppTheme.Dark)
+        if (currentTheme == AppTheme.Dark)
         {
             Application.Current.UserAppTheme = AppTheme.Light;
+            Preferences.Default.Set("AppTheme", AppTheme.Light.ToString());
         }
-        else if(Application.Current.UserAppTheme == AppTheme.Light)
+        else if (currentTheme == AppTheme.Light)
         {
             Application.Current.UserAppTheme = AppTheme.Dark;
+            Preferences.Default.Set("AppTheme", AppTheme.Dark.ToString());
         }
     }
 

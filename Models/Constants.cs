@@ -19,5 +19,12 @@ namespace Dream_Journal_Project.Models
 
         public static string DatabasePath =>
             Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);
+
+        public enum twojastara
+        {
+            NoUpdate,
+            UpdateAvailable,
+            UpdateCheckFailed
+        }
     }
 }
