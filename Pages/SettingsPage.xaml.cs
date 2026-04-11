@@ -47,7 +47,20 @@ public partial class SettingsPage : ContentPage
 
     private async void Change_Theme(object sender, EventArgs e)
     {
+        if(Application.Current.UserAppTheme == AppTheme.Unspecified)
+        {
+            Application.Current.UserAppTheme = AppTheme.Dark;
+        }
 
+
+        if(Application.Current.UserAppTheme == AppTheme.Dark)
+        {
+            Application.Current.UserAppTheme = AppTheme.Light;
+        }
+        else if(Application.Current.UserAppTheme == AppTheme.Light)
+        {
+            Application.Current.UserAppTheme = AppTheme.Dark;
+        }
     }
 
     private async void Import_Database(object sender, EventArgs e)
