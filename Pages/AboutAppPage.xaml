@@ -10,13 +10,14 @@
         <VerticalStackLayout VerticalOptions="End" HorizontalOptions="Center" Margin="50" Grid.Row="1">
 
             <Border x:Name="GithubBorder"
-                    WidthRequest="60"
-                    HeightRequest="60"
+                    WidthRequest="50"
+                    HeightRequest="50"
                     Stroke="Transparent"
                     StrokeShape="RoundRectangle 10,10,10,10">
                 <ImageButton WidthRequest="50" 
                              HeightRequest="50"
-                             x:Name="GithubImage"/>
+                             x:Name="GithubImage"
+                             Clicked="Github_Clicked"/>
             </Border>
             
             

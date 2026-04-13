@@ -22,14 +22,20 @@ public partial class AboutAppPage : ContentPage
 
         if (theme == AppTheme.Light)
         {
-            GithubImage.Source = "github_light.png";
-            GithubBorder.BackgroundColor = Colors.Black;
+            GithubImage.Source = "github_betterdark.png";
+            GithubImage.CornerRadius = 15;
+            GithubImage.BackgroundColor = Colors.White;
+            GithubBorder.BackgroundColor = Colors.White;
         }
         else if(theme == AppTheme.Dark)
         {
             GithubImage.Source = "github_betterdark.png";
-            GithubImage.CornerRadius = 50;
             GithubBorder.BackgroundColor = Colors.White;
         }
+    }
+
+    private async void Github_Clicked(object sender, EventArgs e)
+    {
+        await Launcher.OpenAsync("https://github.com/NikodemBilinski");
     }
 }
