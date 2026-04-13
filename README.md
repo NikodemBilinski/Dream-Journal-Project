@@ -11,15 +11,16 @@ features that are working now:
 - Tagging diffrent dreams
 - Storing all data on local database using SQLite
 - Charts that show statistics according to chosen tag
+- Filter to choose precise dreams
 
 features that im working on now:
 
-
-- Filter to choose precise dreams
 - SlideBar Menu to keep all other pages in one place (also adding settings page and about app page)
 
 
 sources of the images in the project:
+
+"https://www.flaticon.com/free-icons/github" - github icon
 
 https://www.flaticon.com/free-icons/refresh - refresh icon
 
