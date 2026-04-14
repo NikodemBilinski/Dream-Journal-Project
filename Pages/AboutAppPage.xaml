@@ -2,12 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Dream_Journal_Project.Pages.AboutAppPage"
-             Title="About App">
+             Title="">
     <Grid RowDefinitions="*,150">
-        
+
+
+        <VerticalStackLayout Grid.Row="0" VerticalOptions="Start"  HorizontalOptions="Center">
+            <Label Text=".NET MAUI app that stores your dreams, which you can edit and view, on a local database." />
+            <Label Text="features that are working now:" />
+            <Label Text="- Adding, viewing, deleting and viewing your dreams" />
+            <Label Text="- Adding your own tags" />
+            <Label Text="- Tagging diffrent dreams" />
+            <Label Text="- Storing all data on local database using SQLite" />
+            <Label Text="- Charts that show statistics according to chosen tag" />
+            <Label Text="- Filter to choose precise dreams" />
+        </VerticalStackLayout>
         
         
         <VerticalStackLayout VerticalOptions="End" HorizontalOptions="Center" Margin="30" Grid.Row="1">
+            
 
             <Border x:Name="GithubBorder"
                     WidthRequest="50"
