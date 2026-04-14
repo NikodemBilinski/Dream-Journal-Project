@@ -85,6 +85,7 @@ namespace Dream_Journal_Project
         {
             base.OnAppearing();
 
+
             await Task.Delay(50);
 
             // Check for updates and load dreams only on the first load of the page

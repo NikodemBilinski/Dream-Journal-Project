@@ -151,7 +151,7 @@ namespace Dream_Journal_Project.Models
                 return;
             }
 
-            await _database.InsertAsync(new Tag { Name = "Lucid", ColorHex = "#FFFFFF", IsActive = false });
+            await _database.InsertAsync(new Tag { Name = "Lucid", ColorHex = "#F5DEB3", IsActive = false });
             await _database.InsertAsync(new Tag { Name = "Nightmare", ColorHex = "#FF0000", IsActive = false });
             await _database.InsertAsync(new Tag { Name = "Vivid", ColorHex = "#FFFF00", IsActive = false });
             await _database.InsertAsync(new Tag { Name = "False Awakening", ColorHex = "#FF00FF", IsActive = false });
@@ -193,6 +193,17 @@ namespace Dream_Journal_Project.Models
             await _database.DropTableAsync<Dream>();
             await _database.CreateTableAsync<Dream>();
 
+        }
+
+        //debugging method, not used in the app
+        public async Task temp()
+        {
+            await Init();
+            var lucid = await _database.Table<Tag>().Where(t => t.Name == "Lucid").FirstOrDefaultAsync();
+
+            await _database.DeleteAsync(lucid);
+
+            await _database.InsertAsync(new Tag { Name = "Lucid", ColorHex = "#F5DEB3", IsActive = false });
         }
 
 
