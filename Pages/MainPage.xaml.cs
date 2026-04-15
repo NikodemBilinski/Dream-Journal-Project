@@ -45,19 +45,11 @@ namespace Dream_Journal_Project
 
             //ewentualnie tutaj sobie bede dodawal jakies pomysly co by tu jeszcze mozna bylo zrobic
 
-            //todo check on layout on android and fix it if needed to
-
             //todo wallpaper or some shit
-
-            //todo ld techniques dokonczyc w koncu
-
-            //todo obczaic light theme czy ma sens i czy dziala na telefonie aby syfu nie bylo
-
-            //todo ustawienia? (ewentualne pomysly?)
 
             //todo dodac wiecej snow dla testow (bardziej aby sie pobawic jak to by wygladalo przy np 200 snach - uzyc sobie chata aby uzupelnil tabele dreams czy cos
 
-            //todo about app page (kontakt, github, skrocone readme)
+            //todo zmienic kolor zaznaczania gdy jest light theme
 
         }
 
