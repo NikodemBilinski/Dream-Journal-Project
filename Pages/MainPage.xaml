@@ -123,7 +123,9 @@
                         </Border.GestureRecognizers>
                         <Grid ColumnDefinitions="*,35,35">
                             <Label Grid.Column="0"
-                                   VerticalOptions="Center">
+                                   VerticalOptions="Center"
+                                   FontAttributes="Bold"
+                                   FontSize="15">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0:d} | {1}">
                                         <Binding Path="DateCreated"/>
