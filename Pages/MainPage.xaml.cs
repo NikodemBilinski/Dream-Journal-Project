@@ -51,6 +51,8 @@ namespace Dream_Journal_Project
 
             //todo zmienic kolor zaznaczania gdy jest light theme
 
+            //todo ogarnac toolbar, aby sie komponowal z tlem (grid)
+
         }
 
         public Dream IncomingDream

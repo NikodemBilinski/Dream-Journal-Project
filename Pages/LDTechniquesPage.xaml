@@ -53,6 +53,36 @@
                         <Span Text="• Critical Thinking: Question your environment—if something is impossible, you must be dreaming. &#10;"/>
                         <Span Text="• Realization: Once you notice a dream sign, perform a reality check to confirm lucidity. &#10;&#10;&#10;"/>
 
+                        <Span Text="• Reality Check &#10;"
+                              FontSize="15"
+                              FontAttributes="Bold"/>
+
+                        <Span Text="A mental habit used to determine whether you are awake or dreaming by testing the physical laws of your environment. &#10;&#10;"/>
+                        <Span Text="• The Mechanism: By performing these tests frequently during the day, you train your brain to repeat them while sleeping. &#10;"/>
+                        <Span Text="• Nose Pinch: Try to breathe while pinching your nose shut. In a dream, you will still be able to breathe. &#10;"/>
+                        <Span Text="• Digital Clocks: Look at a clock, look away, and look back. In dreams, the exact time is not know and the time will change to a completly diffrent one. &#10;"/>
+                        <Span Text="• The Palm Push: Attempt to push your fingers through the palm of your opposite hand. In a dream, they often pass through. &#10;&#10;&#10;"/>
+
+                        <Span Text="• WBTB (Wake Back To Bed) &#10;"
+                              FontSize="15"
+                              FontAttributes="Bold"/>   
+                        
+                        <Span Text="A power-up technique that involves waking up during the night to increase alertness before falling back into a dream state. &#10;&#10;"/>
+                        <Span Text="• The Alarm: Set an alarm for 4 to 6 hours after you go to sleep to wake up during a REM cycle. &#10;"/>
+                        <Span Text="• Stay Awake: Stay out of bed for 15 to 45 minutes, focusing your mind on the intention of lucid dreaming. &#10;"/>
+                        <Span Text="• Back to Bed: Return to sleep while practicing another technique like MILD or WILD for maximum effectiveness. &#10;"/>
+                        <Span Text="• The Goal: This method spikes your conscious awareness, making it much easier to 'wake up' inside the next dream. &#10;&#10;&#10;"/>
+
+                        <Span Text="• Anchor Technique &#10;"
+                              FontSize="15"
+                              FontAttributes="Bold"/>   
+                        
+                        <Span Text="A variation of WILD where you use a physical or mental 'anchor' to maintain a thread of awareness as you fall asleep. &#10;&#10;"/>
+                        <Span Text="• The Anchor: Choose a subtle focus, such as a slightly uncomfortable sleeping position or the sound of a music playing while laying on the bed. &#10;"/>
+                        <Span Text="• Balancing: The goal is to be relaxed enough to fall asleep, but stimulated enough to stay conscious. &#10;"/>
+                        <Span Text="• Awareness: If the anchor is too strong, you won't sleep; if it's too weak, you'll fall into a normal dream. &#10;"/>
+                        <Span Text="• Entering the Dream: As your body falls asleep, keep your focus on the anchor until the dream world forms around you. &#10;&#10;&#10;"/>
+
                     </FormattedString>
             </Label.FormattedText>        
         </Label>
