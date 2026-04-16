@@ -2,11 +2,76 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Dream_Journal_Project.Pages.SettingsPage"
-             Title="SettingsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Settings Page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Dream Journal Settings">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="40" Margin="0,50,0,0">
+
+
+            <HorizontalStackLayout Margin="50,0,0,0"
+                                   HorizontalOptions="Start"
+                                   Spacing="15">
+
+                <Border Padding="10"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        BackgroundColor="DarkSlateGray">
+
+                    <Label Text="Filter Animation On"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="Center"
+                           WidthRequest="150"
+                           TextColor="White"/>
+                </Border>
+
+                <Switch x:Name="FilterAnimationSwitch"
+                        Toggled="Filter_Animations"
+                        OnColor="DarkGray"/>
+
+            </HorizontalStackLayout>
+
+            <Button Text="Import database from a file"
+                    TextColor="White"
+                    BackgroundColor="DarkSlateGray"
+                    WidthRequest="230"
+                    Clicked="Import_Database"
+                    Margin="50,0,0,0"
+                    HorizontalOptions="Start"/>
+            
+            
+            <Button Text="Export database to a file"
+                    BackgroundColor="DarkSlateGray"
+                    WidthRequest="230"
+                    Clicked="Export_Database"
+                    Margin="50,0,0,0"
+                    HorizontalOptions="Start"
+                    TextColor="White"/>
+            
+            <Button Text="Change Light/Dark Theme"
+                    BackgroundColor="DarkSlateGray"
+                    WidthRequest="230"
+                    Clicked="Change_Theme"
+                    Margin="50,0,0,0"
+                    HorizontalOptions="Start"
+                    TextColor="White"/>
+            
+            <Button Text="Delete All Dreams"
+                    BackgroundColor="DarkSlateGray"
+                    TextColor="#BF0000"
+                    FontAttributes="Bold"
+                    WidthRequest="230"
+                    Clicked="Delete_All_Dreams_Clicked"
+                    Margin="50,0,0,0"
+                    HorizontalOptions="Start"/>
+
+            <Button Text="Delete All Tags"
+                    BackgroundColor="DarkSlateGray"
+                    TextColor="#BF0000"
+                    FontAttributes="Bold"
+                    WidthRequest="230"
+                    Clicked="Delete_All_Tags_Clicked"
+                    Margin="50,0,0,0"
+                    HorizontalOptions="Start"/>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

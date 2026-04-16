@@ -20,7 +20,7 @@ namespace Dream_Journal_Project
 
         private bool DidFilterApplied = false;
         
-        private static bool IsFirstLoad = true;
+        public static bool IsFirstLoad = true;
 
         public ObservableCollection<Dream> Dreams { get; set; } = new();
 
@@ -45,22 +45,13 @@ namespace Dream_Journal_Project
 
             //ewentualnie tutaj sobie bede dodawal jakies pomysly co by tu jeszcze mozna bylo zrobic
 
-            //todo check on layout on android and fix it if needed to
-
             //todo wallpaper or some shit
-
-            //todo ld techniques dokonczyc w koncu
-
-            //todo obczaic light theme czy ma sens i czy dziala na telefonie aby syfu nie bylo
-
-            //todo ustawienia? (ewentualne pomysly?)
 
             //todo dodac wiecej snow dla testow (bardziej aby sie pobawic jak to by wygladalo przy np 200 snach - uzyc sobie chata aby uzupelnil tabele dreams czy cos
 
-            //todo settings page z opcjami typu zmiana motywu, zarzadzanie tagami, zarzadzanie snami (np masowe usuwanie) itp, (wyclearowanie calej bazy snow)
-            //todo moze eksport danych do pliku json czy cos, aby mozna bylo sobie zbackupowac sny przed reinstalem systemu czy cos, a potem wczytac je z powrotem do aplikacji
+            //todo zmienic kolor zaznaczania gdy jest light theme
 
-            //todo about app page (kontakt, github, skrocone readme)
+            //todo ogarnac toolbar, aby sie komponowal z tlem (grid)
 
         }
 
@@ -87,6 +78,7 @@ namespace Dream_Journal_Project
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
 
             await Task.Delay(50);
 
@@ -123,8 +115,6 @@ namespace Dream_Journal_Project
 
                 await RefreshDreams();
             }
-
-            
 
 
         }
@@ -259,20 +249,30 @@ namespace Dream_Journal_Project
         private async void Toggle_Filter(object sender, EventArgs e)
         {
 
+            bool AnimationOn = Preferences.Default.Get("FilterAnimation",true);
+
             // look i know how it looks but i know what i am doing
 
-            if(isanimating)
+            if (isanimating)
             {
                 return;
             }
 
+            
             isanimating = true;
 
             if (!FilterPanel.IsVisible)
             {
+                FilterPanel.IsVisible = true;
+
+                if(!AnimationOn)
+                {
+                    isanimating = false;
+                    return;
+                }
+
                 FilterPanel.Opacity = 0;
                 FilterPanel.ScaleY = 0.5;
-                FilterPanel.IsVisible = true;
                 FilterPanel.Rotation = -1080;
 
                 
@@ -286,13 +286,23 @@ namespace Dream_Journal_Project
             }
             else
             {
+
+                
+
+                if(!AnimationOn)
+                {
+                    FilterPanel.IsVisible = false;
+                    isanimating = false;
+                    return;
+                }
                 await Task.WhenAll(
                     FilterPanel.FadeToAsync(0, 1500, Easing.CubicIn),
                     FilterPanel.ScaleYToAsync(0, 1500, Easing.CubicIn),
                     FilterPanel.RotateToAsync(-1080, 1500, Easing.CubicIn)
                     );
-
                 FilterPanel.IsVisible = false;
+
+
             }
 
             isanimating = false;

@@ -12,7 +12,15 @@ namespace Dream_Journal_Project
 
             _databaseService = databaseservice;
 
-            
+
+            var currentTheme = Preferences.Default.Get("AppTheme", AppTheme.Unspecified.ToString());
+
+            if(Enum.TryParse(currentTheme, out AppTheme theme))
+            {
+                Application.Current.UserAppTheme = theme;
+            }
+
+
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
