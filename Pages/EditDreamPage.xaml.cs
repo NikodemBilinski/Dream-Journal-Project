@@ -117,7 +117,7 @@ public partial class EditDreamPage : ContentPage
 		await _databaservice.UpdateDream(updatedDream);
 
 
-		Shell.Current.GoToAsync("..");
+		await Shell.Current.GoToAsync("..");
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
@@ -137,7 +137,18 @@ public partial class EditDreamPage : ContentPage
         {
             MySelectedTags.Add(tag);
             border2.StrokeThickness = 5;
-			border2.Stroke = Colors.GhostWhite;
+
+			string currenttheme = App.Current.RequestedTheme.ToString();
+
+            if (currenttheme == AppTheme.Dark.ToString() && currenttheme != null)
+            {
+				border2.Stroke = Colors.WhiteSmoke;
+			}
+			else if(currenttheme == AppTheme.Light.ToString() && currenttheme != null)
+			{
+                border2.Stroke = Colors.Black;
+            }
+			
         }
     }
 }

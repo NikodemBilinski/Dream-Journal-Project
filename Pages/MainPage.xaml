@@ -23,7 +23,8 @@
     <Grid>
         <Image Source="testtest2.jpg"
                Aspect="AspectFill"
-               Opacity="0.7"/>
+               Opacity="0.7"
+               BackgroundColor="Gray"/>
         <!--Add dream and view tags buttons-->
     
     <VerticalStackLayout Padding="20" Spacing="15">

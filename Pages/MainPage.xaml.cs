@@ -53,6 +53,8 @@ namespace Dream_Journal_Project
 
             //todo ogarnac toolbar, aby sie komponowal z tlem (grid)
 
+            //todo dodac zrodla ikon
+
         }
 
         public Dream IncomingDream
