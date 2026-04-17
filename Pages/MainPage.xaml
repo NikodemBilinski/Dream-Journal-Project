@@ -23,8 +23,8 @@
     <Grid>
         <Image Source="testtest2.jpg"
                Aspect="AspectFill"
-               Opacity="0.7"
-               BackgroundColor="Gray"/>
+               Opacity="0.9"
+               BackgroundColor="DarkSlateGray"/>
         <!--Add dream and view tags buttons-->
     
     <VerticalStackLayout Padding="20" Spacing="15">
@@ -48,15 +48,16 @@
                     Padding="15"
                     StrokeShape="RoundRectangle 40,40,40,40">
                 <VerticalStackLayout Spacing="20">
-                        <Entry Placeholder="Enter Title" 
+                        <Entry Placeholder="Enter Title"
                                WidthRequest="200"
                                x:Name="TitleFilter"/>
 
                     <DatePicker Format="d"
-                                    x:Name="DateFilterPicker"
-                                    FontSize="Small"
-                                    DateSelected="Filter_By_Date"
-                                    HorizontalOptions="Center"/>
+                                x:Name="DateFilterPicker"
+                                FontSize="Small"
+                                DateSelected="Filter_By_Date"
+                                HorizontalOptions="Center"
+                                TextColor="White"/>
 
                     <CheckBox IsVisible="False"
                               x:Name="DidDateChange"/>
@@ -104,7 +105,7 @@
                     </CollectionView>
                     <Button Text="Apply" Clicked="Apply_Filters" WidthRequest="125"/>
 
-                    <Label Text="(Refresh to clear filters)" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label Text="(Refresh to clear filters)" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White"/>
 
                 </VerticalStackLayout>
                 </Border>
