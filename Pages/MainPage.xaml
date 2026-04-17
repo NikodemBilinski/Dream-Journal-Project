@@ -23,7 +23,7 @@
     <Grid>
         <Image Source="testtest2.jpg"
                Aspect="AspectFill"
-               Opacity="0.9"
+               Opacity="1"
                BackgroundColor="DarkSlateGray"/>
         <!--Add dream and view tags buttons-->
     
@@ -62,7 +62,7 @@
                     <CheckBox IsVisible="False"
                               x:Name="DidDateChange"/>
 
-                    <!--copied from AddDreamPage.xaml-->
+                    <!--copied from AddDreamPage.xaml, tags in filter-->
 
                     <CollectionView x:Name="TagsSelection"
                                     x:DataType="model:Tag"
@@ -127,7 +127,8 @@
                             <Label Grid.Column="0"
                                    VerticalOptions="Center"
                                    FontAttributes="Bold"
-                                   FontSize="15">
+                                   FontSize="15"
+                                   TextColor="White">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0:d} | {1}">
                                         <Binding Path="DateCreated"/>

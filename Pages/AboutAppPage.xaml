@@ -31,11 +31,17 @@
                     HeightRequest="50"
                     Stroke="Transparent"
                     StrokeShape="RoundRectangle 10,10,10,10">
-                
+
+                <Border.GestureRecognizers>
+                    <PointerGestureRecognizer PointerEntered="Pointer_Entered_Testing"
+                                              PointerExited="Pointer_Exited_Testing"/>
+                </Border.GestureRecognizers>
+
                 <ImageButton WidthRequest="50" 
                              HeightRequest="50"
                              x:Name="GithubImage"
                              Clicked="Github_Clicked"/>
+
             </Border>
             
             <Label Text="Nikodemus GitHub" FontAttributes="Bold"/>

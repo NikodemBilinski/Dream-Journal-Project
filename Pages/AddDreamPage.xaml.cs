@@ -75,6 +75,8 @@ public partial class AddDreamPage : ContentPage
 
         var tag = (Tag)border.BindingContext;
 
+		string currenttheme = App.Current.RequestedTheme.ToString();
+
         if (MySelectedTags.Contains(tag))
 		{
             MySelectedTags.Remove(tag);
@@ -85,7 +87,16 @@ public partial class AddDreamPage : ContentPage
         {
             MySelectedTags.Add(tag);
             border2.StrokeThickness = 5;
-            border2.Stroke = Colors.GhostWhite;
+
+			if(currenttheme == AppTheme.Light.ToString() && currenttheme != null)
+			{
+				border2.Stroke = Colors.Black;
+			}
+			else if(currenttheme == AppTheme.Dark.ToString() && currenttheme != null)
+			{
+                border2.Stroke = Colors.GhostWhite;
+            }
+            
         }
     }
 }

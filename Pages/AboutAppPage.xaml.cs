@@ -38,4 +38,15 @@ public partial class AboutAppPage : ContentPage
     {
         await Launcher.OpenAsync("https://github.com/NikodemBilinski");
     }
+
+    private async void Pointer_Entered_Testing(object sender, EventArgs e)
+    {
+        GithubBorder.Scale = 1;
+
+        await GithubBorder.ScaleToAsync(1.2, 200, Easing.CubicOut);
+    }
+    private async void Pointer_Exited_Testing(object sender, EventArgs e)
+    {
+        await GithubBorder.ScaleToAsync(1, 200, Easing.CubicIn);
+    }
 }
