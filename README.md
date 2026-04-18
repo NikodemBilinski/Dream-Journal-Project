@@ -20,7 +20,11 @@ features that im working on now:
 
 sources of the images in the project:
 
-"https://www.flaticon.com/free-icons/github" - github icon
+https://preview.redd.it/i-traveled-6-000-miles-to-see-the-darkest-skies-on-earth-v0-cyafly4jg4xd1.jpeg?width=1080&crop=smart&auto=webp&s=217999515f402bc31925817b009889b5d92f188c - background image
+
+https://www.flaticon.com/free-icons/dream - app icon
+
+https://www.flaticon.com/free-icons/github - github icon
 
 https://www.flaticon.com/free-icons/refresh - refresh icon
 
