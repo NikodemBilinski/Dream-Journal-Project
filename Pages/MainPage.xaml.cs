@@ -41,6 +41,10 @@ namespace Dream_Journal_Project
 
             this.BindingContext = this;
 
+            //Shell.SetBackgroundColor(this, Colors.Transparent);
+            //Shell.SetForegroundColor(this, Colors.White);
+
+
             //ideas dumpster
 
             //ewentualnie tutaj sobie bede dodawal jakies pomysly co by tu jeszcze mozna bylo zrobic

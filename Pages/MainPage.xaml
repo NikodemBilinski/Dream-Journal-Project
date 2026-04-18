@@ -5,26 +5,36 @@
              xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Dream_Journal_Project.MainPage"
-             Title="Dream Journal">
-    
-    
-    <!--Toolbar Items-->
-
-
-    <ContentPage.ToolbarItems>
-
-        <ToolbarItem IconImageSource="search.png"
-             Clicked="Toggle_Filter"/>
-        <ToolbarItem IconImageSource="refresh.png"
-             Clicked="Refresh_Button_Clicked"/>
-
-
-    </ContentPage.ToolbarItems>
+             Shell.NavBarIsVisible="False">
     <Grid>
+        
         <Image Source="testtest2.jpg"
                Aspect="AspectFill"
-               Opacity="1"
-               BackgroundColor="DarkSlateGray"/>
+               Opacity="1"/>
+
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="*,75,75" HeightRequest="50">
+                <Label Text="Dream Journal"
+                   Grid.Column="0"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   FontSize="25"
+                   Margin="10,0,0,0"
+                   TextColor="White"/>
+
+                <ImageButton Source="search.png"
+                             BackgroundColor="Transparent"
+                             Grid.Column="1"
+                             Scale="0.6"
+                             Clicked="Toggle_Filter"/>
+
+                <ImageButton Source="refresh.png"
+                             BackgroundColor="Transparent"
+                             Grid.Column="2"
+                             Scale="0.6"
+                             Clicked="Refresh_Button_Clicked"/>
+            </Grid>
+        
         <!--Add dream and view tags buttons-->
     
     <VerticalStackLayout Padding="20" Spacing="15">
@@ -46,7 +56,9 @@
                     IsVisible="False"
                     VerticalOptions="Start"
                     Padding="15"
-                    StrokeShape="RoundRectangle 40,40,40,40">
+                    StrokeShape="RoundRectangle 40,40,40,40"
+                    BackgroundColor="#66000000"
+                    >
                 <VerticalStackLayout Spacing="20">
                         <Entry Placeholder="Enter Title"
                                WidthRequest="200"
@@ -170,6 +182,7 @@
         </CollectionView>
 
         <!--<Button Text="skidibi toilet" Clicked="CleanList" VerticalOptions="Center" WidthRequest="175"/>-->
+    </VerticalStackLayout>
     </VerticalStackLayout>
     </Grid>
 </ContentPage>
